@@ -1,13 +1,34 @@
-# AI Makeup Assistant — Facial Landmarking
+# AI Makeup Assistant
 
-Current scope: **selfie → MediaPipe Face Landmarker → structured JSON → canvas visualization**, plus
-**face segmentation (roadmap Phase 3)**: pixel-level anatomical regions from a face-parsing model, plus
-the initial makeup-application zones derived from them (early start of roadmap Phase 4). See `CLAUDE.md` for the roadmap. No makeup rendering and no feature classification yet.
+An anatomy-aware makeup assistant. It adapts reference makeup techniques to the user's own facial geometry
+instead of transferring pixels. The current pipeline is **selfie → MediaPipe Face Landmarker (478 landmarks) →
+face parsing (anatomical regions) → 70 makeup-application zones → structured JSON → canvas visualization**.
+There is no makeup rendering and no feature classification yet. The full plan is in
+[docs/ROADMAP.md](docs/ROADMAP.md).
 
 > **LICENSE WARNING.** The face-parsing weights (BiSeNet, ONNX) were trained on **CelebAMask-HQ,
 > which is non-commercial research data. They are not cleared for commercial use.** This is accepted
 > for the prototype only. The warning is repeated in every `/segmentation` response. See
 > [docs/face_segmentation.md](docs/face_segmentation.md).
+
+## Milestones
+
+This README is updated each time a roadmap milestone closes.
+
+| Phase | Milestone | Status |
+|---|---|---|
+| 1 | Secure image upload and loading | **Done.** Validates magic bytes, byte limit and 25 MP pixel cap before decoding; fixes EXIF orientation. |
+| 2 | Facial landmarks and measurements | **Done.** MediaPipe 478 landmarks, pixel measurements, and rejection when a second face is ≥ 20% of the largest. |
+| 3 | Face segmentation | **Closed for the prototype (2026-11-11).** Pilot results on EasyPortrait (N=600), as IoU: skin 0.866, lips 0.787, eyes 0.717, brows 0.710. Glasses signal and skin-tone testing are done. Some fixes are deferred (see below). |
+| 4 | Facial geometry and makeup application zones | **Done (2026-11-11).** 70 zones in batches 1–6, staged across 11 makeup steps; 512 backend tests. |
+| 5 | FacialProfile construction | Next |
+| 6–13 | Makeup taxonomy, reference parsing, adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
+
+**Deferred Phase 3 items (not done).**
+- Roll-aligned crop, y-offset fix and the `present` floor.
+- A provenance/consent record for the test portrait. This is required before any launch.
+- The fine-tuning decision. No custom model is trained without approval.
+- Re-measuring latency on AC power.
 
 ```
 backend/                          FastAPI (Python 3.11+; tested on 3.13)
@@ -27,11 +48,14 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
         geometry.py               pixel measurements from landmarks (no classification)
       face_regions.py             orchestrator: landmarks -> parser -> zones -> response
       segmentation/               Layer A: face parser (ONNX); the ONLY place model class ids exist
-      application_zones/          Layer B: FaceFrame, zone catalog/stages, zone derivation
+      application_zones/          Layer B: FaceFrame (frame.py), zone catalog + stages (catalog.py),
+                                  zone derivation (derive.py)
+  evaluation/                     segmentation eval harness (EasyPortrait IoU, robustness, latency bench);
+                                  datasets live outside the repo, reports go to docs/evaluation/
   scripts/download_model.py
   scripts/download_face_parser.py  face-parser weights + SHA-256 check
-  tests/                          test_facial_analysis, test_face_segmentation_api,
-                                  test_face_parser, test_application_zones
+  tests/                          unit, API and integration tests, per-phase verification suites
+                                  (test_phase*_*.py) and golden_batch*.json zone snapshots
 frontend/                         Next.js 16 + React 19 + TypeScript
   app/landmark-test/page.tsx      debug page
   components/FaceLandmarkViewer.tsx  canvas overlay
@@ -162,12 +186,38 @@ On `/landmark-test`, upload a photo and click **Detect landmarks**, then:
 ## Tests
 
 ```bash
-cd backend && pytest
+cd backend && pytest          # 512 tests as of Phase 4
 ```
 Unit tests use fake services and a stub parser. Integration tests run real MediaPipe and the real face parser on
-`tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing.
+`tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing. Each Phase 4 batch has a
+`golden_batch*.json` snapshot, taken before that batch's changes. It is used to prove that earlier zones stay
+bit-identical when new ones are added. The snapshots store hashes only, never masks or image data.
 
-## Face segmentation (roadmap Phase 3) and initial zones (early Phase 4)
+> **The test portrait is not in the repository.** `tests/fixtures/portrait.jpg` and its landmark file are
+> git-ignored, because the image shows a real person and no provenance/consent record exists yet. To run the
+> integration tests and the `curl` examples above, supply your own photo at that path.
+
+## Face segmentation (Phase 3) and application zones (Phase 4)
+
+There are two layers.
+- **Layer A** is the face parser. Its model class IDs exist only inside `services/segmentation/`.
+- **Layer B** builds the application zones from the landmarks in a face-aligned frame (`FaceFrame`). It clips them to
+  the parser's anatomical regions, so they handle roll and yaw. Each zone reports a `status` (`ok`,
+  `low_confidence`, `unavailable`), a reason, a confidence and its coverage.
+
+The 70 zones cover:
+- **Skin and face areas:** face skin, forehead (center, perimeter), temples, cheeks (apple, upper, outer, cheekbone,
+  contour hollow), jawline (and outer jawline), chin (and chin center).
+- **Eyes and brows:** eyes, under-eye (inner and outer halves), inner and outer eye corners, upper and lower lash lines,
+  upper and lower eyelids, brows (head, arch, tail), brow bone. The eyelid crease cannot be derived reliably and is
+  never added.
+- **Nose:** nose, bridge, tip, sides, nostrils. Nostrils are exclusion areas and belong to no makeup stage.
+- **Mouth:** full, upper and lower lip, inner and outer lip boundaries, Cupid's bow, lip corners, mouth surround,
+  under the lower lip.
+
+The **stage map** assigns zones to 11 makeup steps: primer, color corrector, foundation, concealer, setting
+powder, bronzer and contour, blush, highlighter, eyebrow and eye, lips, setting spray. Bronzer is intentionally
+empty for now.
 
 On `/landmark-test`, click **Segment face**. The panel lets you toggle anatomical regions and application zones
 (left and right use different hues), select all zones of a makeup stage, change overlay opacity, and compare with a

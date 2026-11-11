@@ -295,4 +295,5 @@ For new features and significant changes, follow the specialized agent workflow 
 - Do not automatically commit or push changes.
 - Ask for approval before destructive changes, major architectural changes, expensive infrastructure, or training models.
 - For trivial changes, documentation updates and simple bug fixes, use judgment rather than invoking every agent.
-- Save agent reports in `docs/plans/reports/`.
+- Agent hand-off reports are scratch files: save them in `.scratch/agent_reports/` (git-ignored), not in the repo.
+- When a phase, batch or work package closes, add a short entry to `docs/DECISIONS.md` (decisions, approvals, revised criteria, deferrals) and update the README Milestones table.

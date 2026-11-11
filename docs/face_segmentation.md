@@ -1,12 +1,15 @@
-# Face segmentation (roadmap Phase 3) and initial application zones (early Phase 4)
+# Face segmentation (roadmap Phase 3) and application zones (Phase 4)
 
-Phase numbering follows the roadmap in `CLAUDE.md`. Earlier plans and agent reports in `docs/plans/` say
-"Phase 1" for this work and "Phase 2" for the remaining zones. In roadmap terms, those are Phase 3 (segmentation),
-the initial Phase 4 zones, and the remaining Phase 4 zones.
+Phase numbering follows `docs/ROADMAP.md`. Some older plans in `docs/plans/` call this work "Phase 1" and the
+remaining zones "Phase 2". In roadmap terms those are Phase 3 (segmentation) and Phase 4 (zones).
 
-Status: segmentation and the initial zones are implemented. They passed the agent workflow, with the final
-evaluation in `docs/plans/reports/10_evaluation_iter3_final.md`. Phase 3 is **not complete** until a ground-truth
-quality evaluation has been done. Phase 4 Batch 1 (`chin_center`, `under_lower_lip`, `mouth_surround`, `cupid_bow`, `lip_corner_l/r`) , Batch 2 (`forehead_center`, `forehead_perimeter`, `temple_l/r`, `jawline_outer_l/r`) and Batch 3a (`under_eye_inner/outer_l/r`, `eye_corner_inner/outer_l/r`, `lash_line_upper/lower_l/r`) and Batch 3b (`eyelid_upper_l/r`, `brow_head/arch/tail_l/r`, `brow_bone_l/r`) are implemented; the other Phase 4 zones are NOT implemented. All numbers below are **measurements on one
+**Status.**
+- **Phase 3:** closed for the prototype by the user on 2026-11-11. The EasyPortrait pilot evaluation, the glasses signal and skin-tone testing are done. Some items are deferred.
+- **Phase 4:** the zone list is complete, with 70 zones in batches 1–6.
+
+Decisions, revised criteria and deferred items for both phases are recorded in [DECISIONS.md](DECISIONS.md).
+
+All numbers below are **measurements on one
 machine (Apple M2 Pro, 10 cores, macOS, CPU only, onnxruntime 1.31.1, Python 3.13)** unless marked otherwise. No
 accuracy claim is made anywhere in this document: the only ground-truth comparison so far is a pilot against another
 dataset's annotations (see [Evaluation results](#evaluation-results)), and there is no hand-annotated ground truth of
@@ -144,8 +147,8 @@ measurements in this document were taken before the fix and were not re-measured
 
 Pilot against EasyPortrait v2 test annotations (N = 600, stratified, seed 20261110, 598 detected): report
 `docs/evaluation/easyportrait_test_2026-11-10.md` (and `.json`), sample ids in
-`docs/evaluation/easyportrait_test_sample_seed20261110_n600.txt`, how it was produced in
-`docs/plans/reports/12_coder_report_phase3_eval.md`. Headline *agreement with EasyPortrait annotations*
+`docs/evaluation/easyportrait_test_sample_seed20261110_n600.txt`, how it was produced (and how to
+reproduce it) in [DECISIONS.md](DECISIONS.md#phase-3-completion-easyportrait-evaluation-wp1wp5-2026-11-10-pass-after-3-iterations). Headline *agreement with EasyPortrait annotations*
 (dataset-level IoU, full-image scoring, detected images): skin 0.866, lips 0.787, eye 0.717, brow 0.710; left/right
 swaps 0 of 545 (eyes) and 0 of 593 (brows). Weak spots: eyes in the 48 glasses images (IoU 0.0) and in the 93 images
 where the landmark/parser alignment check failed (0.17); a consistent best-shift of about 1-2 px downward.

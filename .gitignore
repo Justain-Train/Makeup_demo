@@ -89,3 +89,6 @@ frontend/next-env.d.ts
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Agent hand-off reports and other scratch work (decisions go in docs/DECISIONS.md)
+.scratch/
