@@ -1,0 +1,3303 @@
+{
+ "_note": "Captured from pre-Batch-5 code on 2026-11-11; all 62 zones existing before Batch 5. Same method as golden_batch4.json (scenarios via test_phase4_batch3b_verification._scenario_b, _sig from 3a; fixture_api via POST /api/facial-analysis/segmentation on tests/fixtures/portrait.jpg). Hashes and counts only; no coordinates. 2026-11-11 (Batch 5, user-approved bug fix): NOSE_HULL reordered to outline order; ONLY nose, cheek_l and mouth_surround entries were re-captured from post-fix code; all other entries verified unchanged.",
+ "fixture_api": {
+  "brow_arch_l": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "227a298f654e86a2cf8cfe97fe8bc46831860fcab827aafaf94fd13afae26db6",
+   "polygon_sha256": "ede7d4d5a42cc7111a22816e99a55b93aac1a24e6ea4d79baa5706b62fcdc23b",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_arch_r": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "d6d710c907522f6e427a5ea551186e54d4c19e2e6eec606fc8d84a1d8a175d7c",
+   "polygon_sha256": "25d00925c5d671914b8df2fa2198d6486d2d28190f1d13e55ba9bc8680b9d8b6",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_bone_l": {
+   "confidence": 0.8015,
+   "coverage": 0.5364,
+   "mask_png_sha256": "ccaec49d00fe3c57b534847e7ef6c7a841531fe99506b1ef5d17b50db3f06d4b",
+   "polygon_sha256": "9d0b867918b43f3ffa983be1d8ae305aaaec6d9fe00d0830e09a6abdc127e0f6",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_bone_r": {
+   "confidence": 0.8566,
+   "coverage": 0.702,
+   "mask_png_sha256": "bb86fb5510f225ab67129764762dd59e3abd5746a9a2c7dcc3765d1892163629",
+   "polygon_sha256": "708eb6054637fe2f3adefac0aa5f2ed7af38423a54285a2e5eae7fa5ecd9d9ab",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_head_l": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "9c33dbb02b8c972f65f36ed0cf0af1b9dfb1e808c76e477214dd174ee3eb55a7",
+   "polygon_sha256": "ede7d4d5a42cc7111a22816e99a55b93aac1a24e6ea4d79baa5706b62fcdc23b",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_head_r": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "3fd3d104d69d60c37ec076dcf7fa40de579e6f6feef41e833332f5e18dbe98c9",
+   "polygon_sha256": "25d00925c5d671914b8df2fa2198d6486d2d28190f1d13e55ba9bc8680b9d8b6",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_l": {
+   "confidence": 0.596,
+   "coverage": null,
+   "mask_png_sha256": "717644da4b6430dcf29778e2aad1c57b1487a8077964c5b2688af376157e2e98",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_r": {
+   "confidence": 0.6417,
+   "coverage": null,
+   "mask_png_sha256": "b6d9ffd434ca2d72ea409c39aa4d73985e2e7c2d4372f8d482fc4b44355c83aa",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_tail_l": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "2024c50b167ab50dcc7537124015018a269688dd7764d1ce2373e0b818b62727",
+   "polygon_sha256": "ede7d4d5a42cc7111a22816e99a55b93aac1a24e6ea4d79baa5706b62fcdc23b",
+   "reason": null,
+   "status": "ok"
+  },
+  "brow_tail_r": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "e9dfc32f0de3d7b1e26013a3957dade485144071ff4a05052b020c9bbbc95b26",
+   "polygon_sha256": "25d00925c5d671914b8df2fa2198d6486d2d28190f1d13e55ba9bc8680b9d8b6",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_apple_l": {
+   "confidence": 0.8276,
+   "coverage": 1.0,
+   "mask_png_sha256": "92b052cc95785ef11d964ee7a8471552180c0bb753aba8db677037d14a0d8997",
+   "polygon_sha256": "82b3ed4c7625eccd0a4aa0ab62b6954519926eb9e1a51ff7c34a568838c6491f",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_apple_r": {
+   "confidence": 0.8101,
+   "coverage": 1.0,
+   "mask_png_sha256": "f2d726018e356f754389d04857214f0bad85402900de5d652fc59f5dff913dbf",
+   "polygon_sha256": "179eb18e7083225eb9e3aa8151627a79869a77ad4a52ee6b81471cd2c51d42c9",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_l": {
+   "confidence": 0.8373,
+   "coverage": 0.9965,
+   "mask_png_sha256": "6f81e83bcbd892b285b2cb0377e18be855ea16ed254fde5ddc052b9619d9bb0a",
+   "polygon_sha256": "ff271fbc8d8540b27377f9ed150323f1f302efb451849c316870def0a38ed555",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_outer_l": {
+   "confidence": 0.8253,
+   "coverage": 1.0,
+   "mask_png_sha256": "4fb106b01273e8d0ecdb200dfc44a15109215654d3851a1f5512d4c31c4f6a3e",
+   "polygon_sha256": "cbbf26b0784f15fc567e5d268086abe4f58157860e78da3e5ed25f8cbc942a12",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_outer_r": {
+   "confidence": 0.8299,
+   "coverage": 1.0,
+   "mask_png_sha256": "44c0b0ed7f6a9baca79a89f6b07e7ae48d40da8138314062fb3be5b77a809536",
+   "polygon_sha256": "05797a7b6a6308e3ab0c878b46c55764c5d3361619937345d6540f631e48dff4",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_r": {
+   "confidence": 0.8248,
+   "coverage": 0.9641,
+   "mask_png_sha256": "1f64be431a1a0ddc0dcdd740838c9ed5394a827b23e944b487be4f155b012268",
+   "polygon_sha256": "f848c54b1a6c437586bddeae9b99d62d0692bc6f5c1bd70b7e7db298b7097093",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_upper_l": {
+   "confidence": 0.9025,
+   "coverage": 1.0,
+   "mask_png_sha256": "216a65d451e588b9c6c3f2a039a3add59b750e4ec2f61b10e8b4ac296441f997",
+   "polygon_sha256": "b984d28c1bab6aeb0cba610d03fb15d20325e73f4678d29e4e1dcc8699b36996",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheek_upper_r": {
+   "confidence": 0.8806,
+   "coverage": 1.0,
+   "mask_png_sha256": "1bf47e442f90a64a8c9d5aec3ae49a4b4a5aa9c2fadd39d33e2235f8cc7fb523",
+   "polygon_sha256": "42243abc3fca05e80dc1ff9c43ada85828a9d09c1c0d1c96d3988adf99348816",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheekbone_l": {
+   "confidence": 0.875,
+   "coverage": 1.0,
+   "mask_png_sha256": "32acff1e9bd8c651a6e6f761c4e60811da3e2dc4c9626129b0344b64cdbdb825",
+   "polygon_sha256": "c9b64e6f8498d32d41546f46d27912bdf10bdbe6f90d20840264162b36fb9ef0",
+   "reason": null,
+   "status": "ok"
+  },
+  "cheekbone_r": {
+   "confidence": 0.8741,
+   "coverage": 1.0,
+   "mask_png_sha256": "a67086dba5eb0596f17f395cdc21144903a7d599091dd3cc21e32415cbb9d66f",
+   "polygon_sha256": "040c15d6efdeadbead5f7d84129a06b0e694f3742b8b92008e4f05fe89a86a0e",
+   "reason": null,
+   "status": "ok"
+  },
+  "chin": {
+   "confidence": 0.7775,
+   "coverage": 0.9187,
+   "mask_png_sha256": "a9182f326966e0f32fed643c1b2af286faa8b13002e3ca67007fb51887c95044",
+   "polygon_sha256": "e875b1bdd909c249e2bfd4495c10ace168d71b44120a89f826e75b96c43131b5",
+   "reason": null,
+   "status": "ok"
+  },
+  "chin_center": {
+   "confidence": 0.7505,
+   "coverage": 0.9904,
+   "mask_png_sha256": "55fbb22b63e5b1fe5e3007dbb29767fd6d87df7c440bdc1a3d51ecb0f5c9f920",
+   "polygon_sha256": "91231806281b4ec140b4194ec9047f694ef050dd3557b12a9c24aeb9b5370539",
+   "reason": null,
+   "status": "ok"
+  },
+  "contour_hollow_l": {
+   "confidence": 0.8113,
+   "coverage": 1.0,
+   "mask_png_sha256": "64141c4aac7255256cfddd8aa1d66a5be0a22822802d1ae6f18cd1b812606edf",
+   "polygon_sha256": "84dd53e8509cd6929097d85e9914136eecd8d721cc2ed5616d610011022b788e",
+   "reason": null,
+   "status": "ok"
+  },
+  "contour_hollow_r": {
+   "confidence": 0.7968,
+   "coverage": 1.0,
+   "mask_png_sha256": "c1692befc7662b95a759ee6e1187c5a537f2ac2a3ac7836fe5d23e6411a4b432",
+   "polygon_sha256": "63f1b55d8b89b7a6c72c0c913a78aa1376c05bbecc83dc55d294f3ff376fe910",
+   "reason": null,
+   "status": "ok"
+  },
+  "cupid_bow": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "5dc3cd8d1b51cb07fb53fe327cc0576bee9189cce5244c542f13ea567ce478e7",
+   "polygon_sha256": "f730cf759c4b3313ac934f2688954f1dd4ae08adc8c44a5f0e36e1586c4cb7dd",
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_corner_inner_l": {
+   "confidence": 0.86,
+   "coverage": null,
+   "mask_png_sha256": "9072a711a19e5e35436a83c0f588f3085ab4752ec2f94b0b0e91820324c9dacb",
+   "polygon_sha256": "8ff963317f6eee6c378bc5ce1e059ae4263451cc4dce2d8351539449a6b4e805",
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_corner_inner_r": {
+   "confidence": 0.8361,
+   "coverage": null,
+   "mask_png_sha256": "901c451400b6a526444f9ede9590f9278220b53eaeeaec2d3c1232a1a0d13c51",
+   "polygon_sha256": "0ae8d83cf7caf3ffbf9f182f6f1cbb99e34b88b77252bf330441d36b66cc1538",
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_corner_outer_l": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "be1b18e63b532fc12b0bf67eba312edef0ca3e3b4c32e4c0e59b0bafa4060005",
+   "polygon_sha256": "7a34508796272704bd9476c08614aafd72523863ac62bf683d23e660c4793930",
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_corner_outer_r": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "cb77188c14e75d20cb7f788f306703f9aede73c6d627b965986a8d009431f793",
+   "polygon_sha256": "591731577abd0e9038bdfce9fda2213eb6eced3193399c60d92857bb6e60fd4c",
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_l": {
+   "confidence": 0.7294,
+   "coverage": null,
+   "mask_png_sha256": "5e34558de54e40c1a0257efe0c917d3c016fa207d760dfdd04c357e95e117677",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "eye_r": {
+   "confidence": 0.7276,
+   "coverage": null,
+   "mask_png_sha256": "395c4c7a54b0d80573b7e5272ef542dc4de6998853d9fd4035ba44f64de9e821",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "eyelid_upper_l": {
+   "confidence": 0.7844,
+   "coverage": 0.7006,
+   "mask_png_sha256": "9295825d74fc4c2c818681f89d357fa6965bb5b24a0e3a52745969ac8ee2c947",
+   "polygon_sha256": "1c46d0a73dd6d003a65df0cd12783cd280e1a19acbd7c732ddb2e63e0cefc7be",
+   "reason": null,
+   "status": "ok"
+  },
+  "eyelid_upper_r": {
+   "confidence": 0.8559,
+   "coverage": 0.7434,
+   "mask_png_sha256": "27c09679b42950ee23e82edeb89b5eedb70442f78b29c96625364540615ff5cf",
+   "polygon_sha256": "5eaed3048ee3cdf01e93ad469e6cdbb7a6dc194f25d6929bfb507aa80dbfa14a",
+   "reason": null,
+   "status": "ok"
+  },
+  "face_skin": {
+   "confidence": 0.8008,
+   "coverage": null,
+   "mask_png_sha256": "a8586f3902d55783e2e4ac24d476c6ec93eeedd38ef92379a639bdd08b1d6b39",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "forehead": {
+   "confidence": 0.7748,
+   "coverage": 0.9905,
+   "mask_png_sha256": "8c16943f69d1f334938a672059fe980d1fd9b21bd6f718874924a327c1d99f1f",
+   "polygon_sha256": "e929f231dd7f1211ffae5dec9aae95a8ef262352d86729f80f21f8cba4c163e4",
+   "reason": null,
+   "status": "ok"
+  },
+  "forehead_center": {
+   "confidence": 0.7919,
+   "coverage": 1.0,
+   "mask_png_sha256": "2f9e5a30cbcc87151e40ade9f20cf3f2c420fb39c92a49add3f97f9fd37bbf5f",
+   "polygon_sha256": "4f119f9c155d44424f25b7174893133865d4ad6890fe3bff7baec2697ab976db",
+   "reason": null,
+   "status": "ok"
+  },
+  "forehead_perimeter": {
+   "confidence": 0.7244,
+   "coverage": 0.9592,
+   "mask_png_sha256": "88904d3463169a0416ff1a845e18c0b188d7c3cdc19bbcb6341138faa60a3026",
+   "polygon_sha256": "e929f231dd7f1211ffae5dec9aae95a8ef262352d86729f80f21f8cba4c163e4",
+   "reason": null,
+   "status": "ok"
+  },
+  "jawline": {
+   "confidence": 0.7883,
+   "coverage": 0.9616,
+   "mask_png_sha256": "3be0200c694ff494d3553ca78f04531f5479c7ffcbfdcdb0148b7baf5174ec86",
+   "polygon_sha256": "949facc683722f6dffa8dd9fbc01a2e286ef231ec19b6d5307bdf09f4dcb5b5a",
+   "reason": null,
+   "status": "ok"
+  },
+  "jawline_outer_l": {
+   "confidence": 0.7718,
+   "coverage": 0.8954,
+   "mask_png_sha256": "725b74cdcb30ee9bfc09881e70467eb95de98d3958fea110476946c4145ded20",
+   "polygon_sha256": "4867932f54354c8cd1dffbc191171656d04c72a15e13dba7b5aa2897532698d0",
+   "reason": null,
+   "status": "ok"
+  },
+  "jawline_outer_r": {
+   "confidence": 0.7691,
+   "coverage": 0.935,
+   "mask_png_sha256": "9aa084b836a1353900d9d9f377e40585b9c9c8c9575deb42bda2bb93d517d3ba",
+   "polygon_sha256": "7b4f0b7436f31e13ef7661aff6834805e9e0719b5a5e622842c9240e3fe01726",
+   "reason": null,
+   "status": "ok"
+  },
+  "lash_line_lower_l": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "f870f4d6be03bef16ee179e4a6bd39ff3dfbc3cfd7c091700ffbf6d5b8735782",
+   "polygon_sha256": "e867ddbd0ddd8d0bf36cdfaea550bbaf069046762d10d9edbd3e2a569772e5bb",
+   "reason": null,
+   "status": "ok"
+  },
+  "lash_line_lower_r": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "fde6277e283d5d0bef590958ab6feb953e2922ec8e930713db8bbd23f265bccc",
+   "polygon_sha256": "b7a451f06b3e92bc0d92ccce4bbc60fc4972774d56a1fc683190e5eb22106a7a",
+   "reason": null,
+   "status": "ok"
+  },
+  "lash_line_upper_l": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "4051d6e2a679a27cacc729b0bd0ab93da5f3ff8c1e9b548af8126afd344f2d8c",
+   "polygon_sha256": "f4fdf92e0a2ff67e6043a1971e89f4550c64bb6ff31079a406b0e35663151be1",
+   "reason": null,
+   "status": "ok"
+  },
+  "lash_line_upper_r": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "db13b53baafdefb7973c45459d9e72c3a3fa6a1c4b6447e9dcbf09e140c65410",
+   "polygon_sha256": "f0947fdbc776d4b61fab8b41d074522890d034fef17ed6ddf749ad97a5508c37",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_corner_l": {
+   "confidence": 0.7857,
+   "coverage": null,
+   "mask_png_sha256": "6748000a89459831bd730f8519c3b30d447ea823fd7fe6f43da04496fc138377",
+   "polygon_sha256": "798066d42a2d8b926ef5d7627df880e181d6ade6eca60aa83d3840197198be4a",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_corner_r": {
+   "confidence": 1.0,
+   "coverage": null,
+   "mask_png_sha256": "3e6843a1c57cb7b44f98c46c89a93f664de6e65894c2123a4c8eeee81bc35dff",
+   "polygon_sha256": "9576b2d54ae13e0d1f45fceb7a0368177da7d92461f2104f2024da06a56a3c51",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_full": {
+   "confidence": 0.5982,
+   "coverage": null,
+   "mask_png_sha256": "ea0c5db7f53f62b2c49d74c0bde99a38e807dcbdd88257d17b7475975b5b7fbe",
+   "polygon_sha256": "d94024668753aa28013fbb2ff8202bf93c6c2d018a4343ffc2d92789ac7d0e16",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_inner_boundary": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "14b95228ac138df19c730a12c2d81a6bed9760a43cc3216a4c8b3a52b5ee3918",
+   "polygon_sha256": "8e9879c5460327dd858fc47f8c8886159daee7321bc9aebbb3ca8fd42d6f223f",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_lower": {
+   "confidence": 0.6093,
+   "coverage": null,
+   "mask_png_sha256": "98159d918db40a3ccf0372fdc3639cbb9452eeb2190fad89b0f0600f48b3a581",
+   "polygon_sha256": "8a653bfb78db2b0ae3970213ac90b0f9aa6fc2363d4c35b20f032fe69f99e093",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_outer_boundary": {
+   "confidence": null,
+   "coverage": null,
+   "mask_png_sha256": "5415d5081a21a112bb774900c494e239733172e7591bb15bebd65f9d56b5bcfa",
+   "polygon_sha256": "8440eb6e10758b8d60d7ea8415fc0b095095eedad880a46e2fae2c964acc278d",
+   "reason": null,
+   "status": "ok"
+  },
+  "lip_upper": {
+   "confidence": 0.5639,
+   "coverage": null,
+   "mask_png_sha256": "ffa79fb7b9033f6ef8e3db89feb573b70c4c5ca15555a24d822214cc8e966aa0",
+   "polygon_sha256": "8251a55ecc2b7a6f52010e547aee4a7897098ffd3f64e022619cb9df2a4fcfcf",
+   "reason": null,
+   "status": "ok"
+  },
+  "mouth_surround": {
+   "confidence": 0.8182,
+   "coverage": 0.9455,
+   "mask_png_sha256": "8a4db84803033c1d92e4f61b7ffa74ac98ae58d072e5ce05280ed69b71261d15",
+   "polygon_sha256": "8440eb6e10758b8d60d7ea8415fc0b095095eedad880a46e2fae2c964acc278d",
+   "reason": null,
+   "status": "ok"
+  },
+  "nose": {
+   "confidence": 0.8082,
+   "coverage": null,
+   "mask_png_sha256": "5685e929d1f6fecb88e1ae03b15f50b7d39f29fec8cac449e62d9348ab7ab724",
+   "polygon_sha256": null,
+   "reason": null,
+   "status": "ok"
+  },
+  "temple_l": {
+   "confidence": 0.7922,
+   "coverage": 0.9878,
+   "mask_png_sha256": "46e6345f4b8982ef5f4c6c9c8a80ac03a32620ee211738f95524af16ca1437e5",
+   "polygon_sha256": "4e75dbd708ddcf8abf46242a67f4767362287a016ed8ba16e08b7978c805683c",
+   "reason": null,
+   "status": "ok"
+  },
+  "temple_r": {
+   "confidence": 0.85,
+   "coverage": 0.9927,
+   "mask_png_sha256": "82ee5db1522b3ece4106671c3436c48136700398d25668aac73bb06024744b0e",
+   "polygon_sha256": "84c6e04d33c2d1aed96bb82be15dcc2c47695f06bc99739c641cb6a7059696d3",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_inner_l": {
+   "confidence": 0.8963,
+   "coverage": 0.9474,
+   "mask_png_sha256": "efff99aebfc8a2ecbaf051d9973314766fafd3bfe41d605a133b76c55c78aee4",
+   "polygon_sha256": "69b35ad275712567df9a6c5dde6ebcc790f0607680b22c21a417fa24a7d6c202",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_inner_r": {
+   "confidence": 0.8794,
+   "coverage": 0.9474,
+   "mask_png_sha256": "2f2d3e22130c44bfcca3d842c1da790ca28e5373d23c53b98fcbc870abdfea32",
+   "polygon_sha256": "baf28489e01710c54061ad4564434039588139769dc63cde77a20facbe4ef7a2",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_l": {
+   "confidence": 0.8821,
+   "coverage": 0.9401,
+   "mask_png_sha256": "c41c982f138cef2604636290dde9c544c30d4714d42f281edfd561fb122369c0",
+   "polygon_sha256": "69b35ad275712567df9a6c5dde6ebcc790f0607680b22c21a417fa24a7d6c202",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_outer_l": {
+   "confidence": 0.8677,
+   "coverage": 0.9327,
+   "mask_png_sha256": "a6c1887ec8833ed3607d8e57a5172a943bb1b3f7a0ec6f73121ad7422384f198",
+   "polygon_sha256": "69b35ad275712567df9a6c5dde6ebcc790f0607680b22c21a417fa24a7d6c202",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_outer_r": {
+   "confidence": 0.8858,
+   "coverage": 0.9443,
+   "mask_png_sha256": "48c9be18c3577612beb1e3da2315d0b66beda17e1eba8b221bc95a2caca3578e",
+   "polygon_sha256": "baf28489e01710c54061ad4564434039588139769dc63cde77a20facbe4ef7a2",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_eye_r": {
+   "confidence": 0.8826,
+   "coverage": 0.9458,
+   "mask_png_sha256": "fadd73e515e080f52f74271d45c52e3c0cbf2e62b21c5f9d183c090291fa639a",
+   "polygon_sha256": "baf28489e01710c54061ad4564434039588139769dc63cde77a20facbe4ef7a2",
+   "reason": null,
+   "status": "ok"
+  },
+  "under_lower_lip": {
+   "confidence": 0.7717,
+   "coverage": 1.0,
+   "mask_png_sha256": "c87fb2779b87ec5dfe487b12c061329e15d60c757784a8405ffaf3d366b3d8c3",
+   "polygon_sha256": "5112ba40781f0fceacdf5df03cbc6756d70458ba8deac66326ba1db77495e19e",
+   "reason": null,
+   "status": "ok"
+  }
+ },
+ "scenarios": {
+  "glasses_over_brows": {
+   "brow_arch_l": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "ff648123f5ee55a284253faefc6db94dc610eb04fe3f2e66fab77268c9fdd99b",
+    "pixel_count": 164,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "brow_arch_r": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "4c605f4598e366691140f1a45586da4aa3b52ac9e43bdd6461fbb0c9e2e146d1",
+    "pixel_count": 186,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "brow_bone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "52091451272ad8e7d89038e658df8919d183f9a43fc0b4ba64461c0c83f27fdb",
+    "pixel_count": 151,
+    "polygon_sha256": "153319f707d425b033ee457f98459ae545293167d3f1b5b6f9effbfe2ba70b0a",
+    "reason": "The brow is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "brow_bone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "fbb70092e615f7d33e1b325592c5f504142645fef1f387bcbb1e14c559c15ea6",
+    "pixel_count": 151,
+    "polygon_sha256": "1d3bfc5648b8ed0210198ebaf0f54901b5a1c226990a5f41197ac8cc5ab9e7cd",
+    "reason": "The brow is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "brow_head_l": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "1ada5bba19b39bb806d82cd9616a9c6e117105aa7269cc570429d7fa111e27a8",
+    "pixel_count": 222,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "brow_head_r": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "8c923f5aee8a06a7535f89f4b6c4f249b21871fbb6c4ab93f8e532466ccc1c74",
+    "pixel_count": 230,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "brow_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": null,
+    "pixel_count": null,
+    "polygon_sha256": null,
+    "reason": "Parser found no usable pixels for this region.",
+    "status": "unavailable"
+   },
+   "brow_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": null,
+    "pixel_count": null,
+    "polygon_sha256": null,
+    "reason": "Parser found no usable pixels for this region.",
+    "status": "unavailable"
+   },
+   "brow_tail_l": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "535d83affd699d621068939e20e9161fc0553bc714e49327c7701ed5d9ca9f32",
+    "pixel_count": 127,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "brow_tail_r": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "02bc68727bfed019e4a8f54f3e2f30a37843efadcf6f99de4c73735d3af755f8",
+    "pixel_count": 133,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": "Only 0% of the brow part lies within 0.05 ipd of the parser brow mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "cheek_apple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "030db3a4d0d8efc594c3dc30cb1371935ed11b991586f24ddb608c7233551dd6",
+    "pixel_count": 858,
+    "polygon_sha256": "3b5036332cc5a76fbb174153f2f005e7814ceb208b5eac566cc88d38094e2419",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "16101c37831dc6b434b538a720d295a38c947f051f668e558874f15017eec2fe",
+    "pixel_count": 825,
+    "polygon_sha256": "041b5afae8d86fc4fb32046043123ddfaec59d124995aec04a9c92f2425f4245",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_l": {
+    "confidence": 0.9,
+    "coverage": 0.996849,
+    "mask_sha256": "ab3f3f171a3d5eb35cbe14087ae824b56bd4a163f3abdff8281b9e3086703179",
+    "pixel_count": 3164,
+    "polygon_sha256": "721877ac7e6be4d02c59ac2e7e675d131dae971552349c619c09912752d69115",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ff472b038f232d3f730bb63e66ffe3cb768b8bfad8248f6634184981558b6da4",
+    "pixel_count": 499,
+    "polygon_sha256": "d3c08a1c6883f493551d868b764427220876f665d87c0ece3455b08560fc6d27",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ba8ec9deb5a1a585d89f6f07447616cc8c1f1af45ed1a2e3c7b5e4d8d8e0d6b0",
+    "pixel_count": 670,
+    "polygon_sha256": "1527c224c572fa58b5e6a783bb980947f5cd794996eb6300b48f229efc021d39",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_r": {
+    "confidence": 0.9,
+    "coverage": 0.997535,
+    "mask_sha256": "883b3a0efaa625ea50fe4f5fccbc15d143ead0fec694eebbab5a3bebb37bb17c",
+    "pixel_count": 3642,
+    "polygon_sha256": "a968dece870ff361f12857cf091bf53542c22ea3db226894bc9b5356756293c0",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d17a67e1255108c5ea1a934ffc1c83f14235930e08228585287398c07d2dbf45",
+    "pixel_count": 525,
+    "polygon_sha256": "60177b870899a7934cf6e31af8cd6af59e5771e1205c3e94ad31d1e7561b500a",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "994293591a7c7524ce0946e04ae98feb682e018a43a20770b159abc41cf73066",
+    "pixel_count": 540,
+    "polygon_sha256": "2284478c1b5f3e2352f58cb000cd677d9c0e5611939da617ebe900f92f0f433c",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7c181dc5a8fb99796bbd1ffde7e7e1507fad13385c3d07bb597c6c3dee4324bc",
+    "pixel_count": 698,
+    "polygon_sha256": "11d04e69e253c964d8bf7749a8567dc18fb24bd1f9c121a8836ca7f4326419d2",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "459f7533d83e1608f412f4323ea3910339532abd777c061c54cf28a84329bfc1",
+    "pixel_count": 822,
+    "polygon_sha256": "333b8e4d4653c40066979b4096224ddc84ec4971e8b6b297e7660ed84da4d8a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin": {
+    "confidence": 0.9,
+    "coverage": 0.928029,
+    "mask_sha256": "33cccad8b6b3e9a46589c5d55500f2b8a24ff3b5ec74920b779ec13512dbf8fa",
+    "pixel_count": 6473,
+    "polygon_sha256": "eaae4c4f384a45053c0b6671d7bd918d3f36384ddd830184d9e8de4c99eedc97",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "c989e193d285097faf5f19f24681dab981d3d450ce0fd49a00fabfe265968dc5",
+    "pixel_count": 726,
+    "polygon_sha256": "ce79934887f9287883c096aae90541f7ef3a6dc7df3d24faddb5f038bef2cdd6",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "010353fb2027ccca3929de719cd45d3e77aa5060a0d0fb7aee033b8c3b02b446",
+    "pixel_count": 516,
+    "polygon_sha256": "3e280965751c6d46fc9e3173de041e565d901defa901ac16f6eb3fd3a4b11d86",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "75f077ec524e3d1175ea41f62342519cf6917d98b625ddd0fb512068b334a1bc",
+    "pixel_count": 587,
+    "polygon_sha256": "42221876b537723eb254ed5c8359dfc404b6453f9697cf307054d5a94b4c10bb",
+    "reason": null,
+    "status": "ok"
+   },
+   "cupid_bow": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "dfe9c73a6ce9126a5ba685b2ee8e48d452031760303bff4cf1be2e21f255befa",
+    "pixel_count": 395,
+    "polygon_sha256": "a9e8dbf4c91af97fc1300bf516bf115f19a364507236bc813cae8963059dcc00",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "335502365a1749255db0b4d46b611e08ada37d3742b9249a5d56a0f0b4d268ca",
+    "pixel_count": 50,
+    "polygon_sha256": "db31ba550b220369b964bb3a078b6044aa1bb5675af0fb3d8721fdb080d4df71",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "2b72cdbee18fea6e33cdcb234bf7c901e84b1205c9b1fd1e7dc417618d15c06f",
+    "pixel_count": 61,
+    "polygon_sha256": "a28ce88bc702b723f21d6b07c5ca35c9fe25ccb8a904454de18964e0a41f913d",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "da02e3ca6d14b115ecf45425602bd6f4fa48b38d0a4acf35a6106251a03a2ede",
+    "pixel_count": 59,
+    "polygon_sha256": "a1d79c4b00e7069ce8ff9293f072ebf5f024471307cc9501597c3c9ac3239efa",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d8ef5d3fcd68282aa8ebad164abbc813530f15083f51a1b7516009a7763d5eba",
+    "pixel_count": 58,
+    "polygon_sha256": "2159ed5f891a4ccb3d448b199db3e8f2999f380d8445bb5cfaf1ced3fef77870",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "569647f9e841ffa15cb43ea074692742a5edcbefbc2273ebae179e5e628f83f5",
+    "pixel_count": 214,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d9fd3d68bb0f6c76c7b40a2517bfcbd41d9213e1714da2fae5e34b00ba91ed04",
+    "pixel_count": 229,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b8848bb06fc447547b5a36685dd83845b75954fdf75369283fb6e1897e4b0ab0",
+    "pixel_count": 471,
+    "polygon_sha256": "0d55144e3e37a2e165892946042d832402027decf3827915d2d524c86bd9fd33",
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f51c4964b8d7057b4d03c5266e75b250077ae597d7f6d469e351db9d0aa3c9ab",
+    "pixel_count": 457,
+    "polygon_sha256": "4bc7bfeb22dc6c2363527dba21233c3938e82bd400fc4370eaef3efd0c40bbb0",
+    "reason": null,
+    "status": "ok"
+   },
+   "face_skin": {
+    "confidence": 0.9,
+    "coverage": null,
+    "mask_sha256": "12204d7305cafa47fd0ca6d391ea2998a6f40ba5d3e4390dc5646bfef76b4758",
+    "pixel_count": 235123,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b1f0bda5853dc247c5f989f1fb4ad453987319fee14336e8b9e7c7fd1c068b2a",
+    "pixel_count": 8548,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "68f7beb8b765ee18438f2fd98afc1840667a1cba528164714524fc29ec7951ee",
+    "pixel_count": 2347,
+    "polygon_sha256": "a6468084cd93b352ea63e13725c6c6901c275b71ab2edb5a401020bff5a52f59",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_perimeter": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "9d915ed02c59170ae993411e116b10928b6bb8c94a63ef4422301f0e44211520",
+    "pixel_count": 1961,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f8a60c0f312b1f2220d6cb264bb9f64e18fd1197de6c1580ee6dcb12e59d3680",
+    "pixel_count": 4314,
+    "polygon_sha256": "fb4c11b7eb9d4fcc72cd4dcb68cb238a942e7e11f105a4c405e9dc73c27ff165",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ec5a306168b1b94b00521fd693b5fc65820ae4e3b3b321af7a4573b9474c8cb9",
+    "pixel_count": 966,
+    "polygon_sha256": "6dd4794084862a425a0cec690bc9b0b0655e48bc1a5ff7a8dfdcc6f1dc27a457",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b3f337df76e58c4fb0fe3be86c82808832007735a31f0dc878e70e00ce8730f3",
+    "pixel_count": 1000,
+    "polygon_sha256": "bce485daaa29e3e5254a634e7ec8ed02772395dedb0a8e828e19628b8ba735ab",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "df8f17083db498223fee5c75ca8a68300c6b2e50f2a5865d9c96aeaa70d154b3",
+    "pixel_count": 190,
+    "polygon_sha256": "dae3b7dab32cb905a4d30cac0e05914db43de18cea190818108c6aa9f3447f11",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b4a9b94d10bb69ff96f5c65fe4806c0b86287e6202f170ac9ddaf691fbc8f85d",
+    "pixel_count": 192,
+    "polygon_sha256": "fc666a7f5896534a5a40cf12e0c8edfad243dd4bd52842987fd47755387f0be1",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "097844ded266bc0677ddeb6839de0e6bc757d76fa8d22de1bdd07bea8361254e",
+    "pixel_count": 201,
+    "polygon_sha256": "cbdaef88a494ce99d9b5e8da01a0ba844937eb39054f66775b56f99a092fb788",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b9cd873e689b27cac0a73af31c06f8b97574d1c5b7777326b60cfa3fae36e3e9",
+    "pixel_count": 207,
+    "polygon_sha256": "6c3cd4aba38025635de31d6d3be9f5ec5db0af0c2e6fafd235559dc6b10e023b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "35caf72957c626df4056368fdac91aafd3d0200fe0cce97700d85cde258ded7c",
+    "pixel_count": 98,
+    "polygon_sha256": "934519e4c9b82b8997b46838ddb7ac9e36e0d8c55475fbd45e001a160adf3006",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "10d014fb6d58076c086f0fc750fed39535a44db3bc07e1fd7480fed5b158487d",
+    "pixel_count": 105,
+    "polygon_sha256": "f4bc913df2e0a1bae4bf44e8132d9465ef31c5016dcf45cdccaa4ec748050e7b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_full": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c1b2f92e27200209d9c9a992fce8e0736205ef2611f5393918ecca494d3dcbe6",
+    "pixel_count": 1846,
+    "polygon_sha256": "7c91e649cb3b8233f7304d0ea1f4dfb3cafb84a6f47c3bd86ff3fde2fb400b4d",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_inner_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b31fb56c9cdc949f7263d581621ddc5a4e33f25097239063e4765438b3841046",
+    "pixel_count": 964,
+    "polygon_sha256": "a4907f318db1c19dec9fe71bcdfb76337b525646b81c3b37e4c6b4c1411ce625",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_lower": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "93b5f748e02a9cb743bb64a3447633ff15120a3798092af8f895e7a9aab9a7d0",
+    "pixel_count": 1177,
+    "polygon_sha256": "64561ca436cb5f82667221a2a6c4fcf4bf767b285bdf4b35fb04e16097d05312",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_outer_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "ea1f833386dbbef508a9f25e880a3850a0e8d5ccb031b96cc22675feebf58639",
+    "pixel_count": 1131,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_upper": {
+    "confidence": 0.986726,
+    "coverage": null,
+    "mask_sha256": "f388d2fa6be674cff5fce2a8f5c4d1529115fc25411f56c1a31caa0e978c7abb",
+    "pixel_count": 678,
+    "polygon_sha256": "88c24f92ae49cde796de11141729438424482c4a460a3a9834ab9af2d35999a9",
+    "reason": null,
+    "status": "ok"
+   },
+   "mouth_surround": {
+    "confidence": 0.9,
+    "coverage": 0.953077,
+    "mask_sha256": "1495b256aabdc42c1795dd8033e5798483c4faac81d382d553656574d2f184e7",
+    "pixel_count": 4631,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "nose": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c42063df460c0c5036c4454b0cacfdd599571f27268f229bdec7115eb2aa888d",
+    "pixel_count": 2597,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7feb5615fc378be1801bb4202432e49e7495d5030fc3d825eb3263c126ac3025",
+    "pixel_count": 411,
+    "polygon_sha256": "769ae084eceb77ad6848646bdffa9f6a3e332eaca3c4e08af87a76b138883bf0",
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7d4e6c7fb7f306e6c8e339d2e2342552b1b6a7e496dabaeb7c8dd3b750ef6e52",
+    "pixel_count": 549,
+    "polygon_sha256": "8b85cf8839a2c7c13ecfff848cfd28991276720e6d6db3909e6e6f07840fe1df",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8d38937c3b6957e4a41b6b37746cc36519dd8f28c8057bf66b08b90cc817e336",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_r": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8ecb09ac0b2aa7f51cd392f1ae53233dd3136baa8d243b38fd2e8d500bcf5f71",
+    "pixel_count": 324,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3e4a299eb09b75b074642b659cf224945ec7962a6f96caa7bd923fc2174a26e3",
+    "pixel_count": 648,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3a615477021b17173be1914ca14a68d1d0e4e2a6a07c3edb548508843d1e4b46",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_r": {
+    "confidence": 0.9,
+    "coverage": 0.947214,
+    "mask_sha256": "e066301d570c11d6e30bfa10f7b4b0c99381439758d016821ad09b62ededc578",
+    "pixel_count": 323,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_r": {
+    "confidence": 0.9,
+    "coverage": 0.947291,
+    "mask_sha256": "67a88d0c476ecd12e4eee9dba1c1b6c665ff360a206da007d59b89c44b427842",
+    "pixel_count": 647,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_lower_lip": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d5224a3893a496fefbd3e6319af456a987eeda608100ca830bc949450ffdc637",
+    "pixel_count": 421,
+    "polygon_sha256": "6f7658e8ad10844e82fc2f3a30d5020f379ad587198b4da92fee440d329e9ba2",
+    "reason": null,
+    "status": "ok"
+   }
+  },
+  "glasses_over_eyes": {
+   "brow_arch_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "ff648123f5ee55a284253faefc6db94dc610eb04fe3f2e66fab77268c9fdd99b",
+    "pixel_count": 164,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_arch_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "4c605f4598e366691140f1a45586da4aa3b52ac9e43bdd6461fbb0c9e2e146d1",
+    "pixel_count": 186,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "52091451272ad8e7d89038e658df8919d183f9a43fc0b4ba64461c0c83f27fdb",
+    "pixel_count": 151,
+    "polygon_sha256": "153319f707d425b033ee457f98459ae545293167d3f1b5b6f9effbfe2ba70b0a",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "fbb70092e615f7d33e1b325592c5f504142645fef1f387bcbb1e14c559c15ea6",
+    "pixel_count": 151,
+    "polygon_sha256": "1d3bfc5648b8ed0210198ebaf0f54901b5a1c226990a5f41197ac8cc5ab9e7cd",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "1ada5bba19b39bb806d82cd9616a9c6e117105aa7269cc570429d7fa111e27a8",
+    "pixel_count": 222,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "8c923f5aee8a06a7535f89f4b6c4f249b21871fbb6c4ab93f8e532466ccc1c74",
+    "pixel_count": 230,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "b4a098ab82a1e875968193b02b4a6ac1d09d868f8124e1641dd79da27bd6afdb",
+    "pixel_count": 513,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "8c433ef06cb905e1acc11d9e6996c2cfbb839b273e7241d0a3caeaa307361417",
+    "pixel_count": 549,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "535d83affd699d621068939e20e9161fc0553bc714e49327c7701ed5d9ca9f32",
+    "pixel_count": 127,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "02bc68727bfed019e4a8f54f3e2f30a37843efadcf6f99de4c73735d3af755f8",
+    "pixel_count": 133,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "030db3a4d0d8efc594c3dc30cb1371935ed11b991586f24ddb608c7233551dd6",
+    "pixel_count": 858,
+    "polygon_sha256": "3b5036332cc5a76fbb174153f2f005e7814ceb208b5eac566cc88d38094e2419",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "16101c37831dc6b434b538a720d295a38c947f051f668e558874f15017eec2fe",
+    "pixel_count": 825,
+    "polygon_sha256": "041b5afae8d86fc4fb32046043123ddfaec59d124995aec04a9c92f2425f4245",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_l": {
+    "confidence": 0.9,
+    "coverage": 0.996849,
+    "mask_sha256": "ab3f3f171a3d5eb35cbe14087ae824b56bd4a163f3abdff8281b9e3086703179",
+    "pixel_count": 3164,
+    "polygon_sha256": "721877ac7e6be4d02c59ac2e7e675d131dae971552349c619c09912752d69115",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ff472b038f232d3f730bb63e66ffe3cb768b8bfad8248f6634184981558b6da4",
+    "pixel_count": 499,
+    "polygon_sha256": "d3c08a1c6883f493551d868b764427220876f665d87c0ece3455b08560fc6d27",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ba8ec9deb5a1a585d89f6f07447616cc8c1f1af45ed1a2e3c7b5e4d8d8e0d6b0",
+    "pixel_count": 670,
+    "polygon_sha256": "1527c224c572fa58b5e6a783bb980947f5cd794996eb6300b48f229efc021d39",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_r": {
+    "confidence": 0.9,
+    "coverage": 0.997535,
+    "mask_sha256": "883b3a0efaa625ea50fe4f5fccbc15d143ead0fec694eebbab5a3bebb37bb17c",
+    "pixel_count": 3642,
+    "polygon_sha256": "a968dece870ff361f12857cf091bf53542c22ea3db226894bc9b5356756293c0",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d17a67e1255108c5ea1a934ffc1c83f14235930e08228585287398c07d2dbf45",
+    "pixel_count": 525,
+    "polygon_sha256": "60177b870899a7934cf6e31af8cd6af59e5771e1205c3e94ad31d1e7561b500a",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "cheek_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "994293591a7c7524ce0946e04ae98feb682e018a43a20770b159abc41cf73066",
+    "pixel_count": 540,
+    "polygon_sha256": "2284478c1b5f3e2352f58cb000cd677d9c0e5611939da617ebe900f92f0f433c",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "cheekbone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7c181dc5a8fb99796bbd1ffde7e7e1507fad13385c3d07bb597c6c3dee4324bc",
+    "pixel_count": 698,
+    "polygon_sha256": "11d04e69e253c964d8bf7749a8567dc18fb24bd1f9c121a8836ca7f4326419d2",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "cheekbone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "459f7533d83e1608f412f4323ea3910339532abd777c061c54cf28a84329bfc1",
+    "pixel_count": 822,
+    "polygon_sha256": "333b8e4d4653c40066979b4096224ddc84ec4971e8b6b297e7660ed84da4d8a8",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "chin": {
+    "confidence": 0.9,
+    "coverage": 0.928029,
+    "mask_sha256": "33cccad8b6b3e9a46589c5d55500f2b8a24ff3b5ec74920b779ec13512dbf8fa",
+    "pixel_count": 6473,
+    "polygon_sha256": "eaae4c4f384a45053c0b6671d7bd918d3f36384ddd830184d9e8de4c99eedc97",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "c989e193d285097faf5f19f24681dab981d3d450ce0fd49a00fabfe265968dc5",
+    "pixel_count": 726,
+    "polygon_sha256": "ce79934887f9287883c096aae90541f7ef3a6dc7df3d24faddb5f038bef2cdd6",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "010353fb2027ccca3929de719cd45d3e77aa5060a0d0fb7aee033b8c3b02b446",
+    "pixel_count": 516,
+    "polygon_sha256": "3e280965751c6d46fc9e3173de041e565d901defa901ac16f6eb3fd3a4b11d86",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "75f077ec524e3d1175ea41f62342519cf6917d98b625ddd0fb512068b334a1bc",
+    "pixel_count": 587,
+    "polygon_sha256": "42221876b537723eb254ed5c8359dfc404b6453f9697cf307054d5a94b4c10bb",
+    "reason": null,
+    "status": "ok"
+   },
+   "cupid_bow": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "dfe9c73a6ce9126a5ba685b2ee8e48d452031760303bff4cf1be2e21f255befa",
+    "pixel_count": 395,
+    "polygon_sha256": "a9e8dbf4c91af97fc1300bf516bf115f19a364507236bc813cae8963059dcc00",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_l": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "335502365a1749255db0b4d46b611e08ada37d3742b9249a5d56a0f0b4d268ca",
+    "pixel_count": 50,
+    "polygon_sha256": "db31ba550b220369b964bb3a078b6044aa1bb5675af0fb3d8721fdb080d4df71",
+    "reason": "Only 0% of the corner lies within 0.05 ipd of the parser eye mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "eye_corner_inner_r": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "2b72cdbee18fea6e33cdcb234bf7c901e84b1205c9b1fd1e7dc417618d15c06f",
+    "pixel_count": 61,
+    "polygon_sha256": "a28ce88bc702b723f21d6b07c5ca35c9fe25ccb8a904454de18964e0a41f913d",
+    "reason": "Only 0% of the corner lies within 0.05 ipd of the parser eye mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "eye_corner_outer_l": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "da02e3ca6d14b115ecf45425602bd6f4fa48b38d0a4acf35a6106251a03a2ede",
+    "pixel_count": 59,
+    "polygon_sha256": "a1d79c4b00e7069ce8ff9293f072ebf5f024471307cc9501597c3c9ac3239efa",
+    "reason": "Only 0% of the corner lies within 0.05 ipd of the parser eye mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "eye_corner_outer_r": {
+    "confidence": 0.0,
+    "coverage": null,
+    "mask_sha256": "d8ef5d3fcd68282aa8ebad164abbc813530f15083f51a1b7516009a7763d5eba",
+    "pixel_count": 58,
+    "polygon_sha256": "2159ed5f891a4ccb3d448b199db3e8f2999f380d8445bb5cfaf1ced3fef77870",
+    "reason": "Only 0% of the corner lies within 0.05 ipd of the parser eye mask (coverage within a tolerance, not IoU).",
+    "status": "low_confidence"
+   },
+   "eye_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": null,
+    "pixel_count": null,
+    "polygon_sha256": null,
+    "reason": "Parser found no usable pixels for this region.",
+    "status": "unavailable"
+   },
+   "eye_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": null,
+    "pixel_count": null,
+    "polygon_sha256": null,
+    "reason": "Parser found no usable pixels for this region.",
+    "status": "unavailable"
+   },
+   "eyelid_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b8848bb06fc447547b5a36685dd83845b75954fdf75369283fb6e1897e4b0ab0",
+    "pixel_count": 471,
+    "polygon_sha256": "0d55144e3e37a2e165892946042d832402027decf3827915d2d524c86bd9fd33",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "eyelid_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f51c4964b8d7057b4d03c5266e75b250077ae597d7f6d469e351db9d0aa3c9ab",
+    "pixel_count": 457,
+    "polygon_sha256": "4bc7bfeb22dc6c2363527dba21233c3938e82bd400fc4370eaef3efd0c40bbb0",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "face_skin": {
+    "confidence": 0.9,
+    "coverage": null,
+    "mask_sha256": "12204d7305cafa47fd0ca6d391ea2998a6f40ba5d3e4390dc5646bfef76b4758",
+    "pixel_count": 235123,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b1f0bda5853dc247c5f989f1fb4ad453987319fee14336e8b9e7c7fd1c068b2a",
+    "pixel_count": 8548,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "68f7beb8b765ee18438f2fd98afc1840667a1cba528164714524fc29ec7951ee",
+    "pixel_count": 2347,
+    "polygon_sha256": "a6468084cd93b352ea63e13725c6c6901c275b71ab2edb5a401020bff5a52f59",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_perimeter": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "9d915ed02c59170ae993411e116b10928b6bb8c94a63ef4422301f0e44211520",
+    "pixel_count": 1961,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f8a60c0f312b1f2220d6cb264bb9f64e18fd1197de6c1580ee6dcb12e59d3680",
+    "pixel_count": 4314,
+    "polygon_sha256": "fb4c11b7eb9d4fcc72cd4dcb68cb238a942e7e11f105a4c405e9dc73c27ff165",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ec5a306168b1b94b00521fd693b5fc65820ae4e3b3b321af7a4573b9474c8cb9",
+    "pixel_count": 966,
+    "polygon_sha256": "6dd4794084862a425a0cec690bc9b0b0655e48bc1a5ff7a8dfdcc6f1dc27a457",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b3f337df76e58c4fb0fe3be86c82808832007735a31f0dc878e70e00ce8730f3",
+    "pixel_count": 1000,
+    "polygon_sha256": "bce485daaa29e3e5254a634e7ec8ed02772395dedb0a8e828e19628b8ba735ab",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "df8f17083db498223fee5c75ca8a68300c6b2e50f2a5865d9c96aeaa70d154b3",
+    "pixel_count": 190,
+    "polygon_sha256": "dae3b7dab32cb905a4d30cac0e05914db43de18cea190818108c6aa9f3447f11",
+    "reason": "Glasses cover part of this eye zone; nothing is inferred behind the lenses.",
+    "status": "low_confidence"
+   },
+   "lash_line_lower_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b4a9b94d10bb69ff96f5c65fe4806c0b86287e6202f170ac9ddaf691fbc8f85d",
+    "pixel_count": 192,
+    "polygon_sha256": "fc666a7f5896534a5a40cf12e0c8edfad243dd4bd52842987fd47755387f0be1",
+    "reason": "Glasses cover part of this eye zone; nothing is inferred behind the lenses.",
+    "status": "low_confidence"
+   },
+   "lash_line_upper_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "097844ded266bc0677ddeb6839de0e6bc757d76fa8d22de1bdd07bea8361254e",
+    "pixel_count": 201,
+    "polygon_sha256": "cbdaef88a494ce99d9b5e8da01a0ba844937eb39054f66775b56f99a092fb788",
+    "reason": "Glasses cover part of this eye zone; nothing is inferred behind the lenses.",
+    "status": "low_confidence"
+   },
+   "lash_line_upper_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b9cd873e689b27cac0a73af31c06f8b97574d1c5b7777326b60cfa3fae36e3e9",
+    "pixel_count": 207,
+    "polygon_sha256": "6c3cd4aba38025635de31d6d3be9f5ec5db0af0c2e6fafd235559dc6b10e023b",
+    "reason": "Glasses cover part of this eye zone; nothing is inferred behind the lenses.",
+    "status": "low_confidence"
+   },
+   "lip_corner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "35caf72957c626df4056368fdac91aafd3d0200fe0cce97700d85cde258ded7c",
+    "pixel_count": 98,
+    "polygon_sha256": "934519e4c9b82b8997b46838ddb7ac9e36e0d8c55475fbd45e001a160adf3006",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "10d014fb6d58076c086f0fc750fed39535a44db3bc07e1fd7480fed5b158487d",
+    "pixel_count": 105,
+    "polygon_sha256": "f4bc913df2e0a1bae4bf44e8132d9465ef31c5016dcf45cdccaa4ec748050e7b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_full": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c1b2f92e27200209d9c9a992fce8e0736205ef2611f5393918ecca494d3dcbe6",
+    "pixel_count": 1846,
+    "polygon_sha256": "7c91e649cb3b8233f7304d0ea1f4dfb3cafb84a6f47c3bd86ff3fde2fb400b4d",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_inner_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b31fb56c9cdc949f7263d581621ddc5a4e33f25097239063e4765438b3841046",
+    "pixel_count": 964,
+    "polygon_sha256": "a4907f318db1c19dec9fe71bcdfb76337b525646b81c3b37e4c6b4c1411ce625",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_lower": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "93b5f748e02a9cb743bb64a3447633ff15120a3798092af8f895e7a9aab9a7d0",
+    "pixel_count": 1177,
+    "polygon_sha256": "64561ca436cb5f82667221a2a6c4fcf4bf767b285bdf4b35fb04e16097d05312",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_outer_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "ea1f833386dbbef508a9f25e880a3850a0e8d5ccb031b96cc22675feebf58639",
+    "pixel_count": 1131,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_upper": {
+    "confidence": 0.986726,
+    "coverage": null,
+    "mask_sha256": "f388d2fa6be674cff5fce2a8f5c4d1529115fc25411f56c1a31caa0e978c7abb",
+    "pixel_count": 678,
+    "polygon_sha256": "88c24f92ae49cde796de11141729438424482c4a460a3a9834ab9af2d35999a9",
+    "reason": null,
+    "status": "ok"
+   },
+   "mouth_surround": {
+    "confidence": 0.9,
+    "coverage": 0.953077,
+    "mask_sha256": "1495b256aabdc42c1795dd8033e5798483c4faac81d382d553656574d2f184e7",
+    "pixel_count": 4631,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "nose": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c42063df460c0c5036c4454b0cacfdd599571f27268f229bdec7115eb2aa888d",
+    "pixel_count": 2597,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7feb5615fc378be1801bb4202432e49e7495d5030fc3d825eb3263c126ac3025",
+    "pixel_count": 411,
+    "polygon_sha256": "769ae084eceb77ad6848646bdffa9f6a3e332eaca3c4e08af87a76b138883bf0",
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7d4e6c7fb7f306e6c8e339d2e2342552b1b6a7e496dabaeb7c8dd3b750ef6e52",
+    "pixel_count": 549,
+    "polygon_sha256": "8b85cf8839a2c7c13ecfff848cfd28991276720e6d6db3909e6e6f07840fe1df",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8d38937c3b6957e4a41b6b37746cc36519dd8f28c8057bf66b08b90cc817e336",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "under_eye_inner_r": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8ecb09ac0b2aa7f51cd392f1ae53233dd3136baa8d243b38fd2e8d500bcf5f71",
+    "pixel_count": 324,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "under_eye_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3e4a299eb09b75b074642b659cf224945ec7962a6f96caa7bd923fc2174a26e3",
+    "pixel_count": 648,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3a615477021b17173be1914ca14a68d1d0e4e2a6a07c3edb548508843d1e4b46",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "under_eye_outer_r": {
+    "confidence": 0.9,
+    "coverage": 0.947214,
+    "mask_sha256": "e066301d570c11d6e30bfa10f7b4b0c99381439758d016821ad09b62ededc578",
+    "pixel_count": 323,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": "The eye is not parsed or disagrees with the landmarks.",
+    "status": "low_confidence"
+   },
+   "under_eye_r": {
+    "confidence": 0.9,
+    "coverage": 0.947291,
+    "mask_sha256": "67a88d0c476ecd12e4eee9dba1c1b6c665ff360a206da007d59b89c44b427842",
+    "pixel_count": 647,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_lower_lip": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d5224a3893a496fefbd3e6319af456a987eeda608100ca830bc949450ffdc637",
+    "pixel_count": 421,
+    "polygon_sha256": "6f7658e8ad10844e82fc2f3a30d5020f379ad587198b4da92fee440d329e9ba2",
+    "reason": null,
+    "status": "ok"
+   }
+  },
+  "roll_-20": {
+   "brow_arch_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "5d0293b51cad0c1c93e824c31b6d4661a3a29f0bd348b2dacfb09c054a3d42f0",
+    "pixel_count": 185,
+    "polygon_sha256": "dcbf6c636f666d2c986749cceb85150bfef2854a7a0677fb581d861b3a7ea0d4",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_arch_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d17c1bdd31c4ccc00696159718418f37f439c9138d49f2234519664b8b800e61",
+    "pixel_count": 167,
+    "polygon_sha256": "d65ced6cf0ec7415645b8f15d3d4157bcc2f2e17d0fee25ca4d9ec3bf58d6f99",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "840346b40f1823f4a0638e95e615cc7212ae9aaf6d0b33b8a4ae24332fd2f8ae",
+    "pixel_count": 132,
+    "polygon_sha256": "06f3bf052bd1212a8d5650db41c66ea487a30c1e8b4c1f00748bfc5d07e648a0",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "e0cc278f6c65140551926fb60849f6a36dc7dfa63c7f77313f96d5553741a559",
+    "pixel_count": 152,
+    "polygon_sha256": "b73a3139aaa8f8a4a0c5e2535f0a5dd09f0fa6101500c825eba340f50a867b28",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "3a25eb5fef3779009ebc843d99cc1d95ed855d45eaa007ef186d223d530a3082",
+    "pixel_count": 218,
+    "polygon_sha256": "dcbf6c636f666d2c986749cceb85150bfef2854a7a0677fb581d861b3a7ea0d4",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "68db668338f808e709adbccb2508f86b88063b0d2d781437054932b7d4bd9daa",
+    "pixel_count": 224,
+    "polygon_sha256": "d65ced6cf0ec7415645b8f15d3d4157bcc2f2e17d0fee25ca4d9ec3bf58d6f99",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "f8dd3e52469f037ff4c0f3c9944fafd92d2db7249218232a7dfc8c7d6951de88",
+    "pixel_count": 537,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "1813763e538b43eceed8b9a59fb92b0b2315187f8f5d92ecf1feaadd3141dcc3",
+    "pixel_count": 524,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "65b9d4e5fea943129b0b61b32d4c1886f4a20ab2c6bf0eadc897dff441a2565b",
+    "pixel_count": 134,
+    "polygon_sha256": "dcbf6c636f666d2c986749cceb85150bfef2854a7a0677fb581d861b3a7ea0d4",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "a872918a44f36384c109fe2c6a32e23b87d6803a28012f0f315da7c6fa2c2287",
+    "pixel_count": 133,
+    "polygon_sha256": "d65ced6cf0ec7415645b8f15d3d4157bcc2f2e17d0fee25ca4d9ec3bf58d6f99",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "3adb6d75ee37d48db8b917cfeea7c2218462968086433be40dc1aaa77baad284",
+    "pixel_count": 830,
+    "polygon_sha256": "434cf8f7042937c5b1843e3be16c9bb03e49976a0082846dee7bbec2945c7320",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f9b9c968d5fa131eba1217844d6795186209b52e1254d7123008acf301b1c978",
+    "pixel_count": 826,
+    "polygon_sha256": "939d6196da5016f676eda1355557c49ecbcc8979b08d569440cc4dd6125a4db2",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_l": {
+    "confidence": 0.9,
+    "coverage": 0.997481,
+    "mask_sha256": "022abe80eb0d43ab9235be039410b4f0f8f0aedba629c0cb68f8cfefee8d0acb",
+    "pixel_count": 3168,
+    "polygon_sha256": "9f5c7a55b7644886b0fa4362175fee8e6406593cffaba00825191f24dff34eb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "94380822d25164a088c2579367f43a100f5d054f477208c1e693aa40c5971756",
+    "pixel_count": 507,
+    "polygon_sha256": "7118095b91536e415117d3b59311ba7ee563f118b361ab96187cc463414582ad",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "474428c085bfe95e7090213c03bb6ac0933d177fb95b12f23ad0e70f509db294",
+    "pixel_count": 681,
+    "polygon_sha256": "b890300638aaec908b8eaf0caeaecd3c9941d3b91566345956b15979db3c7ea8",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_r": {
+    "confidence": 0.9,
+    "coverage": 0.995622,
+    "mask_sha256": "546f6d2a64e2c5bc35f35038fb14f5c38865fb57be526b98ac94097b54024a1a",
+    "pixel_count": 3639,
+    "polygon_sha256": "22dec31bd306d92c0f69a6958e26f5c748fb14a3a4ca98cde7acc39b30120a74",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b2f88da067422d71979fd0467d0402ebac84ff6886276147f5bb472b987ee8b2",
+    "pixel_count": 514,
+    "polygon_sha256": "d089bee3dafe4e391364f47aac787486fd6adf8cb1e14898e867d436c550e662",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "dbfb49c6c60ee248c421109cebd8067f1a996133281457664355e0da3befaa30",
+    "pixel_count": 512,
+    "polygon_sha256": "8e51bddbd25f0c2571ca4dcc46114547e1fadc70124933abb833cb838d2fb9f7",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "c6d47334380b5d8879ed593443259b5081b5cd29cd0798cfeb5c50925807f1a0",
+    "pixel_count": 698,
+    "polygon_sha256": "9abe8b11c29c3d05aefb357e269a62f1b3590252a391d3da78e945b76840d440",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "54b4db4f1ddac1c17cab75fb58b7a02b38bd5883ed79f9f0f9e8b079b1b29199",
+    "pixel_count": 832,
+    "polygon_sha256": "ef68ccba23e819b58b823bd57482e3a599e50dca0ce346a86efbae567f0eb8f4",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin": {
+    "confidence": 0.9,
+    "coverage": 0.919279,
+    "mask_sha256": "9a1f3187cc938c4e647e7bcd2a114dcfab8831ccd9becc5ada80f15cbe160352",
+    "pixel_count": 6480,
+    "polygon_sha256": "4bf8488f9e836933d3a28f95ea9bd9e85fdfa3019c68dda54654522b1774547b",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ce6343437d515bf475bc395ceb09c16d8be687e1d774e96b551e77e6418f8af2",
+    "pixel_count": 709,
+    "polygon_sha256": "42915ec1f6efba9c0b799c8122aa968bcd867b7e93659f1f7d9055cd0643520b",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "aed39c40520bcd92f71d7977079e90fbaa7e7ce745211e7baeb22e341f81fbed",
+    "pixel_count": 529,
+    "polygon_sha256": "3f10b0d21746d58c8f097d7a95c9c85b2802840d152590014734fa857e92fb1a",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "5abbd982846377af8fd13565c5d1c3913b1f759b2d4c39d5a3ba105c11e98ec9",
+    "pixel_count": 614,
+    "polygon_sha256": "83f35368f8d7d29dcd341c28639ffb149f30c5576127ad26c89162efe7d6e335",
+    "reason": null,
+    "status": "ok"
+   },
+   "cupid_bow": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "c8f390612570609b6904652af840791bbcff18e82faea3ad9425bf8095f615b1",
+    "pixel_count": 410,
+    "polygon_sha256": "a425a4f5b0aaf44ad247e22fbdfd544f80f6a78df3160017ca16ae6cd20a23a5",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "cb8900e2f0608bf99b4896085a2d5c025d8abe22c34315c57fbf42705fff77b1",
+    "pixel_count": 49,
+    "polygon_sha256": "52b09548184753ae9be0728aa648b39660fea82a19020759de68ca08c7a74e7d",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "991f8ddcc75120e1407a5413fe67ee8723d41b271cc7ea86f3acf0d43d34733b",
+    "pixel_count": 56,
+    "polygon_sha256": "54f154a6c131f902cbe812308ac5ef9b732e3a7e31ea40e7d9f45104655afd99",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "ab3639740d6866faf62c15b8583e48234f38ccf896f23367d9559b1858c33143",
+    "pixel_count": 57,
+    "polygon_sha256": "e4660de7feea8ad0fc58440c2e03c4d818ee488df813b76998fa59bfaa803cef",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "feb061df772bf772eb3e94b2f726cff8d1591a5f32571ec659c7c4cca2018a5f",
+    "pixel_count": 58,
+    "polygon_sha256": "54f94d3814f48805009ece37e9b6c15a412c086bfa6dc4af1b9aa10bf5d109cd",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "f0d5cb1c5caa72c78f1a9409cddff5fece9dcd83415599aa2d3a17735d7586d9",
+    "pixel_count": 207,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "80bc83bd8825a5c37c4901f641a88f11716ddee4c3f1c6b7814c569c4e8fe367",
+    "pixel_count": 227,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "1245be5ab2f49137fa82f906ddcfb206933840156d22fce5c49c69a32f9a513b",
+    "pixel_count": 467,
+    "polygon_sha256": "73d83748e285a0448c9d7905fc80c1801cfa3a566fd1d1a8f525b4bcc7617d6e",
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f05876a569f26dfc579f379a4c19f966a5153457b10c0993ce83acfe7d401505",
+    "pixel_count": 469,
+    "polygon_sha256": "9e6486b51cbddba040ed3e1f52cb112d1d320f841e176e4f5fec2ce0c8834f9b",
+    "reason": null,
+    "status": "ok"
+   },
+   "face_skin": {
+    "confidence": 0.9,
+    "coverage": null,
+    "mask_sha256": "0da41b6bd96240d5c7a90822bf2ce99890982796e7a975f53d860eb2deee3f76",
+    "pixel_count": 235113,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "2e78c9f570bb6006af95014138da6353de67943caa0731106b26816a859dd001",
+    "pixel_count": 8539,
+    "polygon_sha256": "eab2805f36ee674c63bbde51d35e98e51c85e68a0102a6b94f141dd6fc6175fd",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "3f76859dfec1d9c591ac9ddd667bb9177ff8a477f9fc6a738a5749e28c11177e",
+    "pixel_count": 2346,
+    "polygon_sha256": "e377bbe53ef143bf2895321834628fda6559cf343cc107c694e50f6a38209905",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_perimeter": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "39181ec950296b8f1a6872cfbe5bc9421cf9e4e04f6b2e79058206e3b4441748",
+    "pixel_count": 1990,
+    "polygon_sha256": "eab2805f36ee674c63bbde51d35e98e51c85e68a0102a6b94f141dd6fc6175fd",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "6583c60ee7a42310dc680367bfc4ab3e6fd1e7c045e1613c692a50ea14f60f27",
+    "pixel_count": 4346,
+    "polygon_sha256": "7bdf9f54514182468271c9e9edfdfc5e630fb2f44e29156fba0d87df22b46f3a",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "004de21aa20c64e088ff0d6f541a99ae424b09738dfb4c4235bc9b5e048f1219",
+    "pixel_count": 969,
+    "polygon_sha256": "b625a3e61586af1a1b37967e5c82b1d42b2a2f94f371da46d6da6a15e335edfc",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "4be3be89bee30c8c8bf5d8c0b9c1fd9f72a78088901bfedc91644617299e0126",
+    "pixel_count": 941,
+    "polygon_sha256": "6f625c4fc1c73e3edd43056fc8c7cfc2aca81d8cc1b21463688c1a00a4f0e9d0",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "601ec08de1ad35766f006952e7dd0c18cbae08375c3dcb6f8e6a348b925a5fe8",
+    "pixel_count": 190,
+    "polygon_sha256": "2d2055e0ff9c23c0d1f9cdad263c6a33a3c78113eb8e4a8a79fb30bc1636376f",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "8ff9cb04158a5e2309c853bf299c5a3f05d7379fe7f2bc12d2117a112f449c77",
+    "pixel_count": 189,
+    "polygon_sha256": "ef1533f9b80f42a1592f84f882708725e24ace245f710ebf284734f78f62fef3",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "cf0a44508eb66c433c46087d40210c14fa0041c0a974de459e129a97f9ad13ff",
+    "pixel_count": 201,
+    "polygon_sha256": "b9b53b109b2367b27465733515d73088f2cdaa27df92a9e0133db218ba9481b0",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "8a51c7175457238200c7d19f931644ec4ea3d7152410f8263b7ad8c9fe67b562",
+    "pixel_count": 205,
+    "polygon_sha256": "d8c88bc22e83d9a803d384a03a9a0335a70e5e973f8b6685ffd55ddcf9c5845f",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "496ca4ca39c8ab7252cd9c80b0509b8fb210544eda0324a7b5e4cdbdf7538564",
+    "pixel_count": 108,
+    "polygon_sha256": "af762b47c8d670a7b16b9ada26eebaad893bc36d83f7c33d010ec0c48271c25b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "a414b6731dd255488e5f09d7aeec666a545fb4d21ba5dd7af85a46559b2fc6b7",
+    "pixel_count": 111,
+    "polygon_sha256": "3dce034fdf6ea087177f04fc91407e32fc716414c9324f1764d59d2d3f721b12",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_full": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "6c290168781de2124ef23a1273cf99ed7625a970bb43696ffb457d5b2d2a9e77",
+    "pixel_count": 1862,
+    "polygon_sha256": "830dfab09026c4a784923e62c48d0b2838b145c84d8735ad279491c9ba0ff6fd",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_inner_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "da280e88190b99ead8273c347f53f383d1846de0eaad7f1997a439225891d0a9",
+    "pixel_count": 990,
+    "polygon_sha256": "d7b030d5e0c2eaf7cc3a35453e314e5e7b275180e494b613d043ddf70891de5d",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_lower": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "83d04beb7bb214f635c630b5543bf62e0747a12a9af423671cd9992529d92845",
+    "pixel_count": 1201,
+    "polygon_sha256": "295fcb9c96c4d2bcfee7e6241a3e216a8e825b91bde50322708420e6a8ae39b6",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_outer_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b0e9fbbab569e461aa951255cf71eeb36281ec399514505acbfb11328346c91f",
+    "pixel_count": 1118,
+    "polygon_sha256": "c49023d706feec2ca1c0546d24d32b63ac04acb63bc321a927c406a9e8895781",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_upper": {
+    "confidence": 0.986567,
+    "coverage": null,
+    "mask_sha256": "93dd58feda9aff9b4666f0191b6badd494b064120e1b32771e6dee7cb09f0b8c",
+    "pixel_count": 670,
+    "polygon_sha256": "e545eaa00c446c693b949cdad86a8280cff02a1a26dc6953bdc02ed30286efbb",
+    "reason": null,
+    "status": "ok"
+   },
+   "mouth_surround": {
+    "confidence": 0.9,
+    "coverage": 0.956477,
+    "mask_sha256": "4aeb57ddc48ad1da92a10dae24fc3b45c7a94c840b8a966bb806221f387e3093",
+    "pixel_count": 4681,
+    "polygon_sha256": "c49023d706feec2ca1c0546d24d32b63ac04acb63bc321a927c406a9e8895781",
+    "reason": null,
+    "status": "ok"
+   },
+   "nose": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "ac066cd759d2d3c7beb9695e08d052314f6cd3ad902551acefe3ff9726fb2b08",
+    "pixel_count": 2597,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "34f78633a2dd24ce5b179640e0f638946fe54882828f29c1750132c08f699f2a",
+    "pixel_count": 418,
+    "polygon_sha256": "bd5901819bbb1de373aaa78ecbcd0f7a5c6320e587b1db8b76c165eb67cf159a",
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "50c52e1d561ac142dee463e9c419768e8a34a894593d428ce71d1133287966a0",
+    "pixel_count": 548,
+    "polygon_sha256": "10490f9307885cb27cb4ec7a1cc48f790853cdbfabd61942617d8768d2e52f56",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_l": {
+    "confidence": 0.9,
+    "coverage": 0.950292,
+    "mask_sha256": "bdcdc247f932dacc27c7703ed7e255b0bf0bcc6dfa3751da17e65cb6c9a2099e",
+    "pixel_count": 325,
+    "polygon_sha256": "f906c06fef99f5bbc5ff6f15c157870575f1a3f34c3cdd0bb9df30798859e456",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_r": {
+    "confidence": 0.9,
+    "coverage": 0.952522,
+    "mask_sha256": "a7aa86227c7b05a881a46cf89073f45924059bd222783b40d4dee39a9e497e64",
+    "pixel_count": 321,
+    "polygon_sha256": "ae5546fdd6856e7a1579089f45ca8af53404d1b086fbe7eb8fb7caf267ee8dd1",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_l": {
+    "confidence": 0.9,
+    "coverage": 0.952174,
+    "mask_sha256": "6acc373d5161de4f67c903edeb3af4311b9dc6c80ae7d155168e5cce3e6af720",
+    "pixel_count": 657,
+    "polygon_sha256": "f906c06fef99f5bbc5ff6f15c157870575f1a3f34c3cdd0bb9df30798859e456",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_l": {
+    "confidence": 0.9,
+    "coverage": 0.954023,
+    "mask_sha256": "142d194b589ef5f2a0bdf387569b4012c7d92da36ef602f5c4930e99160d918b",
+    "pixel_count": 332,
+    "polygon_sha256": "f906c06fef99f5bbc5ff6f15c157870575f1a3f34c3cdd0bb9df30798859e456",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_r": {
+    "confidence": 0.9,
+    "coverage": 0.946746,
+    "mask_sha256": "352a0abbdf905d9e8671aa22807a783959799aa0ad09d6f18fd1dc2e402f32a2",
+    "pixel_count": 320,
+    "polygon_sha256": "ae5546fdd6856e7a1579089f45ca8af53404d1b086fbe7eb8fb7caf267ee8dd1",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_r": {
+    "confidence": 0.9,
+    "coverage": 0.94963,
+    "mask_sha256": "7a7a0b63026f20b45ad5efb194acf8d425a340a321562c09dc06df6d96966663",
+    "pixel_count": 641,
+    "polygon_sha256": "ae5546fdd6856e7a1579089f45ca8af53404d1b086fbe7eb8fb7caf267ee8dd1",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_lower_lip": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d72a527c273aaf7215245dae08056e43b32700c9fbe9e650d12e87fb908dc4b7",
+    "pixel_count": 426,
+    "polygon_sha256": "8b028ec6a5c478332af6d64449462e73ae485fa80c4a0aa4f37567d0a8b975bb",
+    "reason": null,
+    "status": "ok"
+   }
+  },
+  "roll_20": {
+   "brow_arch_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c95bdb15d6ba53469f31b80e05fe5047ab0d06af1b7fcfb419f668164ba53fd0",
+    "pixel_count": 164,
+    "polygon_sha256": "60d934573bae7b585968e6811db3e5cb56cf73023779049005a2c4222ed849b8",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_arch_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "6a51175544ebabd6a7102cf95c510c9bd5dcafd1b7cfce6a71648c687686c7b6",
+    "pixel_count": 175,
+    "polygon_sha256": "3f8e7d8a1b00401c88280aaa9463b0476b99059c6985bdef0d0c1da367eec92b",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ee314e080cee37b495866a591870623dbcd6646f47052f30d64d5eb90c219e8f",
+    "pixel_count": 128,
+    "polygon_sha256": "57ef5bc0dd605220261f4fab9773501752935e2518c69f72fa08924c8778ff42",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "367f77466a24e8b5b1e50884b471814e02c86ad955709dde6a75477fd8dad7d7",
+    "pixel_count": 156,
+    "polygon_sha256": "dbd1b0037acc92611ee92e4d19ee22f3688f6db562ab478aa156e8287d69d228",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "770d73b393e4f1047d3a0e86c3e534927d03c3b781ba9a9ddb87c41922828fc7",
+    "pixel_count": 212,
+    "polygon_sha256": "60d934573bae7b585968e6811db3e5cb56cf73023779049005a2c4222ed849b8",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "40aab939e3aff42d902145410d7a2a95c3ee1f291354a117cf11b65b8927cf5b",
+    "pixel_count": 229,
+    "polygon_sha256": "3f8e7d8a1b00401c88280aaa9463b0476b99059c6985bdef0d0c1da367eec92b",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "5b0eae4c238fa4a9692bddc1a46c03e5f686a025baca805bf3255b532486aff5",
+    "pixel_count": 508,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d210af16e257340c64672343c7f34a2524a4e478bb730a9cb907c25307c0b462",
+    "pixel_count": 529,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "669111bbeac80d66cbeb67e58562dbc907db89f9bbc7ad49bcc44cdd5feed6e7",
+    "pixel_count": 132,
+    "polygon_sha256": "60d934573bae7b585968e6811db3e5cb56cf73023779049005a2c4222ed849b8",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "8f7f1103ef9ae4ad40c1f3d4ce63f6b3e7be0986c67e73d87db164f5147e8d2c",
+    "pixel_count": 125,
+    "polygon_sha256": "3f8e7d8a1b00401c88280aaa9463b0476b99059c6985bdef0d0c1da367eec92b",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ce9d566cba7b16df04c05f89a644d4d8f3252b4bd60967cc4dc46aaec95d2aed",
+    "pixel_count": 839,
+    "polygon_sha256": "7a25f71251235e33189e0db6bf16a4686d3af5e4a86ec65157c48f5e61d8230d",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "4af00fa83ee2b7a3314685aa51731778c5604138838d7f2d928b745469470a46",
+    "pixel_count": 827,
+    "polygon_sha256": "6883c74e88e1121b6e040c2ab3ff2b6b2d7b75940c010512c60ed90fab211c7d",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_l": {
+    "confidence": 0.9,
+    "coverage": 0.99494,
+    "mask_sha256": "a7daf62ff4cc2253c514c0c05c8cb92863aba388321aaab666caf0169e5deb9f",
+    "pixel_count": 3146,
+    "polygon_sha256": "cd6d9bafc42c5931dd58ba302c0211cefb0b27075305ebdea75277b506464eae",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7dfee16f662cefc8723eae03857954ca96e9f8514b36454e20bb851435a5696f",
+    "pixel_count": 518,
+    "polygon_sha256": "2ac531f62f954edb8757841441e1090d7ef8e2e5ce95bfda6ec81aab4a126609",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "75432f9f85fce452c3d9b6d20698f96710df8f2122e6ea1b74cde04ffca74648",
+    "pixel_count": 673,
+    "polygon_sha256": "4b0315465bc6eea87f9c6819127c76b8b3ea8e1df75f3c859fd5fcaa00b4d006",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_r": {
+    "confidence": 0.9,
+    "coverage": 0.997802,
+    "mask_sha256": "43baf767d3f11f1bc8a4a309487729e26cfce26b0a6b6dc2c8408dfbe3ba509e",
+    "pixel_count": 3632,
+    "polygon_sha256": "3a53b3b2750b803ac9913ddafc51e83ac48eed6f93bcce7616b7483a2a2d8c99",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "0cfe39d3866201a65648c5cb9f1344ed92c7796e2514fc654717d0cd6ea65a96",
+    "pixel_count": 548,
+    "polygon_sha256": "73830bfebbcd7e5aa749c69b6c38456512d1eddfaf40756413a09c3c76ba94c0",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "e50df8fdfd541bb4a630d11a92b74ebd6f6a8ae89808209d35ceefa19cc6ae94",
+    "pixel_count": 541,
+    "polygon_sha256": "36d8f649bd856150f3fa725fe021087525375e342c00d95ae054ed0c080d43c2",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f6678f432853cc305e16326431238d936ea0289cc23eef9fc64cb7e6678b7932",
+    "pixel_count": 720,
+    "polygon_sha256": "4b75ea783ca5589e92ca645af8a7badc79501f0dd815d7216940e464abe95513",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "2bec7358b11f7317626be94830b36f479912ce3762be859458fb6ca93a9ead61",
+    "pixel_count": 815,
+    "polygon_sha256": "23e12b01492a1055b3fbf6beaff1fc39bce64f4f8f038a23bdea75a55b3c499f",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin": {
+    "confidence": 0.9,
+    "coverage": 0.917335,
+    "mask_sha256": "eecb279e76da7c5e2af0df172c2d3adb7a53f0d7cf5e0f6b077f00e41f76ef1b",
+    "pixel_count": 6403,
+    "polygon_sha256": "55f7c251d38d2db13efca9f8b21bbb5bae3411c01f5fa97b2019673238973661",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "9f655d27bd150e1f4b645ade28e31ae88874a7186f224700cbf0d25484aed1cc",
+    "pixel_count": 728,
+    "polygon_sha256": "53afd1c113e64eeeda35a7d30461e1dccdfbe9c5391687703ff223bb90b49496",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "adbfcfa621af394e44a314d8dbfc29839791c56b327e632325141919a2d442ed",
+    "pixel_count": 526,
+    "polygon_sha256": "0fff2ab6dca76a26a6e1a6f0f8a46ee798c0fc1ef1c94f5ce40b5f159af58864",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "cf138af029e0275a20618658c5d8575de2277e197e82e7509154cb2e1c900bbc",
+    "pixel_count": 563,
+    "polygon_sha256": "d91919f079a21c3b176f9a00e0d0948eed70938278743764f3c1bc9c6a46e2fa",
+    "reason": null,
+    "status": "ok"
+   },
+   "cupid_bow": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "ff03ca9addf5c1ec0b4a9dd534b9261699b38c2d9bc7423f1d1933e3fc7c5a52",
+    "pixel_count": 394,
+    "polygon_sha256": "c2cb84c26a506a6d675a23b68cf7f631ded735f1e2be7db077f4dce27eb203d4",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "ea8b7bfbe75b473d418f4eb91f986de25242138fd93a4644e216f3459f763205",
+    "pixel_count": 48,
+    "polygon_sha256": "3c2a783071326cfa4eb82b86652c3fd4a463bc957436e9e8c4e79095778f7086",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "f41b12651f3d7a8d83e7514bf3acd9d3fc4e33010aa6b43b5e66a2fa8af8afa4",
+    "pixel_count": 55,
+    "polygon_sha256": "5d1323fbadfa68c05b7a141ec66f0ad098c0bc2b2e5a09d0f20b13fa67ac4c15",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "b3bc7e941cf69f522598e8c61b61524fb5860d5d309adaf2c3ab098da098a41b",
+    "pixel_count": 53,
+    "polygon_sha256": "0548e7915411c0cfd38e07ad92fb4080cadaabfc654bff1266f9ceb211c336ad",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "7b49bc239b9cdb256e7746a02f26c9607795fdeeea3ca58d4fb804f7a8a9505d",
+    "pixel_count": 54,
+    "polygon_sha256": "64902d02d289ac6dfa5938add106292b2948a7aab2802c0a5e28a093364d4899",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "7cd17ea4fe62a5958e39d5b289683923b4471731e66ad34adef0034d8863b05d",
+    "pixel_count": 211,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "64bf48431ce391df0049dc7f2675f7bff45bcd82431a7751071d3a52e323ce66",
+    "pixel_count": 224,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "a561da780ac6a655ba300dbd5e67beb1da3780fb67a87f89936d150993a7631c",
+    "pixel_count": 483,
+    "polygon_sha256": "8962a95fb07077b8c10b65381e0f8b98b3475f84cde3c797d286b0bcb4658f85",
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "313247d6871e304eb699894420e7fb7ca63832c51c13e041cf098689b6fa11be",
+    "pixel_count": 464,
+    "polygon_sha256": "7ea7b9477c83cd4b1f89e58640f63abb875574f045d904dd18c29f789bf0db93",
+    "reason": null,
+    "status": "ok"
+   },
+   "face_skin": {
+    "confidence": 0.9,
+    "coverage": null,
+    "mask_sha256": "861a5f31ba0babf0d8479c15b56b270affa050e842e00f52e68a9b3b0f902941",
+    "pixel_count": 235132,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "613880a48ec6676d25c130963041a55bbd9a4f4e201e5f3be081aeb9ca44b4b3",
+    "pixel_count": 8578,
+    "polygon_sha256": "8af2cf1ede4b73f0bd116402b77f5cdebfdd4e6b7af8f5e1d130106cdfbbbf05",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "bbd9f4707d051cac2867bace99ccf9b1d36cbd0f1ce8d708eb51d1dbc587abb6",
+    "pixel_count": 2373,
+    "polygon_sha256": "0295a1c1581a404cf55eab5a4fa51e967cbcb083835cb19c5a7dc1d7ab8e1b57",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_perimeter": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "82c65074027efc19d629fa831313ef96b95cd95c81cd340901bdc04cfcbf10e6",
+    "pixel_count": 2038,
+    "polygon_sha256": "8af2cf1ede4b73f0bd116402b77f5cdebfdd4e6b7af8f5e1d130106cdfbbbf05",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "8beb67cb352fed8ab9345d3723d34e648a5d570929e0e8a6a5b7ad2677d407c5",
+    "pixel_count": 4289,
+    "polygon_sha256": "ebe0142ecd37e16c834f4c9c8142fbd80c29fea5e574da6e55f7be4572dfab9c",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "bcb7b540b7a00827384cb2222ced0e69fad9a558f77b33bf93c2b5ec77915db2",
+    "pixel_count": 940,
+    "polygon_sha256": "d8fcc5ba67debc1e9d5fe4ed57ccd32f23a3033c650b76eed449c000df3ae219",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "4abc3051162b07e24ed1e866b6c3b87bd8f44444bf866cde24b8e8aa2aae705e",
+    "pixel_count": 988,
+    "polygon_sha256": "c3b4f856a31c8240961a9978ce24cfceefa79b9fd462242f66f888d8f225ff4b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "5f9e48f3ba0e31ec90536fdef169d33c1b54dbf9a9b396c9b8591c6dfa3a82e4",
+    "pixel_count": 195,
+    "polygon_sha256": "9ef22a6b2d7e052b4ffcafd4dbf6df86596c6c6b5eb7b0ddaca6d53bbd426091",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "e7b283498bfb8efb09090951612d8a819d3376ea0a96294692446d53c440d535",
+    "pixel_count": 198,
+    "polygon_sha256": "5da8a5a5da66bfff80e41b7576564d3f686bee5ce2c120756633befef41813dd",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "8da1d91ba4364b4fe53bd6b7b4dfc66caa4aa1c97ca15aea48b5a3c3f99baac7",
+    "pixel_count": 200,
+    "polygon_sha256": "668684f76ea5c459b1b20d49760a4e9ad663ae199c516ac04b2d649f5ccb601e",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "2a41804ceae23a51c7bef2613fc965c2ad6093d0854fc96491d0d35a2e1a3a21",
+    "pixel_count": 192,
+    "polygon_sha256": "c6cc8c37001baf00ba62b06eff47c74071cbf701cf2586e16f8f9ccdbb570c6f",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "bc817eebebd907c481a366c2ebc347a89db8f1a41b1500edb3933501d81406e3",
+    "pixel_count": 102,
+    "polygon_sha256": "9e35b6f31ce930e76ff47eb4776e99b5763ba56de853fcd95606e500f226005d",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "522e8adf0fa05855df91134f1fb63a92f9bb4c0344f7098d562451ec80abe37f",
+    "pixel_count": 116,
+    "polygon_sha256": "877d6dd59d346dd8091e8c90474fea9311c3b79861d464305b5615f0da93d336",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_full": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "17860327dec982e4437d44d651bbdd21aaaddae1a8596d6b4783808cb6de5107",
+    "pixel_count": 1872,
+    "polygon_sha256": "21b0743f821575eb56cd162ded78384de749f87f5413654d752aaae101db41d2",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_inner_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "10507bbca074cc4a4c44a9898f9cb54e5a89ffcd54263b431cddc152ef132065",
+    "pixel_count": 972,
+    "polygon_sha256": "6a2eec0cde9f200dff7303ac7fab3672d753702cd0f6389acfece31df4b073ee",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_lower": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "98dc0d64d7b23ead58276a6cf26d7f0a9dbf0bc6d9952f284bcccd4cc169682f",
+    "pixel_count": 1212,
+    "polygon_sha256": "9f415dd86b651866874d951bee043cfa8a1c5d509fa1de827260eb72fce78c90",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_outer_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "3b92f61888793be6595dc69a2e7630acd7f4a9cec3dfa6d1cb91072a6010202b",
+    "pixel_count": 1144,
+    "polygon_sha256": "bc4bef15e4888439e1d53dc44aeb9eafde38ef76b61b7bc69f42fb2cd1694149",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_upper": {
+    "confidence": 0.988024,
+    "coverage": null,
+    "mask_sha256": "222049e2db40d24c7805f0c42460c94d083aaca8100c58e94245d97725dedb22",
+    "pixel_count": 668,
+    "polygon_sha256": "6a752dae78ddb182018cc01089755aff482e0780d95452e9e7449ef4985d3426",
+    "reason": null,
+    "status": "ok"
+   },
+   "mouth_surround": {
+    "confidence": 0.9,
+    "coverage": 0.955141,
+    "mask_sha256": "ad42232a27262678252bf3d42325a644ce67264fa4f2c8fc33ee33cbd5ddee65",
+    "pixel_count": 4663,
+    "polygon_sha256": "bc4bef15e4888439e1d53dc44aeb9eafde38ef76b61b7bc69f42fb2cd1694149",
+    "reason": null,
+    "status": "ok"
+   },
+   "nose": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "6cf10ab37a5951b6a1da3ab1c87bc2e2ee4cb29d7ff22f022fd784619d0b5a5c",
+    "pixel_count": 2624,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "aa3cd0c75b6507c4f15e3d6fa845ece542d0cc377764640e86e548a888bdca21",
+    "pixel_count": 435,
+    "polygon_sha256": "c1dae498c6dc68c3036bd5e03012d58a78840be40f36d9f94a4277f868c26e30",
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "a0e71932238c37d91e20ab9ae1249c78134c0c55cc5d55fd7dff7e1e8db3c002",
+    "pixel_count": 570,
+    "polygon_sha256": "add4d38abdd61db6252a6012b6f0a4492a0361aab9b3078895fffcee103b2595",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_l": {
+    "confidence": 0.9,
+    "coverage": 0.950147,
+    "mask_sha256": "451561df37e3b9b44878af8878bccb84dfca18608b9a5d67282ebad27ac12bfb",
+    "pixel_count": 324,
+    "polygon_sha256": "bbc004063d0efd83436732ec9d2f57ea19a63f962ee9fd04acd5d3c7582891ba",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_r": {
+    "confidence": 0.9,
+    "coverage": 0.946746,
+    "mask_sha256": "ba0528ebab64787a6f3848f8fab977fb77c8fb4374cbd0d418352a5280156ede",
+    "pixel_count": 320,
+    "polygon_sha256": "1f8f00fc5f0508e9ab48688a623b0c2142d86c4d0a3db095b6515eec83568224",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_l": {
+    "confidence": 0.9,
+    "coverage": 0.950365,
+    "mask_sha256": "d54bc885d875797d742a7920b6f26a29530983364fa297621873a2ee53dbe6ed",
+    "pixel_count": 651,
+    "polygon_sha256": "bbc004063d0efd83436732ec9d2f57ea19a63f962ee9fd04acd5d3c7582891ba",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_l": {
+    "confidence": 0.9,
+    "coverage": 0.950581,
+    "mask_sha256": "1852cb4f81f24f73224e04737a858da38179737f7ee7f35a480561da69d28f74",
+    "pixel_count": 327,
+    "polygon_sha256": "bbc004063d0efd83436732ec9d2f57ea19a63f962ee9fd04acd5d3c7582891ba",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_r": {
+    "confidence": 0.9,
+    "coverage": 0.952802,
+    "mask_sha256": "fccee47823be284073aae51284e1a024b4182fa48be3cafe431053cb53c67f06",
+    "pixel_count": 323,
+    "polygon_sha256": "1f8f00fc5f0508e9ab48688a623b0c2142d86c4d0a3db095b6515eec83568224",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_r": {
+    "confidence": 0.9,
+    "coverage": 0.949778,
+    "mask_sha256": "28780737c47b59cb00bc84a0bf45cff10aeb7c78e5b198b6bc206bccd1c1c0f3",
+    "pixel_count": 643,
+    "polygon_sha256": "1f8f00fc5f0508e9ab48688a623b0c2142d86c4d0a3db095b6515eec83568224",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_lower_lip": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ce6f5305ea7ed211f5ea11fd45d4d15dd20c32f39d490e14feb969d5eb9a1e33",
+    "pixel_count": 417,
+    "polygon_sha256": "47671a566221fe294114bfdf66a9f16019617a91b0d7f243af94189e4b8e5ca8",
+    "reason": null,
+    "status": "ok"
+   }
+  },
+  "synthetic": {
+   "brow_arch_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "ff648123f5ee55a284253faefc6db94dc610eb04fe3f2e66fab77268c9fdd99b",
+    "pixel_count": 164,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_arch_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "4c605f4598e366691140f1a45586da4aa3b52ac9e43bdd6461fbb0c9e2e146d1",
+    "pixel_count": 186,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "52091451272ad8e7d89038e658df8919d183f9a43fc0b4ba64461c0c83f27fdb",
+    "pixel_count": 151,
+    "polygon_sha256": "153319f707d425b033ee457f98459ae545293167d3f1b5b6f9effbfe2ba70b0a",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_bone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "fbb70092e615f7d33e1b325592c5f504142645fef1f387bcbb1e14c559c15ea6",
+    "pixel_count": 151,
+    "polygon_sha256": "1d3bfc5648b8ed0210198ebaf0f54901b5a1c226990a5f41197ac8cc5ab9e7cd",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "1ada5bba19b39bb806d82cd9616a9c6e117105aa7269cc570429d7fa111e27a8",
+    "pixel_count": 222,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_head_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "8c923f5aee8a06a7535f89f4b6c4f249b21871fbb6c4ab93f8e532466ccc1c74",
+    "pixel_count": 230,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "b4a098ab82a1e875968193b02b4a6ac1d09d868f8124e1641dd79da27bd6afdb",
+    "pixel_count": 513,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "8c433ef06cb905e1acc11d9e6996c2cfbb839b273e7241d0a3caeaa307361417",
+    "pixel_count": 549,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "535d83affd699d621068939e20e9161fc0553bc714e49327c7701ed5d9ca9f32",
+    "pixel_count": 127,
+    "polygon_sha256": "74854c6de206e0ac968c5a196d11a67bade9c1b63905a48d288954a5780698b3",
+    "reason": null,
+    "status": "ok"
+   },
+   "brow_tail_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "02bc68727bfed019e4a8f54f3e2f30a37843efadcf6f99de4c73735d3af755f8",
+    "pixel_count": 133,
+    "polygon_sha256": "c0423907c8aefecfa400521b36864031b97d368c27cb06227870826c16367f4e",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "030db3a4d0d8efc594c3dc30cb1371935ed11b991586f24ddb608c7233551dd6",
+    "pixel_count": 858,
+    "polygon_sha256": "3b5036332cc5a76fbb174153f2f005e7814ceb208b5eac566cc88d38094e2419",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_apple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "16101c37831dc6b434b538a720d295a38c947f051f668e558874f15017eec2fe",
+    "pixel_count": 825,
+    "polygon_sha256": "041b5afae8d86fc4fb32046043123ddfaec59d124995aec04a9c92f2425f4245",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_l": {
+    "confidence": 0.9,
+    "coverage": 0.996849,
+    "mask_sha256": "ab3f3f171a3d5eb35cbe14087ae824b56bd4a163f3abdff8281b9e3086703179",
+    "pixel_count": 3164,
+    "polygon_sha256": "721877ac7e6be4d02c59ac2e7e675d131dae971552349c619c09912752d69115",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ff472b038f232d3f730bb63e66ffe3cb768b8bfad8248f6634184981558b6da4",
+    "pixel_count": 499,
+    "polygon_sha256": "d3c08a1c6883f493551d868b764427220876f665d87c0ece3455b08560fc6d27",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ba8ec9deb5a1a585d89f6f07447616cc8c1f1af45ed1a2e3c7b5e4d8d8e0d6b0",
+    "pixel_count": 670,
+    "polygon_sha256": "1527c224c572fa58b5e6a783bb980947f5cd794996eb6300b48f229efc021d39",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_r": {
+    "confidence": 0.9,
+    "coverage": 0.997535,
+    "mask_sha256": "883b3a0efaa625ea50fe4f5fccbc15d143ead0fec694eebbab5a3bebb37bb17c",
+    "pixel_count": 3642,
+    "polygon_sha256": "a968dece870ff361f12857cf091bf53542c22ea3db226894bc9b5356756293c0",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d17a67e1255108c5ea1a934ffc1c83f14235930e08228585287398c07d2dbf45",
+    "pixel_count": 525,
+    "polygon_sha256": "60177b870899a7934cf6e31af8cd6af59e5771e1205c3e94ad31d1e7561b500a",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheek_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "994293591a7c7524ce0946e04ae98feb682e018a43a20770b159abc41cf73066",
+    "pixel_count": 540,
+    "polygon_sha256": "2284478c1b5f3e2352f58cb000cd677d9c0e5611939da617ebe900f92f0f433c",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7c181dc5a8fb99796bbd1ffde7e7e1507fad13385c3d07bb597c6c3dee4324bc",
+    "pixel_count": 698,
+    "polygon_sha256": "11d04e69e253c964d8bf7749a8567dc18fb24bd1f9c121a8836ca7f4326419d2",
+    "reason": null,
+    "status": "ok"
+   },
+   "cheekbone_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "459f7533d83e1608f412f4323ea3910339532abd777c061c54cf28a84329bfc1",
+    "pixel_count": 822,
+    "polygon_sha256": "333b8e4d4653c40066979b4096224ddc84ec4971e8b6b297e7660ed84da4d8a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin": {
+    "confidence": 0.9,
+    "coverage": 0.928029,
+    "mask_sha256": "33cccad8b6b3e9a46589c5d55500f2b8a24ff3b5ec74920b779ec13512dbf8fa",
+    "pixel_count": 6473,
+    "polygon_sha256": "eaae4c4f384a45053c0b6671d7bd918d3f36384ddd830184d9e8de4c99eedc97",
+    "reason": null,
+    "status": "ok"
+   },
+   "chin_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "c989e193d285097faf5f19f24681dab981d3d450ce0fd49a00fabfe265968dc5",
+    "pixel_count": 726,
+    "polygon_sha256": "ce79934887f9287883c096aae90541f7ef3a6dc7df3d24faddb5f038bef2cdd6",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "010353fb2027ccca3929de719cd45d3e77aa5060a0d0fb7aee033b8c3b02b446",
+    "pixel_count": 516,
+    "polygon_sha256": "3e280965751c6d46fc9e3173de041e565d901defa901ac16f6eb3fd3a4b11d86",
+    "reason": null,
+    "status": "ok"
+   },
+   "contour_hollow_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "75f077ec524e3d1175ea41f62342519cf6917d98b625ddd0fb512068b334a1bc",
+    "pixel_count": 587,
+    "polygon_sha256": "42221876b537723eb254ed5c8359dfc404b6453f9697cf307054d5a94b4c10bb",
+    "reason": null,
+    "status": "ok"
+   },
+   "cupid_bow": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "dfe9c73a6ce9126a5ba685b2ee8e48d452031760303bff4cf1be2e21f255befa",
+    "pixel_count": 395,
+    "polygon_sha256": "a9e8dbf4c91af97fc1300bf516bf115f19a364507236bc813cae8963059dcc00",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "335502365a1749255db0b4d46b611e08ada37d3742b9249a5d56a0f0b4d268ca",
+    "pixel_count": 50,
+    "polygon_sha256": "db31ba550b220369b964bb3a078b6044aa1bb5675af0fb3d8721fdb080d4df71",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_inner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "2b72cdbee18fea6e33cdcb234bf7c901e84b1205c9b1fd1e7dc417618d15c06f",
+    "pixel_count": 61,
+    "polygon_sha256": "a28ce88bc702b723f21d6b07c5ca35c9fe25ccb8a904454de18964e0a41f913d",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "da02e3ca6d14b115ecf45425602bd6f4fa48b38d0a4acf35a6106251a03a2ede",
+    "pixel_count": 59,
+    "polygon_sha256": "a1d79c4b00e7069ce8ff9293f072ebf5f024471307cc9501597c3c9ac3239efa",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_corner_outer_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d8ef5d3fcd68282aa8ebad164abbc813530f15083f51a1b7516009a7763d5eba",
+    "pixel_count": 58,
+    "polygon_sha256": "2159ed5f891a4ccb3d448b199db3e8f2999f380d8445bb5cfaf1ced3fef77870",
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "569647f9e841ffa15cb43ea074692742a5edcbefbc2273ebae179e5e628f83f5",
+    "pixel_count": 214,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eye_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "d9fd3d68bb0f6c76c7b40a2517bfcbd41d9213e1714da2fae5e34b00ba91ed04",
+    "pixel_count": 229,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b8848bb06fc447547b5a36685dd83845b75954fdf75369283fb6e1897e4b0ab0",
+    "pixel_count": 471,
+    "polygon_sha256": "0d55144e3e37a2e165892946042d832402027decf3827915d2d524c86bd9fd33",
+    "reason": null,
+    "status": "ok"
+   },
+   "eyelid_upper_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f51c4964b8d7057b4d03c5266e75b250077ae597d7f6d469e351db9d0aa3c9ab",
+    "pixel_count": 457,
+    "polygon_sha256": "4bc7bfeb22dc6c2363527dba21233c3938e82bd400fc4370eaef3efd0c40bbb0",
+    "reason": null,
+    "status": "ok"
+   },
+   "face_skin": {
+    "confidence": 0.9,
+    "coverage": null,
+    "mask_sha256": "12204d7305cafa47fd0ca6d391ea2998a6f40ba5d3e4390dc5646bfef76b4758",
+    "pixel_count": 235123,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b1f0bda5853dc247c5f989f1fb4ad453987319fee14336e8b9e7c7fd1c068b2a",
+    "pixel_count": 8548,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_center": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "68f7beb8b765ee18438f2fd98afc1840667a1cba528164714524fc29ec7951ee",
+    "pixel_count": 2347,
+    "polygon_sha256": "a6468084cd93b352ea63e13725c6c6901c275b71ab2edb5a401020bff5a52f59",
+    "reason": null,
+    "status": "ok"
+   },
+   "forehead_perimeter": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "9d915ed02c59170ae993411e116b10928b6bb8c94a63ef4422301f0e44211520",
+    "pixel_count": 1961,
+    "polygon_sha256": "b31fc53d0a9f1a93ba951138d16e64d6a2a53abab8605c22d1a673202475a3e5",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "f8a60c0f312b1f2220d6cb264bb9f64e18fd1197de6c1580ee6dcb12e59d3680",
+    "pixel_count": 4314,
+    "polygon_sha256": "fb4c11b7eb9d4fcc72cd4dcb68cb238a942e7e11f105a4c405e9dc73c27ff165",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "ec5a306168b1b94b00521fd693b5fc65820ae4e3b3b321af7a4573b9474c8cb9",
+    "pixel_count": 966,
+    "polygon_sha256": "6dd4794084862a425a0cec690bc9b0b0655e48bc1a5ff7a8dfdcc6f1dc27a457",
+    "reason": null,
+    "status": "ok"
+   },
+   "jawline_outer_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "b3f337df76e58c4fb0fe3be86c82808832007735a31f0dc878e70e00ce8730f3",
+    "pixel_count": 1000,
+    "polygon_sha256": "bce485daaa29e3e5254a634e7ec8ed02772395dedb0a8e828e19628b8ba735ab",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "df8f17083db498223fee5c75ca8a68300c6b2e50f2a5865d9c96aeaa70d154b3",
+    "pixel_count": 190,
+    "polygon_sha256": "dae3b7dab32cb905a4d30cac0e05914db43de18cea190818108c6aa9f3447f11",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_lower_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b4a9b94d10bb69ff96f5c65fe4806c0b86287e6202f170ac9ddaf691fbc8f85d",
+    "pixel_count": 192,
+    "polygon_sha256": "fc666a7f5896534a5a40cf12e0c8edfad243dd4bd52842987fd47755387f0be1",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_l": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "097844ded266bc0677ddeb6839de0e6bc757d76fa8d22de1bdd07bea8361254e",
+    "pixel_count": 201,
+    "polygon_sha256": "cbdaef88a494ce99d9b5e8da01a0ba844937eb39054f66775b56f99a092fb788",
+    "reason": null,
+    "status": "ok"
+   },
+   "lash_line_upper_r": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b9cd873e689b27cac0a73af31c06f8b97574d1c5b7777326b60cfa3fae36e3e9",
+    "pixel_count": 207,
+    "polygon_sha256": "6c3cd4aba38025635de31d6d3be9f5ec5db0af0c2e6fafd235559dc6b10e023b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_l": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "35caf72957c626df4056368fdac91aafd3d0200fe0cce97700d85cde258ded7c",
+    "pixel_count": 98,
+    "polygon_sha256": "934519e4c9b82b8997b46838ddb7ac9e36e0d8c55475fbd45e001a160adf3006",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_corner_r": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "10d014fb6d58076c086f0fc750fed39535a44db3bc07e1fd7480fed5b158487d",
+    "pixel_count": 105,
+    "polygon_sha256": "f4bc913df2e0a1bae4bf44e8132d9465ef31c5016dcf45cdccaa4ec748050e7b",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_full": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c1b2f92e27200209d9c9a992fce8e0736205ef2611f5393918ecca494d3dcbe6",
+    "pixel_count": 1846,
+    "polygon_sha256": "7c91e649cb3b8233f7304d0ea1f4dfb3cafb84a6f47c3bd86ff3fde2fb400b4d",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_inner_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "b31fb56c9cdc949f7263d581621ddc5a4e33f25097239063e4765438b3841046",
+    "pixel_count": 964,
+    "polygon_sha256": "a4907f318db1c19dec9fe71bcdfb76337b525646b81c3b37e4c6b4c1411ce625",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_lower": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "93b5f748e02a9cb743bb64a3447633ff15120a3798092af8f895e7a9aab9a7d0",
+    "pixel_count": 1177,
+    "polygon_sha256": "64561ca436cb5f82667221a2a6c4fcf4bf767b285bdf4b35fb04e16097d05312",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_outer_boundary": {
+    "confidence": null,
+    "coverage": null,
+    "mask_sha256": "ea1f833386dbbef508a9f25e880a3850a0e8d5ccb031b96cc22675feebf58639",
+    "pixel_count": 1131,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "lip_upper": {
+    "confidence": 0.986726,
+    "coverage": null,
+    "mask_sha256": "f388d2fa6be674cff5fce2a8f5c4d1529115fc25411f56c1a31caa0e978c7abb",
+    "pixel_count": 678,
+    "polygon_sha256": "88c24f92ae49cde796de11141729438424482c4a460a3a9834ab9af2d35999a9",
+    "reason": null,
+    "status": "ok"
+   },
+   "mouth_surround": {
+    "confidence": 0.9,
+    "coverage": 0.953077,
+    "mask_sha256": "1495b256aabdc42c1795dd8033e5798483c4faac81d382d553656574d2f184e7",
+    "pixel_count": 4631,
+    "polygon_sha256": "9331fd0111a2565bb12a0400b9ff95181a4ec1bb710f8f0dc7c263088e74e1a8",
+    "reason": null,
+    "status": "ok"
+   },
+   "nose": {
+    "confidence": 1.0,
+    "coverage": null,
+    "mask_sha256": "c42063df460c0c5036c4454b0cacfdd599571f27268f229bdec7115eb2aa888d",
+    "pixel_count": 2597,
+    "polygon_sha256": null,
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_l": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7feb5615fc378be1801bb4202432e49e7495d5030fc3d825eb3263c126ac3025",
+    "pixel_count": 411,
+    "polygon_sha256": "769ae084eceb77ad6848646bdffa9f6a3e332eaca3c4e08af87a76b138883bf0",
+    "reason": null,
+    "status": "ok"
+   },
+   "temple_r": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "7d4e6c7fb7f306e6c8e339d2e2342552b1b6a7e496dabaeb7c8dd3b750ef6e52",
+    "pixel_count": 549,
+    "polygon_sha256": "8b85cf8839a2c7c13ecfff848cfd28991276720e6d6db3909e6e6f07840fe1df",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8d38937c3b6957e4a41b6b37746cc36519dd8f28c8057bf66b08b90cc817e336",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_inner_r": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "8ecb09ac0b2aa7f51cd392f1ae53233dd3136baa8d243b38fd2e8d500bcf5f71",
+    "pixel_count": 324,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3e4a299eb09b75b074642b659cf224945ec7962a6f96caa7bd923fc2174a26e3",
+    "pixel_count": 648,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_l": {
+    "confidence": 0.9,
+    "coverage": 0.947368,
+    "mask_sha256": "3a615477021b17173be1914ca14a68d1d0e4e2a6a07c3edb548508843d1e4b46",
+    "pixel_count": 324,
+    "polygon_sha256": "12d35383687fdb92d01e417b78267db51f85ba83a99139bc0fa59dffbd7bb058",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_outer_r": {
+    "confidence": 0.9,
+    "coverage": 0.947214,
+    "mask_sha256": "e066301d570c11d6e30bfa10f7b4b0c99381439758d016821ad09b62ededc578",
+    "pixel_count": 323,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_eye_r": {
+    "confidence": 0.9,
+    "coverage": 0.947291,
+    "mask_sha256": "67a88d0c476ecd12e4eee9dba1c1b6c665ff360a206da007d59b89c44b427842",
+    "pixel_count": 647,
+    "polygon_sha256": "3e172aa9b49a773338e1d5b293083667c5bf44220637cebdf9ffc42df3740bb5",
+    "reason": null,
+    "status": "ok"
+   },
+   "under_lower_lip": {
+    "confidence": 0.9,
+    "coverage": 1.0,
+    "mask_sha256": "d5224a3893a496fefbd3e6319af456a987eeda608100ca830bc949450ffdc637",
+    "pixel_count": 421,
+    "polygon_sha256": "6f7658e8ad10844e82fc2f3a30d5020f379ad587198b4da92fee440d329e9ba2",
+    "reason": null,
+    "status": "ok"
+   }
+  }
+ }
+}

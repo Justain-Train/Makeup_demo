@@ -1,0 +1,7475 @@
+{
+ "bibtex": "@article{EasyPortrait,\n    title={EasyPortrait - Face Parsing and Portrait Segmentation Dataset},\n    author={Kapitanov, Alexander and Kvanchiani, Karina and Kirillova Sofia},\n    journal={arXiv preprint arXiv:2304.13509},\n    year={2023}\n}",
+ "boundary_and_shift": {
+  "brow": {
+   "best_shift": {
+    "iou_at_best_shift_mean": 0.716653,
+    "mean_dx": 0.3086,
+    "mean_dy": 1.731872,
+    "median_dx": 0.0,
+    "median_dy": 2.0,
+    "n": 593,
+    "share_nonzero": 0.979764
+   },
+   "bf_0.02": {
+    "mean": 0.653074,
+    "median": 0.676663,
+    "n": 596
+   },
+   "bf_0.05": {
+    "mean": 0.922539,
+    "median": 0.969169,
+    "n": 596
+   }
+  },
+  "eye": {
+   "best_shift": {
+    "iou_at_best_shift_mean": 0.776654,
+    "mean_dx": 0.162063,
+    "mean_dy": 1.313076,
+    "median_dx": 0.0,
+    "median_dy": 1.0,
+    "n": 543,
+    "share_nonzero": 0.968692
+   },
+   "bf_0.02": {
+    "mean": 0.751211,
+    "median": 0.865376,
+    "n": 596
+   },
+   "bf_0.05": {
+    "mean": 0.8829,
+    "median": 1.0,
+    "n": 596
+   }
+  },
+  "lips": {
+   "best_shift": {
+    "iou_at_best_shift_mean": 0.821486,
+    "mean_dx": 0.204013,
+    "mean_dy": 1.282609,
+    "median_dx": 0.0,
+    "median_dy": 2.0,
+    "n": 598,
+    "share_nonzero": 0.974916
+   },
+   "bf_0.02": {
+    "mean": 0.683187,
+    "median": 0.709485,
+    "n": 596
+   },
+   "bf_0.05": {
+    "mean": 0.941759,
+    "median": 0.997087,
+    "n": 596
+   }
+  },
+  "whole_mouth": {
+   "best_shift": {
+    "iou_at_best_shift_mean": 0.814445,
+    "mean_dx": 0.187291,
+    "mean_dy": 1.264214,
+    "median_dx": 0.0,
+    "median_dy": 2.0,
+    "n": 598,
+    "share_nonzero": 0.966555
+   },
+   "bf_0.02": {
+    "mean": 0.664741,
+    "median": 0.701811,
+    "n": 596
+   },
+   "bf_0.05": {
+    "mean": 0.925541,
+    "median": 0.99807,
+    "n": 596
+   }
+  }
+ },
+ "confusion": {
+  "columns": [
+   "BACKGROUND",
+   "SKIN",
+   "NOSE",
+   "BROW_L",
+   "BROW_R",
+   "EYE_L",
+   "EYE_R",
+   "LIP_UPPER",
+   "LIP_LOWER",
+   "MOUTH_INTERIOR",
+   "EAR_L",
+   "EAR_R",
+   "HAIR",
+   "NECK",
+   "CLOTH",
+   "HAT",
+   "GLASSES",
+   "EARRING",
+   "NECKLACE",
+   "NOT_PARSED"
+  ],
+  "counts": [
+   [
+    572269527,
+    553325,
+    5229,
+    2819,
+    1566,
+    136,
+    13,
+    138,
+    127,
+    0,
+    268227,
+    200801,
+    10030350,
+    230083,
+    10481753,
+    7505416,
+    66138,
+    138697,
+    4061,
+    700265869
+   ],
+   [
+    22007163,
+    24512820,
+    1020760,
+    506189,
+    457584,
+    158021,
+    134981,
+    472999,
+    544798,
+    1602252,
+    2926292,
+    3078914,
+    121386245,
+    71559279,
+    203504494,
+    9904399,
+    1546040,
+    72329,
+    481607,
+    417817275
+   ],
+   [
+    58104,
+    204386640,
+    19571108,
+    335389,
+    294562,
+    171281,
+    137095,
+    258474,
+    295249,
+    8995,
+    108854,
+    98083,
+    1467845,
+    447408,
+    73054,
+    44727,
+    2489004,
+    8051,
+    0,
+    0
+   ],
+   [
+    427,
+    650976,
+    86,
+    0,
+    3604413,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    57513,
+    0,
+    0,
+    695,
+    57171,
+    0,
+    0,
+    0
+   ],
+   [
+    697,
+    582867,
+    20,
+    3732208,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    15504,
+    0,
+    0,
+    1174,
+    36535,
+    0,
+    0,
+    0
+   ],
+   [
+    42,
+    210870,
+    1385,
+    0,
+    0,
+    0,
+    1536836,
+    0,
+    0,
+    0,
+    0,
+    0,
+    639,
+    0,
+    0,
+    0,
+    141420,
+    0,
+    0,
+    0
+   ],
+   [
+    3,
+    151169,
+    1387,
+    0,
+    0,
+    1604686,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    48,
+    129139,
+    0,
+    0,
+    0
+   ],
+   [
+    357,
+    657790,
+    13,
+    0,
+    0,
+    0,
+    0,
+    3564215,
+    4930571,
+    44698,
+    0,
+    0,
+    314,
+    0,
+    1399,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    253,
+    0,
+    0,
+    0,
+    0,
+    0,
+    12257,
+    8322,
+    206591,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "rows": [
+   "BACKGROUND",
+   "PERSON",
+   "SKIN",
+   "LEFT_BROW",
+   "RIGHT_BROW",
+   "LEFT_EYE",
+   "RIGHT_EYE",
+   "LIPS",
+   "TEETH"
+  ]
+ },
+ "date": "2026-11-10",
+ "decision_rules": {
+  "evaluated_on": "pilot: full sample (this is not the final test-split decision, which follows the protocol)",
+  "provisional": true,
+  "rule1_acceptable_for_prototype": {
+   "all_targets_met_or_within_tolerance": false,
+   "detection_failure_rate": 0.003333,
+   "detection_failure_rate_ok": true,
+   "not_assessable": [],
+   "note": "failure rate is over ALL valid images; 'fully visible face' is not annotated, so it cannot be restricted",
+   "unmet": [
+    "skin IoU",
+    "lips boundary F @ 0.02*IOD (mean per image)",
+    "eye boundary F @ 0.02*IOD (mean per image)",
+    "brow boundary F @ 0.02*IOD (mean per image)"
+   ]
+  },
+  "rule2_post_processing_or_geometry_fix": {
+   "not_assessed": [],
+   "roll_from_wp3": "Update from the robustness suite (WP3, 100 dev images): roll of +/-30 deg costs 0.12-0.16 IoU and +/-45 deg costs 0.35-0.54 while detection stays 97-99%, so the roll item of rule 2 IS met; a roll-aligned crop is a WP6 candidate and needs user approval.",
+   "triggers": [
+    "lips: consistent best shift (median dx +0, dy +2 px)",
+    "eye: consistent best shift (median dx +0, dy +1 px)",
+    "brow: consistent best shift (median dx +0, dy +2 px)"
+   ]
+  },
+  "rule3_model_replacement_or_fine_tuning": {
+   "caveat": "Caveat: no trigger fires on the headline numbers, but the glasses stratum (eye IoU 0.00, n=48) and the alignment-failure stratum (eye IoU 0.168, n=93) are very poor; all 48 glasses images are among the 93 alignment failures. The fine-tuning / replacement decision is NOT made here; it is owed to the user.",
+   "triggers": []
+  },
+  "rule4_detector_lever": {
+   "detector_lever": false,
+   "share_of_B_loss_from_detection": 0.045293,
+   "skin_gt_pixels_lost_to_detection_failures": 298700,
+   "skin_gt_pixels_missed_total_B": 6594875.0
+  },
+  "rule5_licence": "Regardless of the outcome, the CelebAMask-HQ model is replaced before any commercial release; this harness is the comparison tool for that replacement."
+ },
+ "dev_test": {
+  "dev": {
+   "headline": {
+    "A_full": {
+     "brow": {
+      "area_ratio": 1.004059,
+      "ci95": {
+       "dice": [
+        0.804576,
+        0.84016
+       ],
+       "iou": [
+        0.673046,
+        0.724375
+       ],
+       "precision": [
+        0.801954,
+        0.841507
+       ],
+       "recall": [
+        0.796264,
+        0.853594
+       ]
+      },
+      "dice": 0.823749,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3370875,
+      "iou": 0.700318,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.674584,
+       "median": 0.715056,
+       "n": 239,
+       "p10": 0.500959,
+       "p90": 0.814053
+      },
+      "precision": 0.822084,
+      "pred_pixels": 3384558,
+      "recall": 0.825421
+     },
+     "brow_L": {
+      "area_ratio": 1.034589,
+      "ci95": {
+       "dice": [
+        0.807431,
+        0.845548
+       ],
+       "iou": [
+        0.677052,
+        0.732424
+       ],
+       "precision": [
+        0.790705,
+        0.835809
+       ],
+       "recall": [
+        0.813915,
+        0.867845
+       ]
+      },
+      "dice": 0.826899,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1649969,
+      "iou": 0.704883,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.670844,
+       "median": 0.712366,
+       "n": 239,
+       "p10": 0.462747,
+       "p90": 0.839928
+      },
+      "precision": 0.813076,
+      "pred_pixels": 1707040,
+      "recall": 0.8412
+     },
+     "brow_R": {
+      "area_ratio": 0.974788,
+      "ci95": {
+       "dice": [
+        0.796429,
+        0.840117
+       ],
+       "iou": [
+        0.661722,
+        0.724311
+       ],
+       "precision": [
+        0.811352,
+        0.850087
+       ],
+       "recall": [
+        0.765481,
+        0.846206
+       ]
+      },
+      "dice": 0.820637,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1720906,
+      "iou": 0.695831,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.669812,
+       "median": 0.708013,
+       "n": 239,
+       "p10": 0.501232,
+       "p90": 0.818157
+      },
+      "precision": 0.83125,
+      "pred_pixels": 1677518,
+      "recall": 0.810292
+     },
+     "eye": {
+      "area_ratio": 0.993229,
+      "ci95": {
+       "dice": [
+        0.799491,
+        0.852039
+       ],
+       "iou": [
+        0.66596,
+        0.742219
+       ],
+       "precision": [
+        0.820121,
+        0.843979
+       ],
+       "recall": [
+        0.768813,
+        0.87206
+       ]
+      },
+      "dice": 0.829494,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1466004,
+      "iou": 0.708663,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.671738,
+       "median": 0.767759,
+       "n": 239,
+       "p10": 0.235106,
+       "p90": 0.843476
+      },
+      "precision": 0.832321,
+      "pred_pixels": 1456078,
+      "recall": 0.826686
+     },
+     "eye_L": {
+      "area_ratio": 1.032038,
+      "ci95": {
+       "dice": [
+        0.806734,
+        0.854559
+       ],
+       "iou": [
+        0.676072,
+        0.746052
+       ],
+       "precision": [
+        0.807903,
+        0.834785
+       ],
+       "recall": [
+        0.795684,
+        0.889044
+       ]
+      },
+      "dice": 0.834154,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 729981,
+      "iou": 0.715493,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.665011,
+       "median": 0.770236,
+       "n": 238,
+       "p10": 0.0,
+       "p90": 0.847284
+      },
+      "precision": 0.821207,
+      "pred_pixels": 753368,
+      "recall": 0.847517
+     },
+     "eye_R": {
+      "area_ratio": 0.954739,
+      "ci95": {
+       "dice": [
+        0.789764,
+        0.85095
+       ],
+       "iou": [
+        0.652571,
+        0.740568
+       ],
+       "precision": [
+        0.830149,
+        0.856605
+       ],
+       "recall": [
+        0.743859,
+        0.856323
+       ]
+      },
+      "dice": 0.82469,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 736023,
+      "iou": 0.701678,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.65951,
+       "median": 0.768574,
+       "n": 239,
+       "p10": 0.0,
+       "p90": 0.857804
+      },
+      "precision": 0.844237,
+      "pred_pixels": 702710,
+      "recall": 0.806026
+     },
+     "lips": {
+      "area_ratio": 1.085561,
+      "ci95": {
+       "dice": [
+        0.867441,
+        0.898894
+       ],
+       "iou": [
+        0.765913,
+        0.816355
+       ],
+       "precision": [
+        0.822989,
+        0.873093
+       ],
+       "recall": [
+        0.906447,
+        0.934269
+       ]
+      },
+      "dice": 0.883421,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3575463,
+      "iou": 0.791185,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.79849,
+       "median": 0.843207,
+       "n": 239,
+       "p10": 0.645224,
+       "p90": 0.902622
+      },
+      "precision": 0.848607,
+      "pred_pixels": 3881382,
+      "recall": 0.921214
+     },
+     "skin": {
+      "area_ratio": 1.095053,
+      "ci95": {
+       "dice": [
+        0.917235,
+        0.934381
+       ],
+       "iou": [
+        0.847123,
+        0.876844
+       ],
+       "precision": [
+        0.872208,
+        0.899118
+       ],
+       "recall": [
+        0.961006,
+        0.978047
+       ]
+      },
+      "dice": 0.926098,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 90290186,
+      "iou": 0.862367,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.844863,
+       "median": 0.882125,
+       "n": 239,
+       "p10": 0.687813,
+       "p90": 0.947971
+      },
+      "precision": 0.885904,
+      "pred_pixels": 98872552,
+      "recall": 0.970112
+     }
+    },
+    "A_window": {
+     "brow": {
+      "area_ratio": 1.004059,
+      "ci95": {
+       "dice": [
+        0.804576,
+        0.84016
+       ],
+       "iou": [
+        0.673046,
+        0.724375
+       ],
+       "precision": [
+        0.801954,
+        0.841507
+       ],
+       "recall": [
+        0.796264,
+        0.853594
+       ]
+      },
+      "dice": 0.823749,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3370875,
+      "iou": 0.700318,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.674584,
+       "median": 0.715056,
+       "n": 239,
+       "p10": 0.500959,
+       "p90": 0.814053
+      },
+      "precision": 0.822084,
+      "pred_pixels": 3384558,
+      "recall": 0.825421
+     },
+     "brow_L": {
+      "area_ratio": 1.034589,
+      "ci95": {
+       "dice": [
+        0.807431,
+        0.845548
+       ],
+       "iou": [
+        0.677052,
+        0.732424
+       ],
+       "precision": [
+        0.790705,
+        0.835809
+       ],
+       "recall": [
+        0.813915,
+        0.867845
+       ]
+      },
+      "dice": 0.826899,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1649969,
+      "iou": 0.704883,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.670844,
+       "median": 0.712366,
+       "n": 239,
+       "p10": 0.462747,
+       "p90": 0.839928
+      },
+      "precision": 0.813076,
+      "pred_pixels": 1707040,
+      "recall": 0.8412
+     },
+     "brow_R": {
+      "area_ratio": 0.974788,
+      "ci95": {
+       "dice": [
+        0.796429,
+        0.840117
+       ],
+       "iou": [
+        0.661722,
+        0.724311
+       ],
+       "precision": [
+        0.811352,
+        0.850087
+       ],
+       "recall": [
+        0.765481,
+        0.846206
+       ]
+      },
+      "dice": 0.820637,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1720906,
+      "iou": 0.695831,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.669812,
+       "median": 0.708013,
+       "n": 239,
+       "p10": 0.501232,
+       "p90": 0.818157
+      },
+      "precision": 0.83125,
+      "pred_pixels": 1677518,
+      "recall": 0.810292
+     },
+     "eye": {
+      "area_ratio": 0.993229,
+      "ci95": {
+       "dice": [
+        0.799491,
+        0.852039
+       ],
+       "iou": [
+        0.66596,
+        0.742219
+       ],
+       "precision": [
+        0.820121,
+        0.843979
+       ],
+       "recall": [
+        0.768813,
+        0.87206
+       ]
+      },
+      "dice": 0.829494,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1466004,
+      "iou": 0.708663,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.671738,
+       "median": 0.767759,
+       "n": 239,
+       "p10": 0.235106,
+       "p90": 0.843476
+      },
+      "precision": 0.832321,
+      "pred_pixels": 1456078,
+      "recall": 0.826686
+     },
+     "eye_L": {
+      "area_ratio": 1.032038,
+      "ci95": {
+       "dice": [
+        0.806734,
+        0.854559
+       ],
+       "iou": [
+        0.676072,
+        0.746052
+       ],
+       "precision": [
+        0.807903,
+        0.834785
+       ],
+       "recall": [
+        0.795684,
+        0.889044
+       ]
+      },
+      "dice": 0.834154,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 729981,
+      "iou": 0.715493,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.665011,
+       "median": 0.770236,
+       "n": 238,
+       "p10": 0.0,
+       "p90": 0.847284
+      },
+      "precision": 0.821207,
+      "pred_pixels": 753368,
+      "recall": 0.847517
+     },
+     "eye_R": {
+      "area_ratio": 0.954739,
+      "ci95": {
+       "dice": [
+        0.789764,
+        0.85095
+       ],
+       "iou": [
+        0.652571,
+        0.740568
+       ],
+       "precision": [
+        0.830149,
+        0.856605
+       ],
+       "recall": [
+        0.743859,
+        0.856323
+       ]
+      },
+      "dice": 0.82469,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 736023,
+      "iou": 0.701678,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.65951,
+       "median": 0.768574,
+       "n": 239,
+       "p10": 0.0,
+       "p90": 0.857804
+      },
+      "precision": 0.844237,
+      "pred_pixels": 702710,
+      "recall": 0.806026
+     },
+     "lips": {
+      "area_ratio": 1.085561,
+      "ci95": {
+       "dice": [
+        0.867441,
+        0.898894
+       ],
+       "iou": [
+        0.765913,
+        0.816355
+       ],
+       "precision": [
+        0.822989,
+        0.873093
+       ],
+       "recall": [
+        0.906447,
+        0.934269
+       ]
+      },
+      "dice": 0.883421,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3575463,
+      "iou": 0.791185,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.79849,
+       "median": 0.843207,
+       "n": 239,
+       "p10": 0.645224,
+       "p90": 0.902622
+      },
+      "precision": 0.848607,
+      "pred_pixels": 3881382,
+      "recall": 0.921214
+     },
+     "skin": {
+      "area_ratio": 1.095053,
+      "ci95": {
+       "dice": [
+        0.917235,
+        0.934381
+       ],
+       "iou": [
+        0.847123,
+        0.876844
+       ],
+       "precision": [
+        0.872208,
+        0.899118
+       ],
+       "recall": [
+        0.961006,
+        0.978047
+       ]
+      },
+      "dice": 0.926098,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 90290186,
+      "iou": 0.862367,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.844863,
+       "median": 0.882125,
+       "n": 239,
+       "p10": 0.687813,
+       "p90": 0.947971
+      },
+      "precision": 0.885904,
+      "pred_pixels": 98872552,
+      "recall": 0.970112
+     }
+    },
+    "B_full": {
+     "brow": {
+      "area_ratio": 1.004059,
+      "ci95": {
+       "dice": [
+        0.804576,
+        0.84016
+       ],
+       "iou": [
+        0.673046,
+        0.724375
+       ],
+       "precision": [
+        0.801954,
+        0.841507
+       ],
+       "recall": [
+        0.796264,
+        0.853594
+       ]
+      },
+      "dice": 0.823749,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3370875,
+      "iou": 0.700318,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.674584,
+       "median": 0.715056,
+       "n": 239,
+       "p10": 0.500959,
+       "p90": 0.814053
+      },
+      "precision": 0.822084,
+      "pred_pixels": 3384558,
+      "recall": 0.825421
+     },
+     "brow_L": {
+      "area_ratio": 1.034589,
+      "ci95": {
+       "dice": [
+        0.807431,
+        0.845548
+       ],
+       "iou": [
+        0.677052,
+        0.732424
+       ],
+       "precision": [
+        0.790705,
+        0.835809
+       ],
+       "recall": [
+        0.813915,
+        0.867845
+       ]
+      },
+      "dice": 0.826899,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1649969,
+      "iou": 0.704883,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.670844,
+       "median": 0.712366,
+       "n": 239,
+       "p10": 0.462747,
+       "p90": 0.839928
+      },
+      "precision": 0.813076,
+      "pred_pixels": 1707040,
+      "recall": 0.8412
+     },
+     "brow_R": {
+      "area_ratio": 0.974788,
+      "ci95": {
+       "dice": [
+        0.796429,
+        0.840117
+       ],
+       "iou": [
+        0.661722,
+        0.724311
+       ],
+       "precision": [
+        0.811352,
+        0.850087
+       ],
+       "recall": [
+        0.765481,
+        0.846206
+       ]
+      },
+      "dice": 0.820637,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1720906,
+      "iou": 0.695831,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.669812,
+       "median": 0.708013,
+       "n": 239,
+       "p10": 0.501232,
+       "p90": 0.818157
+      },
+      "precision": 0.83125,
+      "pred_pixels": 1677518,
+      "recall": 0.810292
+     },
+     "eye": {
+      "area_ratio": 0.993229,
+      "ci95": {
+       "dice": [
+        0.799491,
+        0.852039
+       ],
+       "iou": [
+        0.66596,
+        0.742219
+       ],
+       "precision": [
+        0.820121,
+        0.843979
+       ],
+       "recall": [
+        0.768813,
+        0.87206
+       ]
+      },
+      "dice": 0.829494,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1466004,
+      "iou": 0.708663,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.671738,
+       "median": 0.767759,
+       "n": 239,
+       "p10": 0.235106,
+       "p90": 0.843476
+      },
+      "precision": 0.832321,
+      "pred_pixels": 1456078,
+      "recall": 0.826686
+     },
+     "eye_L": {
+      "area_ratio": 1.032038,
+      "ci95": {
+       "dice": [
+        0.806734,
+        0.854559
+       ],
+       "iou": [
+        0.676072,
+        0.746052
+       ],
+       "precision": [
+        0.807903,
+        0.834785
+       ],
+       "recall": [
+        0.795684,
+        0.889044
+       ]
+      },
+      "dice": 0.834154,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 729981,
+      "iou": 0.715493,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.665011,
+       "median": 0.770236,
+       "n": 238,
+       "p10": 0.0,
+       "p90": 0.847284
+      },
+      "precision": 0.821207,
+      "pred_pixels": 753368,
+      "recall": 0.847517
+     },
+     "eye_R": {
+      "area_ratio": 0.954739,
+      "ci95": {
+       "dice": [
+        0.789764,
+        0.85095
+       ],
+       "iou": [
+        0.652571,
+        0.740568
+       ],
+       "precision": [
+        0.830149,
+        0.856605
+       ],
+       "recall": [
+        0.743859,
+        0.856323
+       ]
+      },
+      "dice": 0.82469,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 736023,
+      "iou": 0.701678,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.65951,
+       "median": 0.768574,
+       "n": 239,
+       "p10": 0.0,
+       "p90": 0.857804
+      },
+      "precision": 0.844237,
+      "pred_pixels": 702710,
+      "recall": 0.806026
+     },
+     "lips": {
+      "area_ratio": 1.085561,
+      "ci95": {
+       "dice": [
+        0.867441,
+        0.898894
+       ],
+       "iou": [
+        0.765913,
+        0.816355
+       ],
+       "precision": [
+        0.822989,
+        0.873093
+       ],
+       "recall": [
+        0.906447,
+        0.934269
+       ]
+      },
+      "dice": 0.883421,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3575463,
+      "iou": 0.791185,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.79849,
+       "median": 0.843207,
+       "n": 239,
+       "p10": 0.645224,
+       "p90": 0.902622
+      },
+      "precision": 0.848607,
+      "pred_pixels": 3881382,
+      "recall": 0.921214
+     },
+     "skin": {
+      "area_ratio": 1.095053,
+      "ci95": {
+       "dice": [
+        0.917235,
+        0.934381
+       ],
+       "iou": [
+        0.847123,
+        0.876844
+       ],
+       "precision": [
+        0.872208,
+        0.899118
+       ],
+       "recall": [
+        0.961006,
+        0.978047
+       ]
+      },
+      "dice": 0.926098,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 90290186,
+      "iou": 0.862367,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.844863,
+       "median": 0.882125,
+       "n": 239,
+       "p10": 0.687813,
+       "p90": 0.947971
+      },
+      "precision": 0.885904,
+      "pred_pixels": 98872552,
+      "recall": 0.970112
+     }
+    },
+    "B_window": {
+     "brow": {
+      "area_ratio": 1.004059,
+      "ci95": {
+       "dice": [
+        0.804576,
+        0.84016
+       ],
+       "iou": [
+        0.673046,
+        0.724375
+       ],
+       "precision": [
+        0.801954,
+        0.841507
+       ],
+       "recall": [
+        0.796264,
+        0.853594
+       ]
+      },
+      "dice": 0.823749,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3370875,
+      "iou": 0.700318,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.674584,
+       "median": 0.715056,
+       "n": 239,
+       "p10": 0.500959,
+       "p90": 0.814053
+      },
+      "precision": 0.822084,
+      "pred_pixels": 3384558,
+      "recall": 0.825421
+     },
+     "brow_L": {
+      "area_ratio": 1.034589,
+      "ci95": {
+       "dice": [
+        0.807431,
+        0.845548
+       ],
+       "iou": [
+        0.677052,
+        0.732424
+       ],
+       "precision": [
+        0.790705,
+        0.835809
+       ],
+       "recall": [
+        0.813915,
+        0.867845
+       ]
+      },
+      "dice": 0.826899,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1649969,
+      "iou": 0.704883,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.670844,
+       "median": 0.712366,
+       "n": 239,
+       "p10": 0.462747,
+       "p90": 0.839928
+      },
+      "precision": 0.813076,
+      "pred_pixels": 1707040,
+      "recall": 0.8412
+     },
+     "brow_R": {
+      "area_ratio": 0.974788,
+      "ci95": {
+       "dice": [
+        0.796429,
+        0.840117
+       ],
+       "iou": [
+        0.661722,
+        0.724311
+       ],
+       "precision": [
+        0.811352,
+        0.850087
+       ],
+       "recall": [
+        0.765481,
+        0.846206
+       ]
+      },
+      "dice": 0.820637,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1720906,
+      "iou": 0.695831,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.669812,
+       "median": 0.708013,
+       "n": 239,
+       "p10": 0.501232,
+       "p90": 0.818157
+      },
+      "precision": 0.83125,
+      "pred_pixels": 1677518,
+      "recall": 0.810292
+     },
+     "eye": {
+      "area_ratio": 0.993229,
+      "ci95": {
+       "dice": [
+        0.799491,
+        0.852039
+       ],
+       "iou": [
+        0.66596,
+        0.742219
+       ],
+       "precision": [
+        0.820121,
+        0.843979
+       ],
+       "recall": [
+        0.768813,
+        0.87206
+       ]
+      },
+      "dice": 0.829494,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1466004,
+      "iou": 0.708663,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.671738,
+       "median": 0.767759,
+       "n": 239,
+       "p10": 0.235106,
+       "p90": 0.843476
+      },
+      "precision": 0.832321,
+      "pred_pixels": 1456078,
+      "recall": 0.826686
+     },
+     "eye_L": {
+      "area_ratio": 1.032038,
+      "ci95": {
+       "dice": [
+        0.806734,
+        0.854559
+       ],
+       "iou": [
+        0.676072,
+        0.746052
+       ],
+       "precision": [
+        0.807903,
+        0.834785
+       ],
+       "recall": [
+        0.795684,
+        0.889044
+       ]
+      },
+      "dice": 0.834154,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 729981,
+      "iou": 0.715493,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.665011,
+       "median": 0.770236,
+       "n": 238,
+       "p10": 0.0,
+       "p90": 0.847284
+      },
+      "precision": 0.821207,
+      "pred_pixels": 753368,
+      "recall": 0.847517
+     },
+     "eye_R": {
+      "area_ratio": 0.954739,
+      "ci95": {
+       "dice": [
+        0.789764,
+        0.85095
+       ],
+       "iou": [
+        0.652571,
+        0.740568
+       ],
+       "precision": [
+        0.830149,
+        0.856605
+       ],
+       "recall": [
+        0.743859,
+        0.856323
+       ]
+      },
+      "dice": 0.82469,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 736023,
+      "iou": 0.701678,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.65951,
+       "median": 0.768574,
+       "n": 239,
+       "p10": 0.0,
+       "p90": 0.857804
+      },
+      "precision": 0.844237,
+      "pred_pixels": 702710,
+      "recall": 0.806026
+     },
+     "lips": {
+      "area_ratio": 1.085561,
+      "ci95": {
+       "dice": [
+        0.867441,
+        0.898894
+       ],
+       "iou": [
+        0.765913,
+        0.816355
+       ],
+       "precision": [
+        0.822989,
+        0.873093
+       ],
+       "recall": [
+        0.906447,
+        0.934269
+       ]
+      },
+      "dice": 0.883421,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 3575463,
+      "iou": 0.791185,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.79849,
+       "median": 0.843207,
+       "n": 239,
+       "p10": 0.645224,
+       "p90": 0.902622
+      },
+      "precision": 0.848607,
+      "pred_pixels": 3881382,
+      "recall": 0.921214
+     },
+     "skin": {
+      "area_ratio": 1.095053,
+      "ci95": {
+       "dice": [
+        0.917235,
+        0.934381
+       ],
+       "iou": [
+        0.847123,
+        0.876844
+       ],
+       "precision": [
+        0.872208,
+        0.899118
+       ],
+       "recall": [
+        0.961006,
+        0.978047
+       ]
+      },
+      "dice": 0.926098,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 90290186,
+      "iou": 0.862367,
+      "n_images": 239,
+      "per_image_iou": {
+       "mean": 0.844863,
+       "median": 0.882125,
+       "n": 239,
+       "p10": 0.687813,
+       "p90": 0.947971
+      },
+      "precision": 0.885904,
+      "pred_pixels": 98872552,
+      "recall": 0.970112
+     }
+    }
+   },
+   "n_images": 239,
+   "outcomes": {
+    "ok": 239
+   }
+  },
+  "test": {
+   "headline": {
+    "A_full": {
+     "brow": {
+      "area_ratio": 1.033665,
+      "ci95": {
+       "dice": [
+        0.824327,
+        0.843936
+       ],
+       "iou": [
+        0.701153,
+        0.730007
+       ],
+       "precision": [
+        0.803372,
+        0.836367
+       ],
+       "recall": [
+        0.831773,
+        0.864494
+       ]
+      },
+      "dice": 0.83414,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5369411,
+      "iou": 0.715472,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.68672,
+       "median": 0.718418,
+       "n": 359,
+       "p10": 0.519988,
+       "p90": 0.81742
+      },
+      "precision": 0.820557,
+      "pred_pixels": 5550172,
+      "recall": 0.848181
+     },
+     "brow_L": {
+      "area_ratio": 1.055361,
+      "ci95": {
+       "dice": [
+        0.826847,
+        0.849887
+       ],
+       "iou": [
+        0.704807,
+        0.73896
+       ],
+       "precision": [
+        0.796897,
+        0.834882
+       ],
+       "recall": [
+        0.84629,
+        0.877419
+       ]
+      },
+      "dice": 0.838941,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2719036,
+      "iou": 0.722566,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.686539,
+       "median": 0.722137,
+       "n": 359,
+       "p10": 0.51795,
+       "p90": 0.830043
+      },
+      "precision": 0.816937,
+      "pred_pixels": 2869565,
+      "recall": 0.862164
+     },
+     "brow_R": {
+      "area_ratio": 1.011407,
+      "ci95": {
+       "dice": [
+        0.816006,
+        0.840368
+       ],
+       "iou": [
+        0.689197,
+        0.724684
+       ],
+       "precision": [
+        0.806779,
+        0.840715
+       ],
+       "recall": [
+        0.809127,
+        0.852859
+       ]
+      },
+      "dice": 0.829107,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 2650375,
+      "iou": 0.708097,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.681589,
+       "median": 0.718035,
+       "n": 358,
+       "p10": 0.517419,
+       "p90": 0.813898
+      },
+      "precision": 0.824431,
+      "pred_pixels": 2680607,
+      "recall": 0.833835
+     },
+     "eye": {
+      "area_ratio": 0.989337,
+      "ci95": {
+       "dice": [
+        0.819328,
+        0.855456
+       ],
+       "iou": [
+        0.693951,
+        0.74742
+       ],
+       "precision": [
+        0.833785,
+        0.853746
+       ],
+       "recall": [
+        0.796082,
+        0.866599
+       ]
+      },
+      "dice": 0.839212,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2311620,
+      "iou": 0.722968,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.681631,
+       "median": 0.762406,
+       "n": 359,
+       "p10": 0.391512,
+       "p90": 0.851239
+      },
+      "precision": 0.843735,
+      "pred_pixels": 2286971,
+      "recall": 0.834738
+     },
+     "eye_L": {
+      "area_ratio": 1.021017,
+      "ci95": {
+       "dice": [
+        0.824197,
+        0.860786
+       ],
+       "iou": [
+        0.700966,
+        0.755596
+       ],
+       "precision": [
+        0.824795,
+        0.845553
+       ],
+       "recall": [
+        0.813202,
+        0.885856
+       ]
+      },
+      "dice": 0.843755,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 1156451,
+      "iou": 0.729737,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.689006,
+       "median": 0.767901,
+       "n": 358,
+       "p10": 0.250888,
+       "p90": 0.863753
+      },
+      "precision": 0.835071,
+      "pred_pixels": 1180756,
+      "recall": 0.852622
+     },
+     "eye_R": {
+      "area_ratio": 0.957622,
+      "ci95": {
+       "dice": [
+        0.813401,
+        0.851689
+       ],
+       "iou": [
+        0.685489,
+        0.741689
+       ],
+       "precision": [
+        0.842208,
+        0.864104
+       ],
+       "recall": [
+        0.777022,
+        0.849593
+       ]
+      },
+      "dice": 0.834517,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1155169,
+      "iou": 0.716027,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.662549,
+       "median": 0.764164,
+       "n": 359,
+       "p10": 0.0,
+       "p90": 0.861977
+      },
+      "precision": 0.852982,
+      "pred_pixels": 1106215,
+      "recall": 0.816835
+     },
+     "lips": {
+      "area_ratio": 1.103465,
+      "ci95": {
+       "dice": [
+        0.862864,
+        0.894905
+       ],
+       "iou": [
+        0.758805,
+        0.809799
+       ],
+       "precision": [
+        0.809755,
+        0.865577
+       ],
+       "recall": [
+        0.913424,
+        0.93446
+       ]
+      },
+      "dice": 0.879318,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5623894,
+      "iou": 0.784628,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.800247,
+       "median": 0.842333,
+       "n": 359,
+       "p10": 0.651111,
+       "p90": 0.900368
+      },
+      "precision": 0.838094,
+      "pred_pixels": 6205768,
+      "recall": 0.924808
+     },
+     "skin": {
+      "area_ratio": 1.096242,
+      "ci95": {
+       "dice": [
+        0.920325,
+        0.936981
+       ],
+       "iou": [
+        0.852409,
+        0.881434
+       ],
+       "precision": [
+        0.872906,
+        0.90192
+       ],
+       "recall": [
+        0.968349,
+        0.978931
+       ]
+      },
+      "dice": 0.929565,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 139963737,
+      "iou": 0.868399,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.85139,
+       "median": 0.903269,
+       "n": 359,
+       "p10": 0.674243,
+       "p90": 0.949771
+      },
+      "precision": 0.88876,
+      "pred_pixels": 153434146,
+      "recall": 0.974296
+     }
+    },
+    "A_window": {
+     "brow": {
+      "area_ratio": 1.033665,
+      "ci95": {
+       "dice": [
+        0.824327,
+        0.843936
+       ],
+       "iou": [
+        0.701153,
+        0.730007
+       ],
+       "precision": [
+        0.803372,
+        0.836367
+       ],
+       "recall": [
+        0.831773,
+        0.864494
+       ]
+      },
+      "dice": 0.83414,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5369411,
+      "iou": 0.715472,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.68672,
+       "median": 0.718418,
+       "n": 359,
+       "p10": 0.519988,
+       "p90": 0.81742
+      },
+      "precision": 0.820557,
+      "pred_pixels": 5550172,
+      "recall": 0.848181
+     },
+     "brow_L": {
+      "area_ratio": 1.055361,
+      "ci95": {
+       "dice": [
+        0.826847,
+        0.849887
+       ],
+       "iou": [
+        0.704807,
+        0.73896
+       ],
+       "precision": [
+        0.796897,
+        0.834882
+       ],
+       "recall": [
+        0.84629,
+        0.877419
+       ]
+      },
+      "dice": 0.838941,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2719036,
+      "iou": 0.722566,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.686539,
+       "median": 0.722137,
+       "n": 359,
+       "p10": 0.51795,
+       "p90": 0.830043
+      },
+      "precision": 0.816937,
+      "pred_pixels": 2869565,
+      "recall": 0.862164
+     },
+     "brow_R": {
+      "area_ratio": 1.011407,
+      "ci95": {
+       "dice": [
+        0.816006,
+        0.840368
+       ],
+       "iou": [
+        0.689197,
+        0.724684
+       ],
+       "precision": [
+        0.806779,
+        0.840715
+       ],
+       "recall": [
+        0.809127,
+        0.852859
+       ]
+      },
+      "dice": 0.829107,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 2650375,
+      "iou": 0.708097,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.681589,
+       "median": 0.718035,
+       "n": 358,
+       "p10": 0.517419,
+       "p90": 0.813898
+      },
+      "precision": 0.824431,
+      "pred_pixels": 2680607,
+      "recall": 0.833835
+     },
+     "eye": {
+      "area_ratio": 0.989337,
+      "ci95": {
+       "dice": [
+        0.819328,
+        0.855456
+       ],
+       "iou": [
+        0.693951,
+        0.74742
+       ],
+       "precision": [
+        0.833785,
+        0.853746
+       ],
+       "recall": [
+        0.796082,
+        0.866599
+       ]
+      },
+      "dice": 0.839212,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2311620,
+      "iou": 0.722968,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.681631,
+       "median": 0.762406,
+       "n": 359,
+       "p10": 0.391512,
+       "p90": 0.851239
+      },
+      "precision": 0.843735,
+      "pred_pixels": 2286971,
+      "recall": 0.834738
+     },
+     "eye_L": {
+      "area_ratio": 1.021017,
+      "ci95": {
+       "dice": [
+        0.824197,
+        0.860786
+       ],
+       "iou": [
+        0.700966,
+        0.755596
+       ],
+       "precision": [
+        0.824795,
+        0.845553
+       ],
+       "recall": [
+        0.813202,
+        0.885856
+       ]
+      },
+      "dice": 0.843755,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 1156451,
+      "iou": 0.729737,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.689006,
+       "median": 0.767901,
+       "n": 358,
+       "p10": 0.250888,
+       "p90": 0.863753
+      },
+      "precision": 0.835071,
+      "pred_pixels": 1180756,
+      "recall": 0.852622
+     },
+     "eye_R": {
+      "area_ratio": 0.957622,
+      "ci95": {
+       "dice": [
+        0.813401,
+        0.851689
+       ],
+       "iou": [
+        0.685489,
+        0.741689
+       ],
+       "precision": [
+        0.842208,
+        0.864104
+       ],
+       "recall": [
+        0.777022,
+        0.849593
+       ]
+      },
+      "dice": 0.834517,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1155169,
+      "iou": 0.716027,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.662549,
+       "median": 0.764164,
+       "n": 359,
+       "p10": 0.0,
+       "p90": 0.861977
+      },
+      "precision": 0.852982,
+      "pred_pixels": 1106215,
+      "recall": 0.816835
+     },
+     "lips": {
+      "area_ratio": 1.103465,
+      "ci95": {
+       "dice": [
+        0.862864,
+        0.894905
+       ],
+       "iou": [
+        0.758805,
+        0.809799
+       ],
+       "precision": [
+        0.809755,
+        0.865577
+       ],
+       "recall": [
+        0.913424,
+        0.93446
+       ]
+      },
+      "dice": 0.879318,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5623894,
+      "iou": 0.784628,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.800247,
+       "median": 0.842333,
+       "n": 359,
+       "p10": 0.651111,
+       "p90": 0.900368
+      },
+      "precision": 0.838094,
+      "pred_pixels": 6205768,
+      "recall": 0.924808
+     },
+     "skin": {
+      "area_ratio": 1.096242,
+      "ci95": {
+       "dice": [
+        0.920325,
+        0.936981
+       ],
+       "iou": [
+        0.852409,
+        0.881434
+       ],
+       "precision": [
+        0.872906,
+        0.90192
+       ],
+       "recall": [
+        0.968349,
+        0.978931
+       ]
+      },
+      "dice": 0.929565,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 139963737,
+      "iou": 0.868399,
+      "n_images": 359,
+      "per_image_iou": {
+       "mean": 0.85139,
+       "median": 0.903269,
+       "n": 359,
+       "p10": 0.674243,
+       "p90": 0.949771
+      },
+      "precision": 0.88876,
+      "pred_pixels": 153434146,
+      "recall": 0.974296
+     }
+    },
+    "B_full": {
+     "brow": {
+      "area_ratio": 1.031535,
+      "ci95": {
+       "dice": [
+        0.822052,
+        0.843191
+       ],
+       "iou": [
+        0.697867,
+        0.728894
+       ],
+       "precision": [
+        0.803381,
+        0.836388
+       ],
+       "recall": [
+        0.828664,
+        0.860935
+       ]
+      },
+      "dice": 0.833294,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5380499,
+      "iou": 0.714228,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.682915,
+       "median": 0.715417,
+       "n": 361,
+       "p10": 0.51674,
+       "p90": 0.817323
+      },
+      "precision": 0.820557,
+      "pred_pixels": 5550172,
+      "recall": 0.846433
+     },
+     "brow_L": {
+      "area_ratio": 1.052577,
+      "ci95": {
+       "dice": [
+        0.825335,
+        0.848524
+       ],
+       "iou": [
+        0.702613,
+        0.7369
+       ],
+       "precision": [
+        0.796186,
+        0.836006
+       ],
+       "recall": [
+        0.842855,
+        0.875218
+       ]
+      },
+      "dice": 0.837863,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2726229,
+      "iou": 0.720967,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.682736,
+       "median": 0.720885,
+       "n": 361,
+       "p10": 0.510563,
+       "p90": 0.82983
+      },
+      "precision": 0.816937,
+      "pred_pixels": 2869565,
+      "recall": 0.859889
+     },
+     "brow_R": {
+      "area_ratio": 1.009923,
+      "ci95": {
+       "dice": [
+        0.815056,
+        0.83994
+       ],
+       "iou": [
+        0.687843,
+        0.724048
+       ],
+       "precision": [
+        0.807661,
+        0.839451
+       ],
+       "recall": [
+        0.809877,
+        0.851365
+       ]
+      },
+      "dice": 0.828501,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 2654270,
+      "iou": 0.707215,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.677803,
+       "median": 0.716968,
+       "n": 360,
+       "p10": 0.514635,
+       "p90": 0.813755
+      },
+      "precision": 0.824431,
+      "pred_pixels": 2680607,
+      "recall": 0.832612
+     },
+     "eye": {
+      "area_ratio": 0.987,
+      "ci95": {
+       "dice": [
+        0.818973,
+        0.853879
+       ],
+       "iou": [
+        0.693441,
+        0.745017
+       ],
+       "precision": [
+        0.833946,
+        0.853816
+       ],
+       "recall": [
+        0.796766,
+        0.86319
+       ]
+      },
+      "dice": 0.838214,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2317094,
+      "iou": 0.721488,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.677854,
+       "median": 0.760566,
+       "n": 361,
+       "p10": 0.357724,
+       "p90": 0.850524
+      },
+      "precision": 0.843735,
+      "pred_pixels": 2286971,
+      "recall": 0.832766
+     },
+     "eye_L": {
+      "area_ratio": 1.01839,
+      "ci95": {
+       "dice": [
+        0.824785,
+        0.858529
+       ],
+       "iou": [
+        0.701816,
+        0.752125
+       ],
+       "precision": [
+        0.825324,
+        0.845709
+       ],
+       "recall": [
+        0.814633,
+        0.880252
+       ]
+      },
+      "dice": 0.842679,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 1159434,
+      "iou": 0.72813,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.685178,
+       "median": 0.766907,
+       "n": 360,
+       "p10": 0.067844,
+       "p90": 0.863631
+      },
+      "precision": 0.835071,
+      "pred_pixels": 1180756,
+      "recall": 0.850428
+     },
+     "eye_R": {
+      "area_ratio": 0.955561,
+      "ci95": {
+       "dice": [
+        0.812976,
+        0.850431
+       ],
+       "iou": [
+        0.684887,
+        0.739782
+       ],
+       "precision": [
+        0.84187,
+        0.863732
+       ],
+       "recall": [
+        0.77839,
+        0.848148
+       ]
+      },
+      "dice": 0.833599,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1157660,
+      "iou": 0.714676,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.658878,
+       "median": 0.763047,
+       "n": 361,
+       "p10": 0.0,
+       "p90": 0.861843
+      },
+      "precision": 0.852982,
+      "pred_pixels": 1106215,
+      "recall": 0.815077
+     },
+     "lips": {
+      "area_ratio": 1.099745,
+      "ci95": {
+       "dice": [
+        0.859373,
+        0.893928
+       ],
+       "iou": [
+        0.753421,
+        0.808201
+       ],
+       "precision": [
+        0.807295,
+        0.866363
+       ],
+       "recall": [
+        0.909399,
+        0.932584
+       ]
+      },
+      "dice": 0.877907,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5642915,
+      "iou": 0.782383,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.795813,
+       "median": 0.842139,
+       "n": 361,
+       "p10": 0.641781,
+       "p90": 0.900208
+      },
+      "precision": 0.838094,
+      "pred_pixels": 6205768,
+      "recall": 0.92169
+     },
+     "skin": {
+      "area_ratio": 1.093908,
+      "ci95": {
+       "dice": [
+        0.919316,
+        0.936507
+       ],
+       "iou": [
+        0.85068,
+        0.880595
+       ],
+       "precision": [
+        0.872757,
+        0.902623
+       ],
+       "recall": [
+        0.965766,
+        0.978249
+       ]
+      },
+      "dice": 0.928619,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 140262437,
+      "iou": 0.86675,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.846673,
+       "median": 0.903263,
+       "n": 361,
+       "p10": 0.671273,
+       "p90": 0.949686
+      },
+      "precision": 0.88876,
+      "pred_pixels": 153434146,
+      "recall": 0.972221
+     }
+    },
+    "B_window": {
+     "brow": {
+      "area_ratio": 1.031535,
+      "ci95": {
+       "dice": [
+        0.822052,
+        0.843191
+       ],
+       "iou": [
+        0.697867,
+        0.728894
+       ],
+       "precision": [
+        0.803381,
+        0.836388
+       ],
+       "recall": [
+        0.828664,
+        0.860935
+       ]
+      },
+      "dice": 0.833294,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5380499,
+      "iou": 0.714228,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.682915,
+       "median": 0.715417,
+       "n": 361,
+       "p10": 0.51674,
+       "p90": 0.817323
+      },
+      "precision": 0.820557,
+      "pred_pixels": 5550172,
+      "recall": 0.846433
+     },
+     "brow_L": {
+      "area_ratio": 1.052577,
+      "ci95": {
+       "dice": [
+        0.825335,
+        0.848524
+       ],
+       "iou": [
+        0.702613,
+        0.7369
+       ],
+       "precision": [
+        0.796186,
+        0.836006
+       ],
+       "recall": [
+        0.842855,
+        0.875218
+       ]
+      },
+      "dice": 0.837863,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2726229,
+      "iou": 0.720967,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.682736,
+       "median": 0.720885,
+       "n": 361,
+       "p10": 0.510563,
+       "p90": 0.82983
+      },
+      "precision": 0.816937,
+      "pred_pixels": 2869565,
+      "recall": 0.859889
+     },
+     "brow_R": {
+      "area_ratio": 1.009923,
+      "ci95": {
+       "dice": [
+        0.815056,
+        0.83994
+       ],
+       "iou": [
+        0.687843,
+        0.724048
+       ],
+       "precision": [
+        0.807661,
+        0.839451
+       ],
+       "recall": [
+        0.809877,
+        0.851365
+       ]
+      },
+      "dice": 0.828501,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 2654270,
+      "iou": 0.707215,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.677803,
+       "median": 0.716968,
+       "n": 360,
+       "p10": 0.514635,
+       "p90": 0.813755
+      },
+      "precision": 0.824431,
+      "pred_pixels": 2680607,
+      "recall": 0.832612
+     },
+     "eye": {
+      "area_ratio": 0.987,
+      "ci95": {
+       "dice": [
+        0.818973,
+        0.853879
+       ],
+       "iou": [
+        0.693441,
+        0.745017
+       ],
+       "precision": [
+        0.833946,
+        0.853816
+       ],
+       "recall": [
+        0.796766,
+        0.86319
+       ]
+      },
+      "dice": 0.838214,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 2317094,
+      "iou": 0.721488,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.677854,
+       "median": 0.760566,
+       "n": 361,
+       "p10": 0.357724,
+       "p90": 0.850524
+      },
+      "precision": 0.843735,
+      "pred_pixels": 2286971,
+      "recall": 0.832766
+     },
+     "eye_L": {
+      "area_ratio": 1.01839,
+      "ci95": {
+       "dice": [
+        0.824785,
+        0.858529
+       ],
+       "iou": [
+        0.701816,
+        0.752125
+       ],
+       "precision": [
+        0.825324,
+        0.845709
+       ],
+       "recall": [
+        0.814633,
+        0.880252
+       ]
+      },
+      "dice": 0.842679,
+      "false_alarm": {
+       "n_absent": 1,
+       "n_false_alarm": 0,
+       "rate": 0.0
+      },
+      "gt_pixels": 1159434,
+      "iou": 0.72813,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.685178,
+       "median": 0.766907,
+       "n": 360,
+       "p10": 0.067844,
+       "p90": 0.863631
+      },
+      "precision": 0.835071,
+      "pred_pixels": 1180756,
+      "recall": 0.850428
+     },
+     "eye_R": {
+      "area_ratio": 0.955561,
+      "ci95": {
+       "dice": [
+        0.812976,
+        0.850431
+       ],
+       "iou": [
+        0.684887,
+        0.739782
+       ],
+       "precision": [
+        0.84187,
+        0.863732
+       ],
+       "recall": [
+        0.77839,
+        0.848148
+       ]
+      },
+      "dice": 0.833599,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 1157660,
+      "iou": 0.714676,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.658878,
+       "median": 0.763047,
+       "n": 361,
+       "p10": 0.0,
+       "p90": 0.861843
+      },
+      "precision": 0.852982,
+      "pred_pixels": 1106215,
+      "recall": 0.815077
+     },
+     "lips": {
+      "area_ratio": 1.099745,
+      "ci95": {
+       "dice": [
+        0.859373,
+        0.893928
+       ],
+       "iou": [
+        0.753421,
+        0.808201
+       ],
+       "precision": [
+        0.807295,
+        0.866363
+       ],
+       "recall": [
+        0.909399,
+        0.932584
+       ]
+      },
+      "dice": 0.877907,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 5642915,
+      "iou": 0.782383,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.795813,
+       "median": 0.842139,
+       "n": 361,
+       "p10": 0.641781,
+       "p90": 0.900208
+      },
+      "precision": 0.838094,
+      "pred_pixels": 6205768,
+      "recall": 0.92169
+     },
+     "skin": {
+      "area_ratio": 1.093908,
+      "ci95": {
+       "dice": [
+        0.919316,
+        0.936507
+       ],
+       "iou": [
+        0.85068,
+        0.880595
+       ],
+       "precision": [
+        0.872757,
+        0.902623
+       ],
+       "recall": [
+        0.965766,
+        0.978249
+       ]
+      },
+      "dice": 0.928619,
+      "false_alarm": {
+       "n_absent": 0,
+       "n_false_alarm": 0,
+       "rate": null
+      },
+      "gt_pixels": 140262437,
+      "iou": 0.86675,
+      "n_images": 361,
+      "per_image_iou": {
+       "mean": 0.846673,
+       "median": 0.903263,
+       "n": 361,
+       "p10": 0.671273,
+       "p90": 0.949686
+      },
+      "precision": 0.88876,
+      "pred_pixels": 153434146,
+      "recall": 0.972221
+     }
+    }
+   },
+   "n_images": 361,
+   "outcomes": {
+    "no_face": 2,
+    "ok": 359
+   }
+  }
+ },
+ "error_modes": {
+  "brow": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.107868
+   },
+   "false_share_of_pred": 0.178865,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.160597,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.141167
+   }
+  },
+  "brow_L": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.110604
+   },
+   "false_share_of_pred": 0.184503,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.145753,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.13341
+   }
+  },
+  "brow_R": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.104996
+   },
+   "false_share_of_pred": 0.172944,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.175433,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.148921
+   }
+  },
+  "eye": {
+   "false_from": {
+    "class": "SKIN",
+    "share_of_pred": 0.082386
+   },
+   "false_share_of_pred": 0.160705,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.168387,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.095838
+   }
+  },
+  "eye_L": {
+   "false_from": {
+    "class": "SKIN",
+    "share_of_pred": 0.088557
+   },
+   "false_share_of_pred": 0.170329,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.149354,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.080135
+   }
+  },
+  "eye_R": {
+   "false_from": {
+    "class": "SKIN",
+    "share_of_pred": 0.075788
+   },
+   "false_share_of_pred": 0.150415,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.187372,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.111501
+   }
+  },
+  "lips": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.1009
+   },
+   "false_share_of_pred": 0.157861,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.076589,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.071504
+   }
+  },
+  "skin": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.101201
+   },
+   "false_share_of_pred": 0.112359,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.027344,
+   "missed_to": {
+    "class": "GLASSES",
+    "share_of_gt": 0.01081
+   }
+  },
+  "teeth_vs_mouth_interior": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.860253
+   },
+   "false_share_of_pred": 0.889081,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.0916,
+   "missed_to": {
+    "class": "LIP_UPPER",
+    "share_of_gt": 0.053895
+   }
+  },
+  "whole_mouth": {
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.219257
+   },
+   "false_share_of_pred": 0.26637,
+   "gt_outside_window_share": 0.0,
+   "missed_share_of_gt": 0.070027,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.069806
+   }
+  }
+ },
+ "headline": {
+  "A_full": {
+   "brow": {
+    "area_ratio": 1.022247,
+    "ci95": {
+     "dice": [
+      0.820384,
+      0.839417
+     ],
+     "iou": [
+      0.695467,
+      0.723272
+     ],
+     "precision": [
+      0.808964,
+      0.832975
+     ],
+     "recall": [
+      0.824298,
+      0.85535
+     ]
+    },
+    "dice": 0.830169,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 8740286,
+    "iou": 0.709648,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.681869,
+     "median": 0.715289,
+     "n": 598,
+     "p10": 0.514546,
+     "p90": 0.817159
+    },
+    "precision": 0.821135,
+    "pred_pixels": 8934730,
+    "recall": 0.839403
+   },
+   "brow_L": {
+    "area_ratio": 1.047517,
+    "ci95": {
+     "dice": [
+      0.824047,
+      0.843911
+     ],
+     "iou": [
+      0.700748,
+      0.72997
+     ],
+     "precision": [
+      0.800423,
+      0.829451
+     ],
+     "recall": [
+      0.840338,
+      0.868727
+     ]
+    },
+    "dice": 0.834422,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 4369005,
+    "iou": 0.715887,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.680266,
+     "median": 0.718428,
+     "n": 598,
+     "p10": 0.509528,
+     "p90": 0.83198
+    },
+    "precision": 0.815497,
+    "pred_pixels": 4576605,
+    "recall": 0.854247
+   },
+   "brow_R": {
+    "area_ratio": 0.99699,
+    "ci95": {
+     "dice": [
+      0.813551,
+      0.836757
+     ],
+     "iou": [
+      0.685703,
+      0.719331
+     ],
+     "precision": [
+      0.814417,
+      0.839878
+     ],
+     "recall": [
+      0.802045,
+      0.844306
+     ]
+    },
+    "dice": 0.825809,
+    "false_alarm": {
+     "n_absent": 1,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 4371281,
+    "iou": 0.703301,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.676874,
+     "median": 0.713518,
+     "n": 597,
+     "p10": 0.514209,
+     "p90": 0.816243
+    },
+    "precision": 0.827056,
+    "pred_pixels": 4358125,
+    "recall": 0.824567
+   },
+   "eye": {
+    "area_ratio": 0.990847,
+    "ci95": {
+     "dice": [
+      0.820239,
+      0.849251
+     ],
+     "iou": [
+      0.695259,
+      0.737998
+     ],
+     "precision": [
+      0.831215,
+      0.847141
+     ],
+     "recall": [
+      0.803126,
+      0.85751
+     ]
+    },
+    "dice": 0.835436,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 3777624,
+    "iou": 0.717382,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.677677,
+     "median": 0.76757,
+     "n": 598,
+     "p10": 0.36295,
+     "p90": 0.847709
+    },
+    "precision": 0.839295,
+    "pred_pixels": 3743049,
+    "recall": 0.831613
+   },
+   "eye_L": {
+    "area_ratio": 1.025282,
+    "ci95": {
+     "dice": [
+      0.825528,
+      0.853337
+     ],
+     "iou": [
+      0.702893,
+      0.744192
+     ],
+     "precision": [
+      0.821117,
+      0.838392
+     ],
+     "recall": [
+      0.822738,
+      0.875646
+     ]
+    },
+    "dice": 0.840027,
+    "false_alarm": {
+     "n_absent": 2,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 1886432,
+    "iou": 0.724179,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.679424,
+     "median": 0.768968,
+     "n": 596,
+     "p10": 0.016666,
+     "p90": 0.86118
+    },
+    "precision": 0.829671,
+    "pred_pixels": 1934124,
+    "recall": 0.850646
+   },
+   "eye_R": {
+    "area_ratio": 0.9565,
+    "ci95": {
+     "dice": [
+      0.813415,
+      0.845554
+     ],
+     "iou": [
+      0.685509,
+      0.732432
+     ],
+     "precision": [
+      0.840508,
+      0.857859
+     ],
+     "recall": [
+      0.780397,
+      0.839835
+     ]
+    },
+    "dice": 0.830696,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 1891192,
+    "iou": 0.710419,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.661334,
+     "median": 0.766005,
+     "n": 598,
+     "p10": 0.0,
+     "p90": 0.859465
+    },
+    "precision": 0.849585,
+    "pred_pixels": 1808925,
+    "recall": 0.812628
+   },
+   "lips": {
+    "area_ratio": 1.096506,
+    "ci95": {
+     "dice": [
+      0.868199,
+      0.892237
+     ],
+     "iou": [
+      0.767095,
+      0.80544
+     ],
+     "precision": [
+      0.82065,
+      0.86075
+     ],
+     "recall": [
+      0.914556,
+      0.931908
+     ]
+    },
+    "dice": 0.880905,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9199357,
+    "iou": 0.787158,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.799545,
+     "median": 0.843076,
+     "n": 598,
+     "p10": 0.64546,
+     "p90": 0.901463
+    },
+    "precision": 0.842139,
+    "pred_pixels": 10087150,
+    "recall": 0.923411
+   },
+   "skin": {
+    "area_ratio": 1.095776,
+    "ci95": {
+     "dice": [
+      0.921617,
+      0.933975
+     ],
+     "iou": [
+      0.854628,
+      0.876128
+     ],
+     "precision": [
+      0.877203,
+      0.897574
+     ],
+     "recall": [
+      0.9679,
+      0.977142
+     ]
+    },
+    "dice": 0.928206,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 230253923,
+    "iou": 0.86603,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.848782,
+     "median": 0.893029,
+     "n": 598,
+     "p10": 0.678589,
+     "p90": 0.949428
+    },
+    "precision": 0.887641,
+    "pred_pixels": 252306698,
+    "recall": 0.972656
+   },
+   "teeth_vs_mouth_interior": {
+    "area_ratio": 8.189743,
+    "ci95": {
+     "dice": [
+      0.159986,
+      0.246767
+     ],
+     "iou": [
+      0.086948,
+      0.14075
+     ],
+     "precision": [
+      0.087768,
+      0.142838
+     ],
+     "recall": [
+      0.870963,
+      0.935847
+     ]
+    },
+    "dice": 0.197699,
+    "false_alarm": {
+     "n_absent": 537,
+     "n_false_alarm": 12,
+     "rate": 0.022346
+    },
+    "gt_pixels": 227423,
+    "iou": 0.109692,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.310959,
+     "median": 0.119511,
+     "n": 61,
+     "p10": 0.014237,
+     "p90": 0.817301
+    },
+    "precision": 0.110919,
+    "pred_pixels": 1862536,
+    "recall": 0.9084
+   },
+   "whole_mouth": {
+    "area_ratio": 1.267632,
+    "ci95": {
+     "dice": [
+      0.786096,
+      0.851128
+     ],
+     "iou": [
+      0.647577,
+      0.740837
+     ],
+     "precision": [
+      0.681288,
+      0.783507
+     ],
+     "recall": [
+      0.92143,
+      0.93829
+     ]
+    },
+    "dice": 0.820215,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9426780,
+    "iou": 0.695225,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.793147,
+     "median": 0.845512,
+     "n": 598,
+     "p10": 0.644342,
+     "p90": 0.904904
+    },
+    "precision": 0.73363,
+    "pred_pixels": 11949686,
+    "recall": 0.929973
+   }
+  },
+  "A_window": {
+   "brow": {
+    "area_ratio": 1.022247,
+    "ci95": {
+     "dice": [
+      0.820384,
+      0.839417
+     ],
+     "iou": [
+      0.695467,
+      0.723272
+     ],
+     "precision": [
+      0.808964,
+      0.832975
+     ],
+     "recall": [
+      0.824298,
+      0.85535
+     ]
+    },
+    "dice": 0.830169,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 8740286,
+    "iou": 0.709648,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.681869,
+     "median": 0.715289,
+     "n": 598,
+     "p10": 0.514546,
+     "p90": 0.817159
+    },
+    "precision": 0.821135,
+    "pred_pixels": 8934730,
+    "recall": 0.839403
+   },
+   "brow_L": {
+    "area_ratio": 1.047517,
+    "ci95": {
+     "dice": [
+      0.824047,
+      0.843911
+     ],
+     "iou": [
+      0.700748,
+      0.72997
+     ],
+     "precision": [
+      0.800423,
+      0.829451
+     ],
+     "recall": [
+      0.840338,
+      0.868727
+     ]
+    },
+    "dice": 0.834422,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 4369005,
+    "iou": 0.715887,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.680266,
+     "median": 0.718428,
+     "n": 598,
+     "p10": 0.509528,
+     "p90": 0.83198
+    },
+    "precision": 0.815497,
+    "pred_pixels": 4576605,
+    "recall": 0.854247
+   },
+   "brow_R": {
+    "area_ratio": 0.99699,
+    "ci95": {
+     "dice": [
+      0.813551,
+      0.836757
+     ],
+     "iou": [
+      0.685703,
+      0.719331
+     ],
+     "precision": [
+      0.814417,
+      0.839878
+     ],
+     "recall": [
+      0.802045,
+      0.844306
+     ]
+    },
+    "dice": 0.825809,
+    "false_alarm": {
+     "n_absent": 1,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 4371281,
+    "iou": 0.703301,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.676874,
+     "median": 0.713518,
+     "n": 597,
+     "p10": 0.514209,
+     "p90": 0.816243
+    },
+    "precision": 0.827056,
+    "pred_pixels": 4358125,
+    "recall": 0.824567
+   },
+   "eye": {
+    "area_ratio": 0.990847,
+    "ci95": {
+     "dice": [
+      0.820239,
+      0.849251
+     ],
+     "iou": [
+      0.695259,
+      0.737998
+     ],
+     "precision": [
+      0.831215,
+      0.847141
+     ],
+     "recall": [
+      0.803126,
+      0.85751
+     ]
+    },
+    "dice": 0.835436,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 3777624,
+    "iou": 0.717382,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.677677,
+     "median": 0.76757,
+     "n": 598,
+     "p10": 0.36295,
+     "p90": 0.847709
+    },
+    "precision": 0.839295,
+    "pred_pixels": 3743049,
+    "recall": 0.831613
+   },
+   "eye_L": {
+    "area_ratio": 1.025282,
+    "ci95": {
+     "dice": [
+      0.825528,
+      0.853337
+     ],
+     "iou": [
+      0.702893,
+      0.744192
+     ],
+     "precision": [
+      0.821117,
+      0.838392
+     ],
+     "recall": [
+      0.822738,
+      0.875646
+     ]
+    },
+    "dice": 0.840027,
+    "false_alarm": {
+     "n_absent": 2,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 1886432,
+    "iou": 0.724179,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.679424,
+     "median": 0.768968,
+     "n": 596,
+     "p10": 0.016666,
+     "p90": 0.86118
+    },
+    "precision": 0.829671,
+    "pred_pixels": 1934124,
+    "recall": 0.850646
+   },
+   "eye_R": {
+    "area_ratio": 0.9565,
+    "ci95": {
+     "dice": [
+      0.813415,
+      0.845554
+     ],
+     "iou": [
+      0.685509,
+      0.732432
+     ],
+     "precision": [
+      0.840508,
+      0.857859
+     ],
+     "recall": [
+      0.780397,
+      0.839835
+     ]
+    },
+    "dice": 0.830696,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 1891192,
+    "iou": 0.710419,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.661334,
+     "median": 0.766005,
+     "n": 598,
+     "p10": 0.0,
+     "p90": 0.859465
+    },
+    "precision": 0.849585,
+    "pred_pixels": 1808925,
+    "recall": 0.812628
+   },
+   "lips": {
+    "area_ratio": 1.096506,
+    "ci95": {
+     "dice": [
+      0.868199,
+      0.892237
+     ],
+     "iou": [
+      0.767095,
+      0.80544
+     ],
+     "precision": [
+      0.82065,
+      0.86075
+     ],
+     "recall": [
+      0.914556,
+      0.931908
+     ]
+    },
+    "dice": 0.880905,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9199357,
+    "iou": 0.787158,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.799545,
+     "median": 0.843076,
+     "n": 598,
+     "p10": 0.64546,
+     "p90": 0.901463
+    },
+    "precision": 0.842139,
+    "pred_pixels": 10087150,
+    "recall": 0.923411
+   },
+   "skin": {
+    "area_ratio": 1.095776,
+    "ci95": {
+     "dice": [
+      0.921617,
+      0.933975
+     ],
+     "iou": [
+      0.854628,
+      0.876128
+     ],
+     "precision": [
+      0.877203,
+      0.897574
+     ],
+     "recall": [
+      0.9679,
+      0.977142
+     ]
+    },
+    "dice": 0.928206,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 230253923,
+    "iou": 0.86603,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.848782,
+     "median": 0.893029,
+     "n": 598,
+     "p10": 0.678589,
+     "p90": 0.949428
+    },
+    "precision": 0.887641,
+    "pred_pixels": 252306698,
+    "recall": 0.972656
+   },
+   "teeth_vs_mouth_interior": {
+    "area_ratio": 8.189743,
+    "ci95": {
+     "dice": [
+      0.159986,
+      0.246767
+     ],
+     "iou": [
+      0.086948,
+      0.14075
+     ],
+     "precision": [
+      0.087768,
+      0.142838
+     ],
+     "recall": [
+      0.870963,
+      0.935847
+     ]
+    },
+    "dice": 0.197699,
+    "false_alarm": {
+     "n_absent": 537,
+     "n_false_alarm": 12,
+     "rate": 0.022346
+    },
+    "gt_pixels": 227423,
+    "iou": 0.109692,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.310959,
+     "median": 0.119511,
+     "n": 61,
+     "p10": 0.014237,
+     "p90": 0.817301
+    },
+    "precision": 0.110919,
+    "pred_pixels": 1862536,
+    "recall": 0.9084
+   },
+   "whole_mouth": {
+    "area_ratio": 1.267632,
+    "ci95": {
+     "dice": [
+      0.786096,
+      0.851128
+     ],
+     "iou": [
+      0.647577,
+      0.740837
+     ],
+     "precision": [
+      0.681288,
+      0.783507
+     ],
+     "recall": [
+      0.92143,
+      0.93829
+     ]
+    },
+    "dice": 0.820215,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9426780,
+    "iou": 0.695225,
+    "n_images": 598,
+    "per_image_iou": {
+     "mean": 0.793147,
+     "median": 0.845512,
+     "n": 598,
+     "p10": 0.644342,
+     "p90": 0.904904
+    },
+    "precision": 0.73363,
+    "pred_pixels": 11949686,
+    "recall": 0.929973
+   }
+  },
+  "B_full": {
+   "brow": {
+    "area_ratio": 1.020952,
+    "ci95": {
+     "dice": [
+      0.820337,
+      0.838617
+     ],
+     "iou": [
+      0.695399,
+      0.722084
+     ],
+     "precision": [
+      0.80884,
+      0.833646
+     ],
+     "recall": [
+      0.822713,
+      0.853568
+     ]
+    },
+    "dice": 0.829648,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 8751374,
+    "iou": 0.708888,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.679597,
+     "median": 0.71524,
+     "n": 600,
+     "p10": 0.511818,
+     "p90": 0.817113
+    },
+    "precision": 0.821135,
+    "pred_pixels": 8934730,
+    "recall": 0.838339
+   },
+   "brow_L": {
+    "area_ratio": 1.045795,
+    "ci95": {
+     "dice": [
+      0.823857,
+      0.842891
+     ],
+     "iou": [
+      0.700473,
+      0.728446
+     ],
+     "precision": [
+      0.801726,
+      0.829255
+     ],
+     "recall": [
+      0.838565,
+      0.867143
+     ]
+    },
+    "dice": 0.833752,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 4376198,
+    "iou": 0.714901,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.677999,
+     "median": 0.717823,
+     "n": 600,
+     "p10": 0.505267,
+     "p90": 0.831747
+    },
+    "precision": 0.815497,
+    "pred_pixels": 4576605,
+    "recall": 0.852843
+   },
+   "brow_R": {
+    "area_ratio": 0.996103,
+    "ci95": {
+     "dice": [
+      0.814029,
+      0.836558
+     ],
+     "iou": [
+      0.686382,
+      0.719038
+     ],
+     "precision": [
+      0.814059,
+      0.840415
+     ],
+     "recall": [
+      0.802022,
+      0.842372
+     ]
+    },
+    "dice": 0.825441,
+    "false_alarm": {
+     "n_absent": 1,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 4375176,
+    "iou": 0.702767,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.674614,
+     "median": 0.713378,
+     "n": 599,
+     "p10": 0.508422,
+     "p90": 0.816241
+    },
+    "precision": 0.827056,
+    "pred_pixels": 4358125,
+    "recall": 0.823833
+   },
+   "eye": {
+    "area_ratio": 0.989414,
+    "ci95": {
+     "dice": [
+      0.819806,
+      0.848458
+     ],
+     "iou": [
+      0.694636,
+      0.736802
+     ],
+     "precision": [
+      0.832402,
+      0.846929
+     ],
+     "recall": [
+      0.802988,
+      0.857572
+     ]
+    },
+    "dice": 0.834829,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 3783098,
+    "iou": 0.716486,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.675418,
+     "median": 0.766964,
+     "n": 600,
+     "p10": 0.331809,
+     "p90": 0.847708
+    },
+    "precision": 0.839295,
+    "pred_pixels": 3743049,
+    "recall": 0.83041
+   },
+   "eye_L": {
+    "area_ratio": 1.023663,
+    "ci95": {
+     "dice": [
+      0.825178,
+      0.852806
+     ],
+     "iou": [
+      0.702386,
+      0.743385
+     ],
+     "precision": [
+      0.821763,
+      0.838063
+     ],
+     "recall": [
+      0.821794,
+      0.875994
+     ]
+    },
+    "dice": 0.839372,
+    "false_alarm": {
+     "n_absent": 2,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 1889415,
+    "iou": 0.723205,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.677151,
+     "median": 0.768483,
+     "n": 598,
+     "p10": 0.0,
+     "p90": 0.861173
+    },
+    "precision": 0.829671,
+    "pred_pixels": 1934124,
+    "recall": 0.849303
+   },
+   "eye_R": {
+    "area_ratio": 0.955242,
+    "ci95": {
+     "dice": [
+      0.813882,
+      0.845459
+     ],
+     "iou": [
+      0.686174,
+      0.73229
+     ],
+     "precision": [
+      0.841407,
+      0.858141
+     ],
+     "recall": [
+      0.782695,
+      0.840359
+     ]
+    },
+    "dice": 0.830137,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 1893683,
+    "iou": 0.709602,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.65913,
+     "median": 0.765823,
+     "n": 600,
+     "p10": 0.0,
+     "p90": 0.859159
+    },
+    "precision": 0.849585,
+    "pred_pixels": 1808925,
+    "recall": 0.811559
+   },
+   "lips": {
+    "area_ratio": 1.094243,
+    "ci95": {
+     "dice": [
+      0.868556,
+      0.891027
+     ],
+     "iou": [
+      0.767653,
+      0.80347
+     ],
+     "precision": [
+      0.822278,
+      0.861151
+     ],
+     "recall": [
+      0.912022,
+      0.930213
+     ]
+    },
+    "dice": 0.880037,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9218378,
+    "iou": 0.785773,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.79688,
+     "median": 0.842639,
+     "n": 600,
+     "p10": 0.644102,
+     "p90": 0.901313
+    },
+    "precision": 0.842139,
+    "pred_pixels": 10087150,
+    "recall": 0.921505
+   },
+   "skin": {
+    "area_ratio": 1.094356,
+    "ci95": {
+     "dice": [
+      0.921466,
+      0.933928
+     ],
+     "iou": [
+      0.85437,
+      0.876046
+     ],
+     "precision": [
+      0.876596,
+      0.898353
+     ],
+     "recall": [
+      0.966463,
+      0.97616
+     ]
+    },
+    "dice": 0.927631,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 230552623,
+    "iou": 0.86503,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.845952,
+     "median": 0.892694,
+     "n": 600,
+     "p10": 0.675795,
+     "p90": 0.949406
+    },
+    "precision": 0.887641,
+    "pred_pixels": 252306698,
+    "recall": 0.971395
+   },
+   "teeth_vs_mouth_interior": {
+    "area_ratio": 8.189743,
+    "ci95": {
+     "dice": [
+      0.155501,
+      0.243954
+     ],
+     "iou": [
+      0.084306,
+      0.138923
+     ],
+     "precision": [
+      0.085078,
+      0.140448
+     ],
+     "recall": [
+      0.87006,
+      0.936883
+     ]
+    },
+    "dice": 0.197699,
+    "false_alarm": {
+     "n_absent": 539,
+     "n_false_alarm": 12,
+     "rate": 0.022263
+    },
+    "gt_pixels": 227423,
+    "iou": 0.109692,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.310959,
+     "median": 0.119511,
+     "n": 61,
+     "p10": 0.014237,
+     "p90": 0.817301
+    },
+    "precision": 0.110919,
+    "pred_pixels": 1862536,
+    "recall": 0.9084
+   },
+   "whole_mouth": {
+    "area_ratio": 1.265079,
+    "ci95": {
+     "dice": [
+      0.787751,
+      0.849297
+     ],
+     "iou": [
+      0.649826,
+      0.738068
+     ],
+     "precision": [
+      0.684198,
+      0.783731
+     ],
+     "recall": [
+      0.91925,
+      0.936546
+     ]
+    },
+    "dice": 0.819486,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9445801,
+    "iou": 0.694178,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.790504,
+     "median": 0.845436,
+     "n": 600,
+     "p10": 0.639223,
+     "p90": 0.904883
+    },
+    "precision": 0.73363,
+    "pred_pixels": 11949686,
+    "recall": 0.928101
+   }
+  },
+  "B_window": {
+   "brow": {
+    "area_ratio": 1.020952,
+    "ci95": {
+     "dice": [
+      0.820337,
+      0.838617
+     ],
+     "iou": [
+      0.695399,
+      0.722084
+     ],
+     "precision": [
+      0.80884,
+      0.833646
+     ],
+     "recall": [
+      0.822713,
+      0.853568
+     ]
+    },
+    "dice": 0.829648,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 8751374,
+    "iou": 0.708888,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.679597,
+     "median": 0.71524,
+     "n": 600,
+     "p10": 0.511818,
+     "p90": 0.817113
+    },
+    "precision": 0.821135,
+    "pred_pixels": 8934730,
+    "recall": 0.838339
+   },
+   "brow_L": {
+    "area_ratio": 1.045795,
+    "ci95": {
+     "dice": [
+      0.823857,
+      0.842891
+     ],
+     "iou": [
+      0.700473,
+      0.728446
+     ],
+     "precision": [
+      0.801726,
+      0.829255
+     ],
+     "recall": [
+      0.838565,
+      0.867143
+     ]
+    },
+    "dice": 0.833752,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 4376198,
+    "iou": 0.714901,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.677999,
+     "median": 0.717823,
+     "n": 600,
+     "p10": 0.505267,
+     "p90": 0.831747
+    },
+    "precision": 0.815497,
+    "pred_pixels": 4576605,
+    "recall": 0.852843
+   },
+   "brow_R": {
+    "area_ratio": 0.996103,
+    "ci95": {
+     "dice": [
+      0.814029,
+      0.836558
+     ],
+     "iou": [
+      0.686382,
+      0.719038
+     ],
+     "precision": [
+      0.814059,
+      0.840415
+     ],
+     "recall": [
+      0.802022,
+      0.842372
+     ]
+    },
+    "dice": 0.825441,
+    "false_alarm": {
+     "n_absent": 1,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 4375176,
+    "iou": 0.702767,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.674614,
+     "median": 0.713378,
+     "n": 599,
+     "p10": 0.508422,
+     "p90": 0.816241
+    },
+    "precision": 0.827056,
+    "pred_pixels": 4358125,
+    "recall": 0.823833
+   },
+   "eye": {
+    "area_ratio": 0.989414,
+    "ci95": {
+     "dice": [
+      0.819806,
+      0.848458
+     ],
+     "iou": [
+      0.694636,
+      0.736802
+     ],
+     "precision": [
+      0.832402,
+      0.846929
+     ],
+     "recall": [
+      0.802988,
+      0.857572
+     ]
+    },
+    "dice": 0.834829,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 3783098,
+    "iou": 0.716486,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.675418,
+     "median": 0.766964,
+     "n": 600,
+     "p10": 0.331809,
+     "p90": 0.847708
+    },
+    "precision": 0.839295,
+    "pred_pixels": 3743049,
+    "recall": 0.83041
+   },
+   "eye_L": {
+    "area_ratio": 1.023663,
+    "ci95": {
+     "dice": [
+      0.825178,
+      0.852806
+     ],
+     "iou": [
+      0.702386,
+      0.743385
+     ],
+     "precision": [
+      0.821763,
+      0.838063
+     ],
+     "recall": [
+      0.821794,
+      0.875994
+     ]
+    },
+    "dice": 0.839372,
+    "false_alarm": {
+     "n_absent": 2,
+     "n_false_alarm": 0,
+     "rate": 0.0
+    },
+    "gt_pixels": 1889415,
+    "iou": 0.723205,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.677151,
+     "median": 0.768483,
+     "n": 598,
+     "p10": 0.0,
+     "p90": 0.861173
+    },
+    "precision": 0.829671,
+    "pred_pixels": 1934124,
+    "recall": 0.849303
+   },
+   "eye_R": {
+    "area_ratio": 0.955242,
+    "ci95": {
+     "dice": [
+      0.813882,
+      0.845459
+     ],
+     "iou": [
+      0.686174,
+      0.73229
+     ],
+     "precision": [
+      0.841407,
+      0.858141
+     ],
+     "recall": [
+      0.782695,
+      0.840359
+     ]
+    },
+    "dice": 0.830137,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 1893683,
+    "iou": 0.709602,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.65913,
+     "median": 0.765823,
+     "n": 600,
+     "p10": 0.0,
+     "p90": 0.859159
+    },
+    "precision": 0.849585,
+    "pred_pixels": 1808925,
+    "recall": 0.811559
+   },
+   "lips": {
+    "area_ratio": 1.094243,
+    "ci95": {
+     "dice": [
+      0.868556,
+      0.891027
+     ],
+     "iou": [
+      0.767653,
+      0.80347
+     ],
+     "precision": [
+      0.822278,
+      0.861151
+     ],
+     "recall": [
+      0.912022,
+      0.930213
+     ]
+    },
+    "dice": 0.880037,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9218378,
+    "iou": 0.785773,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.79688,
+     "median": 0.842639,
+     "n": 600,
+     "p10": 0.644102,
+     "p90": 0.901313
+    },
+    "precision": 0.842139,
+    "pred_pixels": 10087150,
+    "recall": 0.921505
+   },
+   "skin": {
+    "area_ratio": 1.094356,
+    "ci95": {
+     "dice": [
+      0.921466,
+      0.933928
+     ],
+     "iou": [
+      0.85437,
+      0.876046
+     ],
+     "precision": [
+      0.876596,
+      0.898353
+     ],
+     "recall": [
+      0.966463,
+      0.97616
+     ]
+    },
+    "dice": 0.927631,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 230552623,
+    "iou": 0.86503,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.845952,
+     "median": 0.892694,
+     "n": 600,
+     "p10": 0.675795,
+     "p90": 0.949406
+    },
+    "precision": 0.887641,
+    "pred_pixels": 252306698,
+    "recall": 0.971395
+   },
+   "teeth_vs_mouth_interior": {
+    "area_ratio": 8.189743,
+    "ci95": {
+     "dice": [
+      0.155501,
+      0.243954
+     ],
+     "iou": [
+      0.084306,
+      0.138923
+     ],
+     "precision": [
+      0.085078,
+      0.140448
+     ],
+     "recall": [
+      0.87006,
+      0.936883
+     ]
+    },
+    "dice": 0.197699,
+    "false_alarm": {
+     "n_absent": 539,
+     "n_false_alarm": 12,
+     "rate": 0.022263
+    },
+    "gt_pixels": 227423,
+    "iou": 0.109692,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.310959,
+     "median": 0.119511,
+     "n": 61,
+     "p10": 0.014237,
+     "p90": 0.817301
+    },
+    "precision": 0.110919,
+    "pred_pixels": 1862536,
+    "recall": 0.9084
+   },
+   "whole_mouth": {
+    "area_ratio": 1.265079,
+    "ci95": {
+     "dice": [
+      0.787751,
+      0.849297
+     ],
+     "iou": [
+      0.649826,
+      0.738068
+     ],
+     "precision": [
+      0.684198,
+      0.783731
+     ],
+     "recall": [
+      0.91925,
+      0.936546
+     ]
+    },
+    "dice": 0.819486,
+    "false_alarm": {
+     "n_absent": 0,
+     "n_false_alarm": 0,
+     "rate": null
+    },
+    "gt_pixels": 9445801,
+    "iou": 0.694178,
+    "n_images": 600,
+    "per_image_iou": {
+     "mean": 0.790504,
+     "median": 0.845436,
+     "n": 600,
+     "p10": 0.639223,
+     "p90": 0.904883
+    },
+    "precision": 0.73363,
+    "pred_pixels": 11949686,
+    "recall": 0.928101
+   }
+  }
+ },
+ "invalid_reasons": {},
+ "landmark_polygon_vs_parser": {
+  "eye": {
+   "gt": "EP eyes (LEFT+RIGHT)",
+   "landmark_polygon": {
+    "ci95": {
+     "dice": [
+      0.836284,
+      0.850788
+     ],
+     "iou": [
+      0.718632,
+      0.740323
+     ],
+     "precision": [
+      0.769069,
+      0.788736
+     ],
+     "recall": [
+      0.910659,
+      0.929768
+     ]
+    },
+    "dice": 0.844003,
+    "iou": 0.730109,
+    "precision": 0.779166,
+    "recall": 0.920611
+   },
+   "parser": {
+    "ci95": {
+     "dice": [
+      0.820239,
+      0.849251
+     ],
+     "iou": [
+      0.695259,
+      0.737998
+     ],
+     "precision": [
+      0.831215,
+      0.847141
+     ],
+     "recall": [
+      0.803126,
+      0.85751
+     ]
+    },
+    "dice": 0.835436,
+    "iou": 0.717382,
+    "precision": 0.839295,
+    "recall": 0.831613
+   }
+  },
+  "mouth": {
+   "gt": "EP lips + teeth (whole mouth)",
+   "landmark_polygon": {
+    "ci95": {
+     "dice": [
+      0.814683,
+      0.864219
+     ],
+     "iou": [
+      0.687312,
+      0.760903
+     ],
+     "precision": [
+      0.742155,
+      0.827271
+     ],
+     "recall": [
+      0.895547,
+      0.913843
+     ]
+    },
+    "dice": 0.841471,
+    "iou": 0.726328,
+    "precision": 0.786521,
+    "recall": 0.904676
+   },
+   "parser": {
+    "ci95": {
+     "dice": [
+      0.786096,
+      0.851128
+     ],
+     "iou": [
+      0.647577,
+      0.740837
+     ],
+     "precision": [
+      0.681288,
+      0.783507
+     ],
+     "recall": [
+      0.92143,
+      0.93829
+     ]
+    },
+    "dice": 0.820215,
+    "iou": 0.695225,
+    "precision": 0.73363,
+    "recall": 0.929973
+   }
+  },
+  "n_images": 598
+ },
+ "latency_ms": {
+  "1-2 MP": {
+   "decode_ms": {
+    "max": 79.149292,
+    "p50": 11.179542,
+    "p95": 14.048912
+   },
+   "encode": {
+    "max": 35.58,
+    "p50": 14.7,
+    "p95": 31.177
+   },
+   "inference": {
+    "max": 216.41,
+    "p50": 84.2,
+    "p95": 131.255
+   },
+   "landmarks": {
+    "max": 18.08,
+    "p50": 9.37,
+    "p95": 11.326
+   },
+   "n": 59,
+   "postprocess": {
+    "max": 71.69,
+    "p50": 38.75,
+    "p95": 43.446
+   },
+   "preprocess": {
+    "max": 9.51,
+    "p50": 5.1,
+    "p95": 7.756
+   },
+   "total": {
+    "max": 389.43,
+    "p50": 215.26,
+    "p95": 291.408
+   },
+   "wall_ms": {
+    "max": 391.209917,
+    "p50": 216.374959,
+    "p95": 293.895879
+   },
+   "zones": {
+    "max": 93.71,
+    "p50": 43.73,
+    "p95": 82.319
+   }
+  },
+  "2-4 MP": {
+   "decode_ms": {
+    "max": 110.054875,
+    "p50": 20.477105,
+    "p95": 28.049917
+   },
+   "encode": {
+    "max": 112.38,
+    "p50": 25.0,
+    "p95": 50.79
+   },
+   "inference": {
+    "max": 2118.45,
+    "p50": 84.415,
+    "p95": 119.3025
+   },
+   "landmarks": {
+    "max": 48.93,
+    "p50": 9.925,
+    "p95": 13.4125
+   },
+   "n": 366,
+   "postprocess": {
+    "max": 288.99,
+    "p50": 40.475,
+    "p95": 55.885
+   },
+   "preprocess": {
+    "max": 30.3,
+    "p50": 7.375,
+    "p95": 9.4525
+   },
+   "total": {
+    "max": 2583.8,
+    "p50": 270.45,
+    "p95": 408.91
+   },
+   "wall_ms": {
+    "max": 2588.805042,
+    "p50": 272.206021,
+    "p95": 411.313604
+   },
+   "zones": {
+    "max": 378.92,
+    "p50": 76.88,
+    "p95": 150.375
+   }
+  },
+  "<1 MP": {
+   "decode_ms": {
+    "max": 7.74725,
+    "p50": 4.70927,
+    "p95": 7.626612
+   },
+   "encode": {
+    "max": 17.51,
+    "p50": 10.145,
+    "p95": 16.367
+   },
+   "inference": {
+    "max": 163.02,
+    "p50": 85.135,
+    "p95": 132.492
+   },
+   "landmarks": {
+    "max": 15.29,
+    "p50": 9.16,
+    "p95": 14.633
+   },
+   "n": 10,
+   "postprocess": {
+    "max": 51.45,
+    "p50": 32.815,
+    "p95": 46.4145
+   },
+   "preprocess": {
+    "max": 7.66,
+    "p50": 4.77,
+    "p95": 7.4845
+   },
+   "total": {
+    "max": 317.93,
+    "p50": 181.915,
+    "p95": 267.6785
+   },
+   "wall_ms": {
+    "max": 318.872458,
+    "p50": 183.251938,
+    "p95": 268.456427
+   },
+   "zones": {
+    "max": 51.96,
+    "p50": 29.495,
+    "p95": 46.839
+   }
+  },
+  ">=4 MP": {
+   "decode_ms": {
+    "max": 234.048917,
+    "p50": 55.629792,
+    "p95": 94.999079
+   },
+   "encode": {
+    "max": 210.17,
+    "p50": 77.55,
+    "p95": 140.199
+   },
+   "inference": {
+    "max": 861.24,
+    "p50": 85.03,
+    "p95": 157.266
+   },
+   "landmarks": {
+    "max": 40.4,
+    "p50": 11.93,
+    "p95": 18.025
+   },
+   "n": 163,
+   "postprocess": {
+    "max": 225.6,
+    "p50": 43.23,
+    "p95": 63.316
+   },
+   "preprocess": {
+    "max": 54.16,
+    "p50": 11.06,
+    "p95": 16.188
+   },
+   "total": {
+    "max": 1722.29,
+    "p50": 531.96,
+    "p95": 942.32
+   },
+   "wall_ms": {
+    "max": 1725.6395,
+    "p50": 536.094166,
+    "p95": 949.749421
+   },
+   "zones": {
+    "max": 661.4,
+    "p50": 238.5,
+    "p95": 455.885
+   }
+  },
+  "all": {
+   "decode_ms": {
+    "max": 234.048917,
+    "p50": 21.611979,
+    "p95": 79.727558
+   },
+   "encode": {
+    "max": 210.17,
+    "p50": 29.265,
+    "p95": 115.491
+   },
+   "inference": {
+    "max": 2118.45,
+    "p50": 84.625,
+    "p95": 132.199
+   },
+   "landmarks": {
+    "max": 48.93,
+    "p50": 10.22,
+    "p95": 15.4045
+   },
+   "n": 598,
+   "postprocess": {
+    "max": 288.99,
+    "p50": 40.845,
+    "p95": 58.2785
+   },
+   "preprocess": {
+    "max": 54.16,
+    "p50": 7.74,
+    "p95": 13.5145
+   },
+   "total": {
+    "max": 2583.8,
+    "p50": 292.305,
+    "p95": 765.223
+   },
+   "wall_ms": {
+    "max": 2588.805042,
+    "p50": 293.721083,
+    "p95": 770.188012
+   },
+   "zones": {
+    "max": 661.4,
+    "p50": 89.28,
+    "p95": 370.032
+   }
+  }
+ },
+ "licence": "Ground truth: EasyPortrait (Kapitanov, Kvanchiani, Kirillova, 2023), https://github.com/hukenovs/easyportrait . Licence: \"a variant of Creative Commons Attribution-ShareAlike 4.0 International\" (a reworked, non-Creative-Commons public licence with attribution and conditions reserved; no non-commercial clause; the privacy and portrait rights of the people depicted are not granted): https://github.com/hukenovs/easyportrait/blob/master/license/en_us.pdf . Use here: evaluation only, aggregate results only. No images or annotations are redistributed, and none are used for training (that needs the separate legal review listed as a pre-deployment blocker).",
+ "outcomes": {
+  "invalid_sample": 0,
+  "multiple_faces": 0,
+  "no_face": 2,
+  "ok": 598,
+  "pipeline_error": 0
+ },
+ "pinned_archive_lengths": {
+  "https://rndml-team-cv.obs.ru-moscow-1.hc.sbercloud.ru/datasets/easyportrait/v2/annotations.zip": 657142345,
+  "https://rndml-team-cv.obs.ru-moscow-1.hc.sbercloud.ru/datasets/easyportrait/v2/meta.zip": 1941735,
+  "https://rndml-team-cv.obs.ru-moscow-1.hc.sbercloud.ru/datasets/easyportrait/v2/test.zip": 12794142394
+ },
+ "pipeline_error_types": {},
+ "prediction_view": {
+  "brow": {
+   "pixels": 8934730,
+   "share_by_ep_class": [
+    0.000491,
+    0.107868,
+    0.070506,
+    0.403416,
+    0.417719,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ep_classes": [
+   "BACKGROUND",
+   "PERSON",
+   "SKIN",
+   "LEFT_BROW",
+   "RIGHT_BROW",
+   "LEFT_EYE",
+   "RIGHT_EYE",
+   "LIPS",
+   "TEETH"
+  ],
+  "eye": {
+   "pixels": 3743049,
+   "share_by_ep_class": [
+    4e-05,
+    0.078279,
+    0.082386,
+    0.0,
+    0.0,
+    0.410584,
+    0.428711,
+    0.0,
+    0.0
+   ]
+  },
+  "lips": {
+   "pixels": 10087150,
+   "share_by_ep_class": [
+    2.6e-05,
+    0.1009,
+    0.054894,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.842139,
+    0.00204
+   ]
+  },
+  "skin + nose": {
+   "pixels": 252306698,
+   "share_by_ep_class": [
+    0.002214,
+    0.101201,
+    0.887641,
+    0.00258,
+    0.00231,
+    0.000841,
+    0.000605,
+    0.002607,
+    1e-06
+   ]
+  }
+ },
+ "run": {
+  "environment": {
+   "cpu": "Apple M2 Pro",
+   "cpu_count": 10,
+   "crop_scale": 2.0,
+   "git": "not a git repository: no commit hash available",
+   "landmarker_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+   "opencv_threads": 10,
+   "os": "macOS-15.6-arm64-arm-64bit-Mach-O",
+   "packages": {
+    "Pillow": "13.0.0",
+    "mediapipe": "1.2.2",
+    "numpy": "2.5.4",
+    "onnxruntime": "1.31.1"
+   },
+   "parser_id": "bisenet-resnet18-celebamask-hq",
+   "parser_threads_setting": 0,
+   "parser_weights_sha256": "0d9bd318e46987c3bdbfacae9e2c0f461cae1c6ac6ea6d43bbe541a91727e33f",
+   "python": "3.13.7",
+   "source_fingerprint_sha256": "4718831d1215e9cabaebba36e4bfd67023b1dccfede1682011c1e4e3b8c3a381"
+  },
+  "n_sample": 600,
+  "summary": {
+   "elapsed_s": 486.844302,
+   "n": 600,
+   "outcomes": {
+    "invalid_sample": 0,
+    "multiple_faces": 0,
+    "no_face": 2,
+    "ok": 598,
+    "pipeline_error": 0
+   },
+   "peak_rss_mb": 1470.38208,
+   "stopped_early": false
+  },
+  "warmups": 3
+ },
+ "sample": {
+  "dev": 239,
+  "file": "docs/evaluation/easyportrait_test_sample_seed20261110_n600.txt",
+  "n_listed": 600,
+  "n_target": 600,
+  "seed": 20261110,
+  "test": 361
+ },
+ "side_handling": {
+  "brow": {
+   "gt_order_defined": 599,
+   "gt_order_exception_rate": 0.0,
+   "gt_order_exceptions": 0,
+   "swap_defined": 593,
+   "swap_rate": 0.0,
+   "swapped": 0
+  },
+  "eye": {
+   "gt_order_defined": 598,
+   "gt_order_exception_rate": 0.0,
+   "gt_order_exceptions": 0,
+   "swap_defined": 545,
+   "swap_rate": 0.0,
+   "swapped": 0
+  },
+  "sided_rows_flagged": false
+ },
+ "strata": {
+  "alignment_passed": {
+   "no": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.717291,
+       0.811833
+      ],
+      "iou": [
+       0.559201,
+       0.683265
+      ],
+      "precision": [
+       0.750604,
+       0.852656
+      ],
+      "recall": [
+       0.666623,
+       0.800023
+      ]
+     },
+     "gt_pixels": 1181519,
+     "iou": 0.628479
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.189201,
+       0.392301
+      ],
+      "iou": [
+       0.104485,
+       0.244014
+      ],
+      "precision": [
+       0.765033,
+       0.861005
+      ],
+      "recall": [
+       0.107275,
+       0.256946
+      ]
+     },
+     "gt_pixels": 420767,
+     "iou": 0.168214
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.817841,
+       0.891057
+      ],
+      "iou": [
+       0.69182,
+       0.803519
+      ],
+      "precision": [
+       0.738621,
+       0.863248
+      ],
+      "recall": [
+       0.891557,
+       0.937657
+      ]
+     },
+     "gt_pixels": 1341930,
+     "iou": 0.751715
+    },
+    "low_sample": false,
+    "n": 93,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.84274,
+       0.881455
+      ],
+      "iou": [
+       0.72822,
+       0.788037
+      ],
+      "precision": [
+       0.798886,
+       0.860423
+      ],
+      "recall": [
+       0.868443,
+       0.92386
+      ]
+     },
+     "gt_pixels": 28142291,
+     "iou": 0.756966
+    }
+   },
+   "yes": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.83044,
+       0.846859
+      ],
+      "iou": [
+       0.710045,
+       0.734393
+      ],
+      "precision": [
+       0.810657,
+       0.834592
+      ],
+      "recall": [
+       0.841721,
+       0.868993
+      ]
+     },
+     "gt_pixels": 7558767,
+     "iou": 0.722259
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.868883,
+       0.880936
+      ],
+      "iou": [
+       0.768163,
+       0.787208
+      ],
+      "precision": [
+       0.832302,
+       0.847123
+      ],
+      "recall": [
+       0.902186,
+       0.923564
+      ]
+     },
+     "gt_pixels": 3356857,
+     "iou": 0.778304
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.871379,
+       0.896508
+      ],
+      "iou": [
+       0.772073,
+       0.812429
+      ],
+      "precision": [
+       0.826257,
+       0.868476
+      ],
+      "recall": [
+       0.914406,
+       0.933626
+      ]
+     },
+     "gt_pixels": 7857427,
+     "iou": 0.793499
+    },
+    "low_sample": false,
+    "n": 505,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.930922,
+       0.943112
+      ],
+      "iou": [
+       0.870771,
+       0.892347
+      ],
+      "precision": [
+       0.884086,
+       0.905833
+      ],
+      "recall": [
+       0.98115,
+       0.984949
+      ]
+     },
+     "gt_pixels": 202111632,
+     "iou": 0.882165
+    }
+   }
+  },
+  "brightness_quartile": {
+   "Q1": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.811394,
+       0.85096
+      ],
+      "iou": [
+       0.682644,
+       0.740584
+      ],
+      "precision": [
+       0.790142,
+       0.839321
+      ],
+      "recall": [
+       0.821042,
+       0.876672
+      ]
+     },
+     "gt_pixels": 2389968,
+     "iou": 0.712466
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.793601,
+       0.860791
+      ],
+      "iou": [
+       0.657826,
+       0.755604
+      ],
+      "precision": [
+       0.818183,
+       0.847762
+      ],
+      "recall": [
+       0.762541,
+       0.884942
+      ]
+     },
+     "gt_pixels": 1093879,
+     "iou": 0.712744
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.846804,
+       0.899511
+      ],
+      "iou": [
+       0.73431,
+       0.817373
+      ],
+      "precision": [
+       0.798257,
+       0.881319
+      ],
+      "recall": [
+       0.887309,
+       0.930175
+      ]
+     },
+     "gt_pixels": 2502020,
+     "iou": 0.778872
+    },
+    "low_sample": false,
+    "n": 149,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.920471,
+       0.942
+      ],
+      "iou": [
+       0.852659,
+       0.89036
+      ],
+      "precision": [
+       0.881711,
+       0.914315
+      ],
+      "recall": [
+       0.95657,
+       0.976888
+      ]
+     },
+     "gt_pixels": 62924694,
+     "iou": 0.873184
+    }
+   },
+   "Q2": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.797231,
+       0.843974
+      ],
+      "iou": [
+       0.662829,
+       0.730064
+      ],
+      "precision": [
+       0.79493,
+       0.849052
+      ],
+      "recall": [
+       0.781651,
+       0.857316
+      ]
+     },
+     "gt_pixels": 2171255,
+     "iou": 0.698684
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.80647,
+       0.862922
+      ],
+      "iou": [
+       0.675701,
+       0.758895
+      ],
+      "precision": [
+       0.830991,
+       0.859087
+      ],
+      "recall": [
+       0.771148,
+       0.878482
+      ]
+     },
+     "gt_pixels": 938659,
+     "iou": 0.721036
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.837296,
+       0.890448
+      ],
+      "iou": [
+       0.720128,
+       0.80253
+      ],
+      "precision": [
+       0.7712,
+       0.865608
+      ],
+      "recall": [
+       0.899238,
+       0.931691
+      ]
+     },
+     "gt_pixels": 2244155,
+     "iou": 0.762738
+    },
+    "low_sample": false,
+    "n": 149,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.918472,
+       0.941162
+      ],
+      "iou": [
+       0.849236,
+       0.888863
+      ],
+      "precision": [
+       0.874396,
+       0.909933
+      ],
+      "recall": [
+       0.961789,
+       0.980118
+      ]
+     },
+     "gt_pixels": 58368288,
+     "iou": 0.870106
+    }
+   },
+   "Q3": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.816492,
+       0.84529
+      ],
+      "iou": [
+       0.689891,
+       0.732036
+      ],
+      "precision": [
+       0.806269,
+       0.851073
+      ],
+      "recall": [
+       0.806258,
+       0.85856
+      ]
+     },
+     "gt_pixels": 2375651,
+     "iou": 0.711329
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.827443,
+       0.866398
+      ],
+      "iou": [
+       0.705674,
+       0.764288
+      ],
+      "precision": [
+       0.83231,
+       0.862689
+      ],
+      "recall": [
+       0.812437,
+       0.884242
+      ]
+     },
+     "gt_pixels": 991349,
+     "iou": 0.73838
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.846934,
+       0.897378
+      ],
+      "iou": [
+       0.734506,
+       0.813858
+      ],
+      "precision": [
+       0.776268,
+       0.862655
+      ],
+      "recall": [
+       0.921616,
+       0.945467
+      ]
+     },
+     "gt_pixels": 2357426,
+     "iou": 0.777479
+    },
+    "low_sample": false,
+    "n": 150,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.926248,
+       0.944462
+      ],
+      "iou": [
+       0.862628,
+       0.894768
+      ],
+      "precision": [
+       0.879377,
+       0.911123
+      ],
+      "recall": [
+       0.974496,
+       0.983724
+      ]
+     },
+     "gt_pixels": 61904719,
+     "iou": 0.879318
+    }
+   },
+   "Q4": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.818397,
+       0.84876
+      ],
+      "iou": [
+       0.692617,
+       0.737257
+      ],
+      "precision": [
+       0.787599,
+       0.837761
+      ],
+      "recall": [
+       0.833545,
+       0.878213
+      ]
+     },
+     "gt_pixels": 1803412,
+     "iou": 0.716734
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.771428,
+       0.851727
+      ],
+      "iou": [
+       0.627906,
+       0.741747
+      ],
+      "precision": [
+       0.813919,
+       0.844925
+      ],
+      "recall": [
+       0.720027,
+       0.868895
+      ]
+     },
+     "gt_pixels": 753737,
+     "iou": 0.692285
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.902925,
+       0.918592
+      ],
+      "iou": [
+       0.82303,
+       0.849441
+      ],
+      "precision": [
+       0.874365,
+       0.903103
+      ],
+      "recall": [
+       0.921943,
+       0.945079
+      ]
+     },
+     "gt_pixels": 2095756,
+     "iou": 0.8374
+    },
+    "low_sample": false,
+    "n": 150,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.889989,
+       0.928898
+      ],
+      "iou": [
+       0.801784,
+       0.867235
+      ],
+      "precision": [
+       0.823117,
+       0.887697
+      ],
+      "recall": [
+       0.958789,
+       0.98002
+      ]
+     },
+     "gt_pixels": 47056222,
+     "iou": 0.835296
+    }
+   }
+  },
+  "face_size": {
+   "high": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.824557,
+       0.850412
+      ],
+      "iou": [
+       0.701486,
+       0.739754
+      ],
+      "precision": [
+       0.82273,
+       0.855635
+      ],
+      "recall": [
+       0.814696,
+       0.856257
+      ]
+     },
+     "gt_pixels": 5654843,
+     "iou": 0.720415
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.817917,
+       0.861514
+      ],
+      "iou": [
+       0.691928,
+       0.75672
+      ],
+      "precision": [
+       0.832276,
+       0.854073
+      ],
+      "recall": [
+       0.795905,
+       0.879275
+      ]
+     },
+     "gt_pixels": 2420574,
+     "iou": 0.725488
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.854127,
+       0.891374
+      ],
+      "iou": [
+       0.745394,
+       0.804035
+      ],
+      "precision": [
+       0.796413,
+       0.859109
+      ],
+      "recall": [
+       0.91128,
+       0.935662
+      ]
+     },
+     "gt_pixels": 5299381,
+     "iou": 0.777344
+    },
+    "low_sample": false,
+    "n": 199,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.930452,
+       0.946963
+      ],
+      "iou": [
+       0.869948,
+       0.899269
+      ],
+      "precision": [
+       0.891984,
+       0.920767
+      ],
+      "recall": [
+       0.96618,
+       0.979155
+      ]
+     },
+     "gt_pixels": 149118239,
+     "iou": 0.884712
+    }
+   },
+   "low": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.795893,
+       0.819626
+      ],
+      "iou": [
+       0.660981,
+       0.694378
+      ],
+      "precision": [
+       0.751533,
+       0.788386
+      ],
+      "recall": [
+       0.824196,
+       0.875977
+      ]
+     },
+     "gt_pixels": 965556,
+     "iou": 0.677724
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.804091,
+       0.841816
+      ],
+      "iou": [
+       0.672369,
+       0.726841
+      ],
+      "precision": [
+       0.818272,
+       0.841139
+      ],
+      "recall": [
+       0.780709,
+       0.850204
+      ]
+     },
+     "gt_pixels": 458958,
+     "iou": 0.699483
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.880977,
+       0.905762
+      ],
+      "iou": [
+       0.787273,
+       0.827756
+      ],
+      "precision": [
+       0.855647,
+       0.896614
+      ],
+      "recall": [
+       0.89577,
+       0.926707
+      ]
+     },
+     "gt_pixels": 1264508,
+     "iou": 0.809521
+    },
+    "low_sample": false,
+    "n": 198,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.890974,
+       0.912436
+      ],
+      "iou": [
+       0.803385,
+       0.838973
+      ],
+      "precision": [
+       0.820552,
+       0.857243
+      ],
+      "recall": [
+       0.968459,
+       0.980873
+      ]
+     },
+     "gt_pixels": 26362957,
+     "iou": 0.820917
+    }
+   },
+   "mid": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.809428,
+       0.833559
+      ],
+      "iou": [
+       0.679864,
+       0.714618
+      ],
+      "precision": [
+       0.779162,
+       0.818065
+      ],
+      "recall": [
+       0.828305,
+       0.86577
+      ]
+     },
+     "gt_pixels": 2115507,
+     "iou": 0.697905
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.807312,
+       0.844179
+      ],
+      "iou": [
+       0.676885,
+       0.730371
+      ],
+      "precision": [
+       0.822008,
+       0.844945
+      ],
+      "recall": [
+       0.785857,
+       0.854168
+      ]
+     },
+     "gt_pixels": 895625,
+     "iou": 0.704874
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.870219,
+       0.901825
+      ],
+      "iou": [
+       0.770254,
+       0.821203
+      ],
+      "precision": [
+       0.82413,
+       0.875823
+      ],
+      "recall": [
+       0.910504,
+       0.941047
+      ]
+     },
+     "gt_pixels": 2621101,
+     "iou": 0.796589
+    },
+    "low_sample": false,
+    "n": 199,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.903493,
+       0.921774
+      ],
+      "iou": [
+       0.823973,
+       0.854899
+      ],
+      "precision": [
+       0.846811,
+       0.877409
+      ],
+      "recall": [
+       0.964084,
+       0.976443
+      ]
+     },
+     "gt_pixels": 54530927,
+     "iou": 0.840181
+    }
+   }
+  },
+  "glasses_detected": {
+   "no": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.826645,
+       0.843884
+      ],
+      "iou": [
+       0.704513,
+       0.72993
+      ],
+      "precision": [
+       0.807341,
+       0.834359
+      ],
+      "recall": [
+       0.837548,
+       0.863185
+      ]
+     },
+     "gt_pixels": 8117695,
+     "iou": 0.71737
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.859472,
+       0.873451
+      ],
+      "iou": [
+       0.753574,
+       0.775334
+      ],
+      "precision": [
+       0.831528,
+       0.847114
+      ],
+      "recall": [
+       0.881734,
+       0.907677
+      ]
+     },
+     "gt_pixels": 3506407,
+     "iou": 0.764745
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.869338,
+       0.893417
+      ],
+      "iou": [
+       0.768876,
+       0.807365
+      ],
+      "precision": [
+       0.823388,
+       0.864956
+      ],
+      "recall": [
+       0.912742,
+       0.930096
+      ]
+     },
+     "gt_pixels": 8525313,
+     "iou": 0.788164
+    },
+    "low_sample": false,
+    "n": 550,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.928067,
+       0.940487
+      ],
+      "iou": [
+       0.865789,
+       0.88766
+      ],
+      "precision": [
+       0.879377,
+       0.900931
+      ],
+      "recall": [
+       0.981636,
+       0.985025
+      ]
+     },
+     "gt_pixels": 215222780,
+     "iou": 0.877798
+    }
+   },
+   "yes": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.6746,
+       0.817922
+      ],
+      "iou": [
+       0.508979,
+       0.691936
+      ],
+      "precision": [
+       0.773358,
+       0.854198
+      ],
+      "recall": [
+       0.580309,
+       0.808867
+      ]
+     },
+     "gt_pixels": 622591,
+     "iou": 0.606328
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.0,
+       0.0
+      ],
+      "iou": [
+       0.0,
+       0.0
+      ],
+      "precision": [
+       null,
+       null
+      ],
+      "recall": [
+       0.0,
+       0.0
+      ]
+     },
+     "gt_pixels": 271217,
+     "iou": 0.0
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.822073,
+       0.913332
+      ],
+      "iou": [
+       0.697898,
+       0.840488
+      ],
+      "precision": [
+       0.72664,
+       0.88574
+      ],
+      "recall": [
+       0.92314,
+       0.963825
+      ]
+     },
+     "gt_pixels": 674044,
+     "iou": 0.774946
+    },
+    "low_sample": false,
+    "n": 48,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.806619,
+       0.842402
+      ],
+      "iou": [
+       0.675911,
+       0.727716
+      ],
+      "precision": [
+       0.787624,
+       0.872927
+      ],
+      "recall": [
+       0.796922,
+       0.845232
+      ]
+     },
+     "gt_pixels": 15031143,
+     "iou": 0.703689
+    }
+   }
+  },
+  "luma": {
+   "high": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.821546,
+       0.851719
+      ],
+      "iou": [
+       0.697138,
+       0.741734
+      ],
+      "precision": [
+       0.822672,
+       0.855942
+      ],
+      "recall": [
+       0.805004,
+       0.862179
+      ]
+     },
+     "gt_pixels": 3510461,
+     "iou": 0.72119
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.801999,
+       0.863717
+      ],
+      "iou": [
+       0.669447,
+       0.760125
+      ],
+      "precision": [
+       0.831095,
+       0.853771
+      ],
+      "recall": [
+       0.765205,
+       0.884394
+      ]
+     },
+     "gt_pixels": 1532423,
+     "iou": 0.716515
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.853551,
+       0.896697
+      ],
+      "iou": [
+       0.744517,
+       0.812738
+      ],
+      "precision": [
+       0.784145,
+       0.860586
+      ],
+      "recall": [
+       0.925406,
+       0.944674
+      ]
+     },
+     "gt_pixels": 3336903,
+     "iou": 0.780994
+    },
+    "low_sample": false,
+    "n": 200,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.92243,
+       0.941131
+      ],
+      "iou": [
+       0.856028,
+       0.888808
+      ],
+      "precision": [
+       0.880336,
+       0.909752
+      ],
+      "recall": [
+       0.961486,
+       0.979899
+      ]
+     },
+     "gt_pixels": 92852062,
+     "iou": 0.872373
+    }
+   },
+   "low": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.792433,
+       0.8285
+      ],
+      "iou": [
+       0.656222,
+       0.707213
+      ],
+      "precision": [
+       0.760157,
+       0.818022
+      ],
+      "recall": [
+       0.810119,
+       0.859712
+      ]
+     },
+     "gt_pixels": 2290350,
+     "iou": 0.683732
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.818547,
+       0.858289
+      ],
+      "iou": [
+       0.692831,
+       0.751757
+      ],
+      "precision": [
+       0.822086,
+       0.850601
+      ],
+      "recall": [
+       0.804521,
+       0.879981
+      ]
+     },
+     "gt_pixels": 1051565,
+     "iou": 0.723995
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.861342,
+       0.900147
+      ],
+      "iou": [
+       0.756454,
+       0.818424
+      ],
+      "precision": [
+       0.817354,
+       0.886992
+      ],
+      "recall": [
+       0.892163,
+       0.928701
+      ]
+     },
+     "gt_pixels": 2843158,
+     "iou": 0.788686
+    },
+    "low_sample": false,
+    "n": 198,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.918111,
+       0.935763
+      ],
+      "iou": [
+       0.848618,
+       0.879281
+      ],
+      "precision": [
+       0.868529,
+       0.899724
+      ],
+      "recall": [
+       0.966588,
+       0.980134
+      ]
+     },
+     "gt_pixels": 60895146,
+     "iou": 0.864097
+    }
+   },
+   "mid": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.817209,
+       0.84955
+      ],
+      "iou": [
+       0.690916,
+       0.738451
+      ],
+      "precision": [
+       0.802904,
+       0.845478
+      ],
+      "recall": [
+       0.821145,
+       0.867021
+      ]
+     },
+     "gt_pixels": 2939475,
+     "iou": 0.717014
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.810336,
+       0.849932
+      ],
+      "iou": [
+       0.681147,
+       0.739028
+      ],
+      "precision": [
+       0.821474,
+       0.851363
+      ],
+      "recall": [
+       0.789602,
+       0.859709
+      ]
+     },
+     "gt_pixels": 1193636,
+     "iou": 0.712642
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.861535,
+       0.904121
+      ],
+      "iou": [
+       0.756752,
+       0.825019
+      ],
+      "precision": [
+       0.814775,
+       0.880571
+      ],
+      "recall": [
+       0.904946,
+       0.937405
+      ]
+     },
+     "gt_pixels": 3019296,
+     "iou": 0.792741
+    },
+    "low_sample": false,
+    "n": 200,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.909964,
+       0.936715
+      ],
+      "iou": [
+       0.834801,
+       0.880963
+      ],
+      "precision": [
+       0.855891,
+       0.901047
+      ],
+      "recall": [
+       0.964466,
+       0.97918
+      ]
+     },
+     "gt_pixels": 76506715,
+     "iou": 0.859986
+    }
+   }
+  },
+  "resolution": {
+   "1.5-2.5MP": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.809416,
+       0.844076
+      ],
+      "iou": [
+       0.679847,
+       0.730218
+      ],
+      "precision": [
+       0.747384,
+       0.819594
+      ],
+      "recall": [
+       0.843075,
+       0.90621
+      ]
+     },
+     "gt_pixels": 782601,
+     "iou": 0.707557
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.723813,
+       0.85638
+      ],
+      "iou": [
+       0.567168,
+       0.748833
+      ],
+      "precision": [
+       0.803154,
+       0.829702
+      ],
+      "recall": [
+       0.653078,
+       0.900947
+      ]
+     },
+     "gt_pixels": 366833,
+     "iou": 0.676568
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.843063,
+       0.912293
+      ],
+      "iou": [
+       0.728702,
+       0.838731
+      ],
+      "precision": [
+       0.767867,
+       0.890597
+      ],
+      "recall": [
+       0.912177,
+       0.950372
+      ]
+     },
+     "gt_pixels": 812819,
+     "iou": 0.794178
+    },
+    "low_sample": false,
+    "n": 85,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.903985,
+       0.933213
+      ],
+      "iou": [
+       0.824792,
+       0.874789
+      ],
+      "precision": [
+       0.854669,
+       0.90162
+      ],
+      "recall": [
+       0.938995,
+       0.981552
+      ]
+     },
+     "gt_pixels": 20872622,
+     "iou": 0.851615
+    }
+   },
+   "2.5-3.0MP": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.822598,
+       0.843371
+      ],
+      "iou": [
+       0.698654,
+       0.729163
+      ],
+      "precision": [
+       0.816,
+       0.842599
+      ],
+      "recall": [
+       0.820447,
+       0.854374
+      ]
+     },
+     "gt_pixels": 7390480,
+     "iou": 0.714748
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.822055,
+       0.8542
+      ],
+      "iou": [
+       0.697872,
+       0.745506
+      ],
+      "precision": [
+       0.831615,
+       0.849062
+      ],
+      "recall": [
+       0.804689,
+       0.867144
+      ]
+     },
+     "gt_pixels": 3147390,
+     "iou": 0.724061
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.865302,
+       0.892331
+      ],
+      "iou": [
+       0.762583,
+       0.805593
+      ],
+      "precision": [
+       0.815852,
+       0.862033
+      ],
+      "recall": [
+       0.912777,
+       0.931419
+      ]
+     },
+     "gt_pixels": 7641641,
+     "iou": 0.783687
+    },
+    "low_sample": false,
+    "n": 452,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.922007,
+       0.936152
+      ],
+      "iou": [
+       0.8553,
+       0.879968
+      ],
+      "precision": [
+       0.875579,
+       0.899555
+      ],
+      "recall": [
+       0.968968,
+       0.978632
+      ]
+     },
+     "gt_pixels": 193601068,
+     "iou": 0.868462
+    }
+   },
+   "ge3.0MP": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.710228,
+       0.832322
+      ],
+      "iou": [
+       0.550662,
+       0.712801
+      ],
+      "precision": [
+       0.648997,
+       0.817353
+      ],
+      "recall": [
+       0.772283,
+       0.88251
+      ]
+     },
+     "gt_pixels": 413941,
+     "iou": 0.645924
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.774393,
+       0.859998
+      ],
+      "iou": [
+       0.631844,
+       0.754383
+      ],
+      "precision": [
+       0.827758,
+       0.880952
+      ],
+      "recall": [
+       0.706262,
+       0.874944
+      ]
+     },
+     "gt_pixels": 198191,
+     "iou": 0.697349
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.891589,
+       0.925942
+      ],
+      "iou": [
+       0.804384,
+       0.862096
+      ],
+      "precision": [
+       0.866702,
+       0.92049
+      ],
+      "recall": [
+       0.892518,
+       0.956529
+      ]
+     },
+     "gt_pixels": 604959,
+     "iou": 0.835056
+    },
+    "low_sample": false,
+    "n": 31,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.896434,
+       0.941406
+      ],
+      "iou": [
+       0.812306,
+       0.889299
+      ],
+      "precision": [
+       0.8302,
+       0.908567
+      ],
+      "recall": [
+       0.958232,
+       0.986812
+      ]
+     },
+     "gt_pixels": 11982636,
+     "iou": 0.852897
+    }
+   },
+   "lt1.5MP": {
+    "brow": {
+     "ci95": {
+      "dice": [
+       0.731628,
+       0.857321
+      ],
+      "iou": [
+       0.576824,
+       0.750274
+      ],
+      "precision": [
+       0.782089,
+       0.885705
+      ],
+      "recall": [
+       0.662904,
+       0.862251
+      ]
+     },
+     "gt_pixels": 153264,
+     "iou": 0.662196
+    },
+    "eye": {
+     "ci95": {
+      "dice": [
+       0.753367,
+       0.862801
+      ],
+      "iou": [
+       0.604321,
+       0.758706
+      ],
+      "precision": [
+       0.835417,
+       0.87705
+      ],
+      "recall": [
+       0.673429,
+       0.866046
+      ]
+     },
+     "gt_pixels": 65210,
+     "iou": 0.687734
+    },
+    "lips": {
+     "ci95": {
+      "dice": [
+       0.798455,
+       0.890838
+      ],
+      "iou": [
+       0.664523,
+       0.803163
+      ],
+      "precision": [
+       0.775587,
+       0.880299
+      ],
+      "recall": [
+       0.808991,
+       0.920703
+      ]
+     },
+     "gt_pixels": 139938,
+     "iou": 0.740965
+    },
+    "low_sample": false,
+    "n": 30,
+    "skin": {
+     "ci95": {
+      "dice": [
+       0.89712,
+       0.951646
+      ],
+      "iou": [
+       0.813434,
+       0.907753
+      ],
+      "precision": [
+       0.873732,
+       0.951505
+      ],
+      "recall": [
+       0.901582,
+       0.967304
+      ]
+     },
+     "gt_pixels": 3797597,
+     "iou": 0.864053
+    }
+   }
+  }
+ },
+ "targets": {
+  "items": [
+   {
+    "ci95": [
+     0.854628,
+     0.876128
+    ],
+    "item": "skin IoU",
+    "result": "missed",
+    "target": 0.9,
+    "value": 0.86603
+   },
+   {
+    "ci95": [
+     0.767095,
+     0.80544
+    ],
+    "item": "lips IoU",
+    "result": "met",
+    "target": 0.75,
+    "value": 0.787158
+   },
+   {
+    "ci95": null,
+    "item": "lips boundary F @ 0.02*IOD (mean per image)",
+    "result": "missed",
+    "target": 0.8,
+    "value": 0.683187
+   },
+   {
+    "ci95": [
+     0.695259,
+     0.737998
+    ],
+    "item": "eye IoU",
+    "result": "met",
+    "target": 0.65,
+    "value": 0.717382
+   },
+   {
+    "ci95": null,
+    "item": "eye boundary F @ 0.02*IOD (mean per image)",
+    "result": "missed",
+    "target": 0.8,
+    "value": 0.751211
+   },
+   {
+    "ci95": [
+     0.695467,
+     0.723272
+    ],
+    "item": "brow IoU",
+    "result": "met",
+    "target": 0.6,
+    "value": 0.709648
+   },
+   {
+    "ci95": null,
+    "item": "brow boundary F @ 0.02*IOD (mean per image)",
+    "result": "missed",
+    "target": 0.8,
+    "value": 0.653074
+   },
+   {
+    "ci95": null,
+    "item": "side-swap rate (eye)",
+    "result": "met",
+    "target": 0.01,
+    "value": 0.0
+   },
+   {
+    "ci95": null,
+    "item": "side-swap rate (brow)",
+    "result": "met",
+    "target": 0.01,
+    "value": 0.0
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap brightness_quartile/skin (Q3 vs Q4)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.05,
+    "value": 0.044022
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap brightness_quartile/lips (Q4 vs Q2)",
+    "lower_bound": 0.0205,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.074661
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap brightness_quartile/eye (Q3 vs Q4)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.046095
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap brightness_quartile/brow (Q4 vs Q2)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.01805
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap luma/skin (high vs mid)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.05,
+    "value": 0.012387
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap luma/lips (mid vs high)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.011747
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap luma/eye (low vs mid)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.011353
+   },
+   {
+    "ci95": null,
+    "item": "worst-stratum gap luma/brow (high vs low)",
+    "lower_bound": 0.0,
+    "result": "met",
+    "target": 0.08,
+    "value": 0.037458
+   },
+   {
+    "ci95": null,
+    "item": "latency p95, 1-2 MP images, this machine (segment_face total)",
+    "note": "n = 59; PROVISIONAL, not measured on AC power: the pilot ran on battery with system sleep events in its window, so these timings are unreliable. The re-run benchmark (docs/evaluation/benchmark_2026-11-10.md; 2 MP p95 176 ms, 0 sleep events, still on battery) is the latency reference; the 2-4 MP bucket is the nearest large one",
+    "result": "met",
+    "target": 300.0,
+    "value": 291.408
+   }
+  ],
+  "provisional": true
+ },
+ "title": "Agreement of the face-parsing pipeline with EasyPortrait v2 test annotations (pilot)",
+ "weak_regions": [
+  {
+   "class": "skin",
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.101201
+   },
+   "false_share_of_pred": 0.112359,
+   "gt_outside_window_share": 0.0,
+   "iou": 0.86603,
+   "missed_share_of_gt": 0.027344,
+   "missed_to": {
+    "class": "GLASSES",
+    "share_of_gt": 0.01081
+   },
+   "shortfall": 0.03397,
+   "target": 0.9
+  },
+  {
+   "class": "lips",
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.1009
+   },
+   "false_share_of_pred": 0.157861,
+   "gt_outside_window_share": 0.0,
+   "iou": 0.787158,
+   "missed_share_of_gt": 0.076589,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.071504
+   },
+   "shortfall": -0.037158,
+   "target": 0.75
+  },
+  {
+   "class": "eye",
+   "false_from": {
+    "class": "SKIN",
+    "share_of_pred": 0.082386
+   },
+   "false_share_of_pred": 0.160705,
+   "gt_outside_window_share": 0.0,
+   "iou": 0.717382,
+   "missed_share_of_gt": 0.168387,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.095838
+   },
+   "shortfall": -0.067382,
+   "target": 0.65
+  },
+  {
+   "class": "brow",
+   "false_from": {
+    "class": "PERSON",
+    "share_of_pred": 0.107868
+   },
+   "false_share_of_pred": 0.178865,
+   "gt_outside_window_share": 0.0,
+   "iou": 0.709648,
+   "missed_share_of_gt": 0.160597,
+   "missed_to": {
+    "class": "SKIN",
+    "share_of_gt": 0.141167
+   },
+   "shortfall": -0.109648,
+   "target": 0.6
+  }
+ ],
+ "worst_ids": {
+  "brow": [
+   {
+    "id": "227949f2-81ac-414f-9371-ad2a48da0e53",
+    "iou": 0.0
+   },
+   {
+    "id": "30ee9c3b-5c7b-47f8-9f1b-68fa7897fe9b",
+    "iou": 0.0
+   },
+   {
+    "id": "6b539bb2-1fb0-4bbe-a914-ada0a457f357",
+    "iou": 0.0
+   },
+   {
+    "id": "8261f91d-6068-4fdc-9021-c8b0412d1a24",
+    "iou": 0.0
+   },
+   {
+    "id": "9eed18eb-17d2-482f-ad29-64801bc50776",
+    "iou": 0.0
+   },
+   {
+    "id": "d5d1184d-887a-4c5a-84b2-eeef9d46d263",
+    "iou": 0.000546
+   },
+   {
+    "id": "ea703959-5daa-474f-a349-e6e63ad8d9e4",
+    "iou": 0.038917
+   },
+   {
+    "id": "a194102b-7640-4841-ae5e-afb399add5ef",
+    "iou": 0.040171
+   },
+   {
+    "id": "17e58d41-21a1-42ad-a051-ecf06340ec30",
+    "iou": 0.068521
+   },
+   {
+    "id": "1fda97a4-2369-452e-8c83-cb17c3c9825c",
+    "iou": 0.083493
+   }
+  ],
+  "brow_L": [
+   {
+    "id": "17e58d41-21a1-42ad-a051-ecf06340ec30",
+    "iou": 0.0
+   },
+   {
+    "id": "1da1f112-413d-4444-be41-38d52e81d891",
+    "iou": 0.0
+   },
+   {
+    "id": "227949f2-81ac-414f-9371-ad2a48da0e53",
+    "iou": 0.0
+   },
+   {
+    "id": "2c773853-316a-45c6-b31b-5844bed45dbf",
+    "iou": 0.0
+   },
+   {
+    "id": "30ee9c3b-5c7b-47f8-9f1b-68fa7897fe9b",
+    "iou": 0.0
+   },
+   {
+    "id": "6b539bb2-1fb0-4bbe-a914-ada0a457f357",
+    "iou": 0.0
+   },
+   {
+    "id": "8261f91d-6068-4fdc-9021-c8b0412d1a24",
+    "iou": 0.0
+   },
+   {
+    "id": "9eed18eb-17d2-482f-ad29-64801bc50776",
+    "iou": 0.0
+   },
+   {
+    "id": "a81f43a0-2f06-4b2d-b7ab-127801b9a030",
+    "iou": 0.0
+   },
+   {
+    "id": "b6aad415-f838-49fa-9889-93408e3a6bc9",
+    "iou": 0.0
+   }
+  ],
+  "brow_R": [
+   {
+    "id": "0374a515-3499-4287-ab22-f52c6a7b999f",
+    "iou": 0.0
+   },
+   {
+    "id": "225eb720-7888-4edd-aa82-20af17f12d8b",
+    "iou": 0.0
+   },
+   {
+    "id": "227949f2-81ac-414f-9371-ad2a48da0e53",
+    "iou": 0.0
+   },
+   {
+    "id": "2a7cc351-36c6-4c5c-8d87-75b70624672c",
+    "iou": 0.0
+   },
+   {
+    "id": "2cfbb212-bb47-4b12-99a3-fa341c32f9bf",
+    "iou": 0.0
+   },
+   {
+    "id": "30ee9c3b-5c7b-47f8-9f1b-68fa7897fe9b",
+    "iou": 0.0
+   },
+   {
+    "id": "439f0136-cada-4c0b-af96-3deb1a216d85",
+    "iou": 0.0
+   },
+   {
+    "id": "6b539bb2-1fb0-4bbe-a914-ada0a457f357",
+    "iou": 0.0
+   },
+   {
+    "id": "9eed18eb-17d2-482f-ad29-64801bc50776",
+    "iou": 0.0
+   },
+   {
+    "id": "b2ad4622-5d40-4308-b859-5660ffc8f8eb",
+    "iou": 0.0
+   }
+  ],
+  "eye": [
+   {
+    "id": "0c8728ab-96f9-4937-8ba9-75c7deec5d00",
+    "iou": 0.0
+   },
+   {
+    "id": "0f536fe6-86dc-4fe1-bb07-055d94b8067e",
+    "iou": 0.0
+   },
+   {
+    "id": "1282134c-ffd6-49a4-a595-f25948a535b3",
+    "iou": 0.0
+   },
+   {
+    "id": "1341f980-7306-4fb9-ac35-8f2b664eab2c",
+    "iou": 0.0
+   },
+   {
+    "id": "13831237-60f0-4858-8e68-738cf5b1d35e",
+    "iou": 0.0
+   },
+   {
+    "id": "14e4e5c7-16fe-48cc-9725-e6b428554c9b",
+    "iou": 0.0
+   },
+   {
+    "id": "188e80b4-5fea-40c4-ac97-0498519804c8",
+    "iou": 0.0
+   },
+   {
+    "id": "18edf397-83c4-4d28-8d47-6c31d47312e9",
+    "iou": 0.0
+   },
+   {
+    "id": "1c31d0b8-e45c-4145-bebe-2d40509e379a",
+    "iou": 0.0
+   },
+   {
+    "id": "1cd76bc3-c040-4487-8324-6130ae306447",
+    "iou": 0.0
+   }
+  ],
+  "eye_L": [
+   {
+    "id": "0c8728ab-96f9-4937-8ba9-75c7deec5d00",
+    "iou": 0.0
+   },
+   {
+    "id": "0f536fe6-86dc-4fe1-bb07-055d94b8067e",
+    "iou": 0.0
+   },
+   {
+    "id": "1282134c-ffd6-49a4-a595-f25948a535b3",
+    "iou": 0.0
+   },
+   {
+    "id": "1341f980-7306-4fb9-ac35-8f2b664eab2c",
+    "iou": 0.0
+   },
+   {
+    "id": "13831237-60f0-4858-8e68-738cf5b1d35e",
+    "iou": 0.0
+   },
+   {
+    "id": "14e4e5c7-16fe-48cc-9725-e6b428554c9b",
+    "iou": 0.0
+   },
+   {
+    "id": "173925cd-9aa4-43ea-b6d1-6fc9ed5e7999",
+    "iou": 0.0
+   },
+   {
+    "id": "188e80b4-5fea-40c4-ac97-0498519804c8",
+    "iou": 0.0
+   },
+   {
+    "id": "18edf397-83c4-4d28-8d47-6c31d47312e9",
+    "iou": 0.0
+   },
+   {
+    "id": "1c31d0b8-e45c-4145-bebe-2d40509e379a",
+    "iou": 0.0
+   }
+  ],
+  "eye_R": [
+   {
+    "id": "0c8728ab-96f9-4937-8ba9-75c7deec5d00",
+    "iou": 0.0
+   },
+   {
+    "id": "0ea7b5d0-f309-4143-9744-3cdbd5d69685",
+    "iou": 0.0
+   },
+   {
+    "id": "0f536fe6-86dc-4fe1-bb07-055d94b8067e",
+    "iou": 0.0
+   },
+   {
+    "id": "0fadadd9-d4e6-4d6b-b766-482e2d431d12",
+    "iou": 0.0
+   },
+   {
+    "id": "1282134c-ffd6-49a4-a595-f25948a535b3",
+    "iou": 0.0
+   },
+   {
+    "id": "1341f980-7306-4fb9-ac35-8f2b664eab2c",
+    "iou": 0.0
+   },
+   {
+    "id": "13831237-60f0-4858-8e68-738cf5b1d35e",
+    "iou": 0.0
+   },
+   {
+    "id": "14e4e5c7-16fe-48cc-9725-e6b428554c9b",
+    "iou": 0.0
+   },
+   {
+    "id": "17e58d41-21a1-42ad-a051-ecf06340ec30",
+    "iou": 0.0
+   },
+   {
+    "id": "188e80b4-5fea-40c4-ac97-0498519804c8",
+    "iou": 0.0
+   }
+  ],
+  "lips": [
+   {
+    "id": "eb1afb42-af19-4eaf-825e-ea2795c93bc4",
+    "iou": 0.116324
+   },
+   {
+    "id": "933d3490-6359-4503-b349-1e5310e3027a",
+    "iou": 0.18096
+   },
+   {
+    "id": "f91f54cf-3dc8-46a0-837e-60325f608e28",
+    "iou": 0.184755
+   },
+   {
+    "id": "02ec7863-650e-4047-aad6-c621a1aed928",
+    "iou": 0.188826
+   },
+   {
+    "id": "5f0e80f3-a36e-460c-b51c-7f5159d30ddd",
+    "iou": 0.222091
+   },
+   {
+    "id": "0c104242-1221-42e3-95a0-fa6994b2f61d",
+    "iou": 0.233399
+   },
+   {
+    "id": "147e9fd4-c6ce-4d60-afa5-f363411bae56",
+    "iou": 0.2408
+   },
+   {
+    "id": "8a95efe3-bfcb-4bac-9665-d5e56ee4890c",
+    "iou": 0.245228
+   },
+   {
+    "id": "1ace5c08-2f7e-4e90-87ef-1eb9a7910f87",
+    "iou": 0.254988
+   },
+   {
+    "id": "d5d1184d-887a-4c5a-84b2-eeef9d46d263",
+    "iou": 0.296576
+   }
+  ],
+  "skin": [
+   {
+    "id": "ae1e71d8-3e09-4e3b-b626-c8e95878cceb",
+    "iou": 0.434104
+   },
+   {
+    "id": "439f0136-cada-4c0b-af96-3deb1a216d85",
+    "iou": 0.44335
+   },
+   {
+    "id": "b3dc4d73-8ab8-46e4-be81-50e220c4c653",
+    "iou": 0.466414
+   },
+   {
+    "id": "17c071c3-36ea-496e-aad2-acc80d16f5a6",
+    "iou": 0.478371
+   },
+   {
+    "id": "668399b5-bbb4-42db-9311-61f351f8df10",
+    "iou": 0.488832
+   },
+   {
+    "id": "369334d2-bb13-4e13-9155-469a40a36521",
+    "iou": 0.49817
+   },
+   {
+    "id": "f05263ae-3624-4b00-929e-e9229db37172",
+    "iou": 0.505695
+   },
+   {
+    "id": "173925cd-9aa4-43ea-b6d1-6fc9ed5e7999",
+    "iou": 0.513703
+   },
+   {
+    "id": "8a0fa024-4c0a-4c05-b0eb-457aec9bb05a",
+    "iou": 0.514198
+   },
+   {
+    "id": "33696bfb-c275-4e1b-8475-70b86920102a",
+    "iou": 0.53912
+   }
+  ]
+ },
+ "worst_stratum_gaps": {
+  "brightness_quartile/brow": {
+   "best_cell": "Q4",
+   "lower_bound": 0.0,
+   "point": 0.01805,
+   "worst_cell": "Q2"
+  },
+  "brightness_quartile/eye": {
+   "best_cell": "Q3",
+   "lower_bound": 0.0,
+   "point": 0.046095,
+   "worst_cell": "Q4"
+  },
+  "brightness_quartile/lips": {
+   "best_cell": "Q4",
+   "lower_bound": 0.0205,
+   "point": 0.074661,
+   "worst_cell": "Q2"
+  },
+  "brightness_quartile/skin": {
+   "best_cell": "Q3",
+   "lower_bound": 0.0,
+   "point": 0.044022,
+   "worst_cell": "Q4"
+  },
+  "luma/brow": {
+   "best_cell": "high",
+   "lower_bound": 0.0,
+   "point": 0.037458,
+   "worst_cell": "low"
+  },
+  "luma/eye": {
+   "best_cell": "low",
+   "lower_bound": 0.0,
+   "point": 0.011353,
+   "worst_cell": "mid"
+  },
+  "luma/lips": {
+   "best_cell": "mid",
+   "lower_bound": 0.0,
+   "point": 0.011747,
+   "worst_cell": "high"
+  },
+  "luma/skin": {
+   "best_cell": "high",
+   "lower_bound": 0.0,
+   "point": 0.012387,
+   "worst_cell": "mid"
+  }
+ }
+}

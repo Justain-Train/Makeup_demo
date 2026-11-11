@@ -1,0 +1,91 @@
+# --- Secrets & environment (example templates stay committed) ---
+.env
+.env.*
+*.env
+!.env.example
+!.env.local.example
+!*.env.example
+backend/.env
+frontend/.env.local
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+secrets/
+credentials*.json
+service-account*.json
+
+# --- Model weights: downloaded by backend/scripts/, SHA-256 pinned, never committed ---
+# The face parser is CelebAMask-HQ derived (non-commercial research only): never redistribute.
+backend/models/*.task
+backend/models/*.onnx
+*.onnx
+*.task
+*.tflite
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.h5
+
+# --- Real-person test fixture: never publish without recorded provenance/consent ---
+backend/tests/fixtures/portrait.jpg
+backend/tests/fixtures/portrait_landmarks.json
+
+# --- Selfies, facial geometry and runtime outputs: sensitive, never committed ---
+uploads/
+outputs/
+tmp/
+*.heic
+*.heif
+
+# --- Evaluation data and per-image outputs: these must live outside the repo (see backend/evaluation/dataset.py);
+# these entries are a defensive second line. Only the sample UUID list and aggregate reports are committed.
+.cache/
+easyportrait*/
+.makeup_demo_easyportrait_cache
+per_image.jsonl
+run_meta.json
+docs/evaluation/**/*.jpg
+docs/evaluation/**/*.jpeg
+docs/evaluation/**/*.png
+docs/evaluation/**/*.webp
+docs/evaluation/**/*.bmp
+docs/evaluation/**/*.tif
+docs/evaluation/**/*.tiff
+docs/evaluation/**/*.zip
+docs/evaluation/**/*.npz
+docs/evaluation/**/*.npy
+
+# --- Claude Code files: kept local, not published ---
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+
+# --- Frontend ---
+node_modules/
+.next/
+frontend/next-env.d.ts
+*.tsbuildinfo
+.vercel/
+
+# --- Tooling / OS ---
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
