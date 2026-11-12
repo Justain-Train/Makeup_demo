@@ -228,13 +228,92 @@ def test_info():
         (10 * math.cos(math.radians(55.1)), 10 * math.sin(math.radians(55.1)), "warm"),
         (10 * math.cos(math.radians(84.9)), 10 * math.sin(math.radians(84.9)), "warm"),
         (10 * math.cos(math.radians(85.1)), 10 * math.sin(math.radians(85.1)), "olive"),
-        (10 * math.cos(math.radians(119.9)), 10 * math.sin(math.radians(119.9)), "olive"),
-        (10 * math.cos(math.radians(120.1)), 10 * math.sin(math.radians(120.1)), "cool"),
+        (10 * math.cos(math.radians(136.0)), 10 * math.sin(math.radians(136.0)), "olive"),  # green
+        (10 * math.cos(math.radians(199.9)), 10 * math.sin(math.radians(199.9)), "olive"),
+        (10 * math.cos(math.radians(200.1)), 10 * math.sin(math.radians(200.1)), "cool"),
+        (10 * math.cos(math.radians(306.0)), 10 * math.sin(math.radians(306.0)), "cool"),  # blue
         (10.0, -1.0, "cool"),
     ],
 )
 def test_undertone_boundaries(a, b, expected):
     assert undertone_from_lab(a, b) == expected
+
+
+def test_fallback_reference_color_exact(monkeypatch):
+    rects = dict(RECTS)
+    rects["face_skin"] = (100, 100, 40, 40)
+    seen = []
+    real = cv.hex_to_lab
+
+    def spy(h):
+        seen.append(h)
+        return real(h)
+
+    monkeypatch.setattr(cv, "hex_to_lab", spy)
+    CvReferenceAnalyzer().analyze(_image(), _profile(rects))
+    assert seen[0] == "#CDA08C"
+
+
+@pytest.mark.parametrize("status", ["multiple_faces_detected"])
+def test_other_non_ok_status_empty(status):
+    res = CvReferenceAnalyzer().analyze(_image(), _profile(status=status))
+    assert res.components == []
+    assert [w.code for w in res.warnings] == ["low_confidence"]
+    assert res.confidence is None
+
+
+def _crop_zone(b64, w=40, h=30):
+    z = _zone("lip_full", (10, 10, w, h))
+    return Zone(
+        id=z.id, name=z.name, group=z.group, side=None, sources=["landmarks"], status="ok",
+        confidence=0.9, clipped_to=[], bbox=ZoneBBox(x=10, y=10, width=w, height=h),
+        pixel_count=w * h, mask=ZoneMask(png_base64=b64),
+    )
+
+
+def _png_b64(w, h):
+    ok, buf = cv2.imencode(".png", np.full((h, w), 255, dtype=np.uint8))
+    assert ok
+    return base64.b64encode(buf.tobytes()).decode()
+
+
+def _spy_decode(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cv.mk, "decode_png", lambda data: calls.append(1) or np.zeros((1, 1)))
+    return calls
+
+
+def test_crop_valid_png_decodes():
+    out = cv._crop((100, 100, 3), _crop_zone(_png_b64(40, 30)))
+    assert out is not None and out[0].shape == (30, 40)
+
+
+def test_crop_rejects_ihdr_dim_mismatch(monkeypatch):
+    calls = _spy_decode(monkeypatch)
+    assert cv._crop((100, 100, 3), _crop_zone(_png_b64(41, 30))) is None
+    assert calls == []
+
+
+def test_crop_rejects_oversized_base64(monkeypatch):
+    calls = _spy_decode(monkeypatch)
+    limit = 4 * math.ceil((40 * 30 + 1024) / 3)
+    big = "A" * (limit + 4)
+    assert cv._crop((100, 100, 3), _crop_zone(big)) is None
+    assert calls == []
+
+
+def test_crop_rejects_truncated_and_non_png(monkeypatch):
+    calls = _spy_decode(monkeypatch)
+    good = base64.b64decode(_png_b64(40, 30))
+    for payload in (good[:20], b"GIF89a" + b"\x00" * 40, b"\x89PNG\r\n\x1a\n" + b"\x00" * 16):
+        assert cv._crop((100, 100, 3), _crop_zone(base64.b64encode(payload).decode())) is None
+    assert calls == []
+
+
+def test_crop_rejects_invalid_base64(monkeypatch):
+    calls = _spy_decode(monkeypatch)
+    assert cv._crop((100, 100, 3), _crop_zone("!!!not base64!!!")) is None
+    assert calls == []
 
 
 def test_no_model_construct_in_module():
@@ -320,7 +399,7 @@ def test_build_profile_integration_deterministic(monkeypatch):
         (25.0, "cool", "neutral"),
         (55.0, "neutral", "warm"),
         (85.0, "warm", "olive"),
-        (120.0, "olive", "cool"),
+        (200.0, "olive", "cool"),
     ],
 )
 def test_undertone_exact_hue_thresholds(hue_deg, expected_below, expected_above):

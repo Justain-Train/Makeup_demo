@@ -14,6 +14,7 @@ MAX_LONG_SIDE = 1568
 JPEG_QUALITY = 90
 MAX_ANNOTATIONS = 32
 MAX_PROPOSALS = 4
+MAX_STYLE_LABELS = 8
 
 SYSTEM_PROMPT = (
     "You describe the makeup look in a reference photo using a fixed vocabulary. "
@@ -73,7 +74,18 @@ class VlmResponse(BaseModel):
 
     annotations: list[VlmAnnotation] = Field(default_factory=list, max_length=MAX_ANNOTATIONS)
     proposals: list[VlmProposal] = Field(default_factory=list, max_length=MAX_PROPOSALS)
-    style_labels: list[_StyleLabel] = Field(default_factory=list, max_length=8)
+    style_labels: list[_StyleLabel] = Field(default_factory=list, max_length=MAX_STYLE_LABELS)
+    style_confidence: float | None = Field(default=None, ge=0.0, le=1.0, allow_inf_nan=False)
+
+
+class VlmResponseRaw(BaseModel):
+    """SDK-facing model: list lengths are unbounded so overflow is truncated, not rejected."""
+
+    model_config = _CFG
+
+    annotations: list[VlmAnnotation] = Field(default_factory=list)
+    proposals: list[VlmProposal] = Field(default_factory=list)
+    style_labels: list[_StyleLabel] = Field(default_factory=list)
     style_confidence: float | None = Field(default=None, ge=0.0, le=1.0, allow_inf_nan=False)
 
 

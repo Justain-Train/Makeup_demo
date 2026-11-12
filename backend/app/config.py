@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     makeup_vlm_effort: Literal["low", "medium", "high"] = "medium"
     makeup_vlm_timeout_s: float = Field(default=30, gt=0, le=300)
     makeup_vlm_max_tokens: int = Field(default=16000, ge=1024, le=64000)
+    makeup_vlm_max_retries: int = Field(default=1, ge=0, le=3)
 
     @property
     def resolved_model_path(self) -> Path:

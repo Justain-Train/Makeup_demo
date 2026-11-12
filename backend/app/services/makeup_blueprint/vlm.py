@@ -59,6 +59,24 @@ class StubVlmProvider:
         )
 
 
+class FailedVlmProvider:
+    """Used when the Claude client cannot be constructed. Keeps no exception text."""
+
+    def __init__(self, model: str) -> None:
+        self._model = model
+
+    def info(self) -> ReferenceProviderInfo:
+        return ReferenceProviderInfo(
+            id="claude_vlm", kind="vlm", algorithm_version="1.0", model=self._model, enabled=True
+        )
+
+    def analyze(self, image: np.ndarray, cv: list[BlueprintComponent]) -> VlmAnalysis:
+        return VlmAnalysis(
+            info=self.info(),
+            warnings=[BlueprintWarning(code="vlm_failed", message="Semantic analysis failed.")],
+        )
+
+
 def attach_annotations(cv: list[BlueprintComponent], analysis: VlmAnalysis) -> list[BlueprintComponent]:
     """Merge VLM semantic fields into CV components without overriding CV values."""
     merged: list[BlueprintComponent] = list(cv)
@@ -87,12 +105,18 @@ def attach_annotations(cv: list[BlueprintComponent], analysis: VlmAnalysis) -> l
 def build_vlm_provider(settings: Settings, client: Any = None) -> VlmProvider:
     if not settings.makeup_vlm_enabled:
         return StubVlmProvider()
-    from app.services.makeup_blueprint.claude_vlm import ClaudeVlmProvider
+    try:
+        from app.services.makeup_blueprint.claude_vlm import ClaudeVlmProvider
 
-    if client is None:
-        import anthropic
+        if client is None:
+            import anthropic
 
-        client = anthropic.Anthropic(timeout=settings.makeup_vlm_timeout_s)
+            client = anthropic.Anthropic(
+                timeout=settings.makeup_vlm_timeout_s,
+                max_retries=settings.makeup_vlm_max_retries,
+            )
+    except Exception:
+        return FailedVlmProvider(settings.makeup_vlm_model)
     return ClaudeVlmProvider(
         client=client,
         model=settings.makeup_vlm_model,

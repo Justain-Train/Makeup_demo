@@ -28,6 +28,7 @@ from app.services.makeup_blueprint.vlm_prompt import (
     VlmAnnotation,
     VlmProposal,
     VlmResponse,
+    VlmResponseRaw,
     encode_image,
 )
 
@@ -138,7 +139,7 @@ def test_call_kwargs_and_messages():
     assert kw["model"] == "claude-opus-5-5" and kw["max_tokens"] == 16000
     assert kw["thinking"] == {"type": "adaptive"}
     assert kw["output_config"] == {"effort": "medium"}
-    assert kw["output_format"] is VlmResponse
+    assert kw["output_format"] is VlmResponseRaw
     assert kw["betas"] == ["server-side-fallback-2026-07-01"]
     assert kw["fallbacks"] == "default"
     assert "temperature" not in kw
@@ -273,6 +274,93 @@ def test_no_sensitive_logging(caplog):
     b64 = client.messages.kwargs["messages"][0]["content"][0]["source"]["data"]
     assert CANARY not in caplog.text
     assert b64[:40] not in caplog.text
+
+
+def test_max_retries_setting_default_and_bounds():
+    assert Settings(_env_file=None).makeup_vlm_max_retries == 1
+    assert Settings(_env_file=None, makeup_vlm_max_retries=0).makeup_vlm_max_retries == 0
+    assert Settings(_env_file=None, makeup_vlm_max_retries=3).makeup_vlm_max_retries == 3
+    for bad in (-1, 4):
+        with pytest.raises(Exception):
+            Settings(_env_file=None, makeup_vlm_max_retries=bad)
+
+
+@pytest.mark.parametrize("retries", [0, 1, 3])
+def test_anthropic_constructed_with_retries(monkeypatch, retries):
+    seen = {}
+
+    def fake(**kwargs):
+        seen.update(kwargs)
+        return FakeClient()
+
+    monkeypatch.setattr(anthropic, "Anthropic", fake)
+    s = Settings(_env_file=None, makeup_vlm_enabled=True, makeup_vlm_max_retries=retries)
+    p = build_vlm_provider(s)
+    assert isinstance(p, ClaudeVlmProvider)
+    assert seen == {"timeout": s.makeup_vlm_timeout_s, "max_retries": retries}
+
+
+def test_claude_vlm_import_failure_returns_failed_provider(monkeypatch):
+    monkeypatch.setitem(__import__("sys").modules, "app.services.makeup_blueprint.claude_vlm", None)
+    p = build_vlm_provider(Settings(_env_file=None, makeup_vlm_enabled=True))
+    a = p.analyze(_img(), [])
+    assert _codes(a) == ["vlm_failed"]
+
+
+def test_constructor_failure_returns_failed_provider(monkeypatch):
+    def boom(**kwargs):
+        raise RuntimeError(CANARY)
+
+    monkeypatch.setattr(anthropic, "Anthropic", boom)
+    p = build_vlm_provider(Settings(_env_file=None, makeup_vlm_enabled=True))
+    a = p.analyze(_img(), [])
+    assert _codes(a) == ["vlm_failed"]
+    assert CANARY not in (a.warnings[0].message or "")
+    assert p.info().kind == "vlm"
+
+
+@pytest.mark.parametrize(
+    "exc",
+    [
+        _status_exc(anthropic.AuthenticationError, 401),
+        anthropic.CredentialsError(CANARY),
+        TypeError(CANARY),
+    ],
+)
+def test_request_time_credential_errors(exc):
+    a = _provider(FakeClient(exc=exc)).analyze(_img(), [])
+    assert _codes(a) == ["vlm_failed"]
+    assert CANARY not in (a.warnings[0].message or "")
+
+
+def test_overflow_is_truncated_and_accepted():
+    raw = VlmResponseRaw(
+        annotations=[VlmAnnotation(index=i % 32, finish="matte") for i in range(33)],
+        proposals=[VlmProposal(category="eye", product_type="mascara")] * 5,
+        style_labels=["natural", "glam", "editorial", "bold", "soft", "dramatic", "minimal", "smoky", "vintage"],
+    )
+    assert len(raw.annotations) == 33 and len(raw.proposals) == 5 and len(raw.style_labels) == 9
+    a = _provider(FakeClient(_ok(raw))).analyze(_img(), [])
+    assert a.warnings == []
+    assert len(a.annotations) == 32
+    assert len(a.proposals) == 1  # duplicates of one product_type collapse
+    assert a.style is not None and len(a.style.labels) == 8
+
+
+def test_overflow_four_distinct_proposals_cap():
+    raw = VlmResponseRaw(
+        proposals=[
+            VlmProposal(category="eyebrows", product_type="brow_pencil"),
+            VlmProposal(category="eyebrows", product_type="brow_powder"),
+            VlmProposal(category="eyebrows", product_type="brow_gel"),
+            VlmProposal(category="eye", product_type="eyeliner"),
+            VlmProposal(category="eye", product_type="mascara"),
+        ]
+    )
+    a = _provider(FakeClient(_ok(raw))).analyze(_img(), [])
+    assert [p.component.product_type for p in a.proposals] == [
+        "brow_pencil", "brow_powder", "brow_gel", "eyeliner",
+    ]
 
 
 def test_large_image_downscaled():

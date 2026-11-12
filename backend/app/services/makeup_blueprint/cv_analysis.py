@@ -9,6 +9,7 @@ Brows, eyeliner and mascara are not analyzed (natural hair and lashes are indist
 import base64
 import binascii
 import math
+import struct
 from dataclasses import dataclass
 from typing import Literal, Protocol
 
@@ -42,7 +43,9 @@ UNDERTONE_MIN_CHROMA = 8.0
 UNDERTONE_COOL_BELOW = 25.0
 UNDERTONE_NEUTRAL_BELOW = 55.0
 UNDERTONE_WARM_BELOW = 85.0
-UNDERTONE_OLIVE_BELOW = 120.0
+# Lab hue (deg): pink/red ~0-25 cool, orange ~55, yellow ~90, green ~136, cyan ~196, blue ~306.
+# Yellow-green and green read as warm-leaning (olive); cool starts at blue (user, 2026-11-12).
+UNDERTONE_OLIVE_BELOW = 200.0
 
 SKIN_ZONE = "face_skin"
 REFERENCE_EXCLUDED_ZONES: tuple[str, ...] = (
@@ -125,9 +128,22 @@ def _crop(image_shape: tuple[int, ...], zone: Zone) -> tuple[np.ndarray, int, in
         return None
     if bbox.x + bbox.width > width or bbox.y + bbox.height > height:
         return None
+    if len(mask.png_base64) > 4 * math.ceil((bbox.width * bbox.height + 1024) / 3):
+        return None
     try:
-        arr = mk.decode_png(base64.b64decode(mask.png_base64, validate=True))
+        raw = base64.b64decode(mask.png_base64, validate=True)
     except (ValueError, binascii.Error):
+        return None
+    if (
+        len(raw) < 24
+        or raw[:8] != b"\x89PNG\r\n\x1a\n"
+        or raw[12:16] != b"IHDR"
+        or struct.unpack(">II", raw[16:24]) != (bbox.width, bbox.height)
+    ):
+        return None
+    try:
+        arr = mk.decode_png(raw)
+    except ValueError:
         return None
     if arr.ndim != 2 or arr.shape != (bbox.height, bbox.width):
         return None

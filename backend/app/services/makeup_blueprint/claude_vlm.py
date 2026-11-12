@@ -15,11 +15,14 @@ from app.schemas.makeup_blueprint import (
 from app.schemas.makeup_component import MakeupComponent
 from app.services.makeup_blueprint.vlm import VlmAnalysis, VlmAnnotationResult
 from app.services.makeup_blueprint.vlm_prompt import (
+    MAX_ANNOTATIONS,
     MAX_PROPOSALS,
+    MAX_STYLE_LABELS,
     PROPOSAL_CATEGORIES,
     PROPOSAL_PRODUCT_TYPES,
     SYSTEM_PROMPT,
     VlmResponse,
+    VlmResponseRaw,
     build_messages,
     encode_image,
 )
@@ -39,7 +42,10 @@ _MSG_BAD_RESPONSE = "Semantic analysis returned an unusable response."
 
 
 def _error_message(exc: BaseException) -> str:
-    if isinstance(exc, (anthropic.AuthenticationError, anthropic.PermissionDeniedError)):
+    if isinstance(
+        exc,
+        (anthropic.AuthenticationError, anthropic.PermissionDeniedError, anthropic.CredentialsError),
+    ):
         return _MSG_AUTH
     if isinstance(exc, anthropic.NotFoundError):
         return _MSG_NOT_FOUND
@@ -84,7 +90,7 @@ class ClaudeVlmProvider:
                 max_tokens=self._max_tokens,
                 thinking={"type": "adaptive"},
                 output_config={"effort": self._effort},
-                output_format=VlmResponse,
+                output_format=VlmResponseRaw,
                 betas=_BETAS,
                 fallbacks="default",
                 system=SYSTEM_PROMPT,
@@ -106,10 +112,14 @@ class ClaudeVlmProvider:
         if stop == "max_tokens":
             return self._fail("vlm_failed", _MSG_BAD_RESPONSE)
         out = getattr(parsed, "parsed_output", None)
-        if not isinstance(out, VlmResponse):
+        if not isinstance(out, (VlmResponse, VlmResponseRaw)):
             return self._fail("vlm_failed", _MSG_BAD_RESPONSE)
         try:
-            resp = VlmResponse.model_validate(out.model_dump())
+            data = out.model_dump()
+            data["proposals"] = data["proposals"][:MAX_PROPOSALS]
+            data["annotations"] = data["annotations"][:MAX_ANNOTATIONS]
+            data["style_labels"] = data["style_labels"][:MAX_STYLE_LABELS]
+            resp = VlmResponse.model_validate(data)
             annotations = [
                 VlmAnnotationResult(
                     index=a.index,

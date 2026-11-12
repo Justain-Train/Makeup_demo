@@ -541,10 +541,9 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
 - CV populates category, product type, color, undertone, intensity, zones and confidence, all with source `cv`. Finish, placement, technique and direction are left for the VLM.
 - Tests: 36 new, full suite 1041.
 - **Open:**
-  - The undertone rule maps Lab hue 120–360° to "cool". This needs the user's confirmation.
-  - The mask PNG is decoded before its size is checked. This is MEDIUM, and must be fixed before any client-supplied FacialProfile is accepted.
-  - The fallback color is not asserted in tests.
-  - Non-ok statuses are tested only with `no_face_detected`.
+  - ~~Undertone cool range~~ **Resolved (user, 2026-11-12):** cool starts at blue. Olive covers yellow-green and green up to 200°. Cool is ≥200° or <25°.
+  - ~~Mask PNG decoded before its size is checked (MEDIUM)~~ **Fixed in step 3.** The base64 length cap and the PNG signature, IHDR and dimension check now run before `decode_png`.
+  - ~~Fallback color not asserted; non-ok statuses beyond `no_face_detected` untested~~ **Fixed in step 3.**
 
 ### Step 2 — VLM provider (accepted by the evaluator, 2026-11-12)
 
@@ -563,9 +562,52 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
   - A refusal gives `vlm_refused`. Every SDK error, `max_tokens` stop or invalid output gives `vlm_failed` with a fixed message. The provider never raises.
 - `httpx2` is the HTTP library that `anthropic` 2.8.0 depends on; it is not a typosquat.
 - Tests: 24 new, all with a fake client and no network; full suite 1065.
-- **Follow-ups (step 3):**
-  - Set `max_retries` explicitly, because retries resend the image.
-  - Fall back to the stub if client construction fails.
-  - A response over the list bounds is rejected whole rather than truncated.
-  - The cap of 4 has no dedicated test.
-  - `fallbacks="default"` may serve a request from another Anthropic model.
+- **Follow-ups:**
+  - ~~Explicit `max_retries`~~, ~~stub fallback on construction failure~~, ~~list-bound overflow rejected whole~~ and ~~cap test~~: all fixed in step 3.
+  - Still open: `fallbacks="default"` may serve a request from another Anthropic model while `info().model` reports the configured one (LOW).
+- **Credentials (user, 2026-11-12):** develop against the `ant auth login` profile. `anthropic.Anthropic()` resolves it with zero arguments, so no API key is set anywhere in the app or in `.env`. `ANTHROPIC_API_KEY` exported in the shell remains a fallback. The `MAKEUP_VLM_*` settings are documented in `backend/.env.example`.
+
+### Step 3 — Reference analysis service (accepted by the evaluator, 2026-11-12)
+
+- `services/makeup_blueprint/service.py` holds `analyze_reference(image, *, deps, clock)`, which returns a `MakeupBlueprint`. It also holds `ReferenceDeps` and `build_reference_deps(settings, landmark, parsing, zone)`; step 4 reuses the profile route's provider dependencies for these. It has no FastAPI import and no globals.
+- **Flow:**
+  - Build the FacialProfile with masks.
+  - A non-ok status gives an empty blueprint with that status.
+  - Otherwise run CV, then the VLM with the CV components, then `attach_annotations`.
+  - Warnings are deduped by code, with a cap of 32.
+  - Providers are `[cv, vlm]`.
+  - `timings_ms` records profile, cv, vlm and total.
+  - The profile, masks and landmarks never reach the output.
+- **`overall_confidence`:** the mean of the component confidences, falling back to the CV confidence, else None. It is multiplied by 0.9 on `vlm_failed`, `vlm_refused` or `glasses_present`, clamped and rounded to 4 decimal places.
+- **Errors:**
+  - Any failure in the profile, CV or blueprint build becomes `ReferenceAnalysisError(stage)`, with a fixed message and raised `from None`.
+  - A missing parser gives `ParserUnavailableError`.
+  - `FaceParserBusyError` propagates.
+  - Step 4 maps the first to 500 and the last two to 503.
+  - Any VLM failure degrades to CV-only with `vlm_failed`.
+- **Step 2 follow-ups folded in:**
+  - `makeup_vlm_max_retries` (default 1, 0–3).
+  - A client-construction or SDK-import failure gives `FailedVlmProvider`.
+  - In `anthropic` 2.8.0, missing credentials surface at request time as `TypeError`, which maps to `vlm_failed`.
+  - The SDK gets the lenient `VlmResponseRaw`; lists are truncated to 4/32/8, then strictly validated.
+- Tests: full suite 1110. Fix loop 1 wrapped generic CV exceptions and moved the SDK import inside the try.
+- ~~Not asserted yet: confidence clamping and rounding, and the 32-warning cap~~ **Covered in step 4.** The cap is tested by patching `MAX_WARNINGS`, because only 7 distinct warning codes exist.
+
+### Step 4 — `POST /api/makeup/reference-analysis` (accepted by the evaluator, 2026-11-12)
+
+- `app/api/makeup_reference.py` holds the route; `main.py` gets only the `include_router`.
+  - The route is a sync `def`. It runs Phase 1 `read_validated_image`, then `analyze_reference`, and returns `MakeupBlueprint`.
+  - It reuses the profile route's landmark, parsing and zone dependencies.
+- **VLM provider:** built once and cached on `app.state.makeup_vlm_provider`, keyed by `Settings` identity (`get_settings` is `lru_cache`d).
+- **Error map** (all fixed messages, raised `from None`; logs carry only the type name and stage):
+  - Upload errors are unchanged from the profile route: 400, 413, 415.
+  - Busy parser: 503 with `Retry-After: 2`.
+  - Missing parser: 503 with the profile route's exact text.
+  - `ReferenceAnalysisError` or any other exception: 500 "Reference analysis failed.". The stage is never exposed.
+  - `no_face_detected` and `multiple_faces_detected` return 200 with that status.
+- **`Cache-Control: no-store`** on success. This deliberately differs from the profile route, because the payload derives from a face photo.
+- Tests: 16 API tests (including a real-model portrait integration run with sockets blocked) and 3 service gap tests. Full suite 1129.
+- **Open (LOW):**
+  - `no-store` is not on error responses; their bodies hold no user data.
+  - Two concurrent first requests may each build a provider (harmless).
+  - **No auth or rate limit on the route. Both must be added before `MAKEUP_VLM_ENABLED=true` is used outside local dev**, because each request can trigger a paid Claude call with a user's photo.
