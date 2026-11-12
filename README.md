@@ -21,8 +21,9 @@ This README is updated each time a roadmap milestone closes.
 | 2 | Facial landmarks and measurements | **Done.** MediaPipe 478 landmarks, pixel measurements, and rejection when a second face is ≥ 20% of the largest. |
 | 3 | Face segmentation | **Closed for the prototype (2026-11-11).** Pilot results on EasyPortrait (N=600), as IoU: skin 0.866, lips 0.787, eyes 0.717, brows 0.710. Glasses signal and skin-tone testing are done. Some fixes are deferred (see below). |
 | 4 | Facial geometry and makeup application zones | **Done (2026-11-11).** 70 zones in batches 1–6, staged across 11 makeup steps; 512 backend tests. |
-| 5 | FacialProfile construction | Next |
-| 6–13 | Makeup taxonomy, reference parsing, adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
+| 5 | FacialProfile construction | **Done (2026-11-12).** Versioned profile (`schema_version` 1.0) from `POST /api/facial-analysis/profile`. Each component (landmarks, frame, parsing, zones) has its own provider and status, so one failure leaves the rest valid. Nothing is persisted. Includes frontend types and an API client (no UI). 607 backend tests. |
+| 6 | Makeup taxonomy and application mapping | Next |
+| 7–13 | Reference parsing, adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
 
 **Deferred Phase 3 items (not done).**
 - Roll-aligned crop, y-offset fix and the `present` floor.
@@ -37,10 +38,12 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
     config.py                     env-var settings (backend/.env)
     api/facial_analysis.py        HTTP routes only (/landmarks, /topology)
     api/face_segmentation.py      HTTP route for /segmentation
+    api/facial_profile.py         HTTP route for /profile
     api/uploads.py                shared upload validation (type, bytes, real format, pixels)
     schemas/
       facial_landmarks.py         Landmark, FacialLandmarkResult, FaceMeshTopology (raw data)
       face_measurements.py        BoundingBox, FaceMeasurements, FacialLandmarkResponse (derived)
+      facial_profile.py           versioned FacialProfile (components, providers, quality)
     services/
       image_loading.py            bytes → RGB numpy (+ EXIF orientation fix)
       facial_analysis/
@@ -50,6 +53,7 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
       segmentation/               Layer A: face parser (ONNX); the ONLY place model class ids exist
       application_zones/          Layer B: FaceFrame (frame.py), zone catalog + stages (catalog.py),
                                   zone derivation (derive.py)
+      facial_profile/             provider protocols + adapters, per-component builder, versions/compat
   evaluation/                     segmentation eval harness (EasyPortrait IoU, robustness, latency bench);
                                   datasets live outside the repo, reports go to docs/evaluation/
   scripts/download_model.py
@@ -60,7 +64,9 @@ frontend/                         Next.js 16 + React 19 + TypeScript
   app/landmark-test/page.tsx      debug page
   components/FaceLandmarkViewer.tsx  canvas overlay
   lib/api.ts                      fetch helpers
+  lib/facialProfile.ts            /profile client: version check, typed errors, isComponentAvailable
   types/facialLandmarks.ts        TS mirror of the Pydantic schemas
+  types/facialProfile.ts          TS mirror of the FacialProfile schema
 ```
 
 ## Setup
@@ -131,6 +137,12 @@ curl -X POST http://localhost:8000/api/facial-analysis/segmentation \
   -F "file=@backend/tests/fixtures/portrait.jpg" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['status'], d['alignment_check'], [(z['id'], z['status']) for z in d['zones']])"
 ```
 
+`POST /api/facial-analysis/profile`: same upload rules. Returns a versioned **FacialProfile**: `schema_version`, `status`, `image`, `components` (`landmarks`, `frame`, `parsing`, `zones`), `quality` (alignment, warnings, `retake_suggested`) and `timings_ms`. Masks are embedded by default. With `?include_masks=false`, the label map and zone masks are dropped, but bbox, polygon and regions are kept. The profile is built per request and is never stored or logged.
+
+- **Components:** each has `meta` (`component_version`, `status` ok/degraded/unavailable, `confidence`, `provider` with id, weights sha256, `algorithm_version` and licence warning, `reason`) and `data`. `data` is `null` exactly when the component is `unavailable`. A failing stage marks only that component, and the components that depend on it, unavailable.
+- **Versioning:** a MINOR bump adds optional fields only. A MAJOR bump is a breaking change. The frontend client (`fetchFacialProfile` in `frontend/lib/facialProfile.ts`) rejects unsupported MAJOR versions.
+- **Errors:** the same as `/segmentation`. A busy or missing parser gives 503 (with `Retry-After` when busy). The client turns this into `ProfileBusyError`, with the retry delay clamped to 0–60 s. In TypeScript, narrow a component with `isComponentAvailable(c)` or `c.data !== null`, not by checking `meta.status`.
+
 `GET /api/facial-analysis/topology` — MediaPipe's mesh connections (`tesselation` + named `contours`) used for drawing.
 
 ```bash
@@ -186,7 +198,7 @@ On `/landmark-test`, upload a photo and click **Detect landmarks**, then:
 ## Tests
 
 ```bash
-cd backend && pytest          # 512 tests as of Phase 4
+cd backend && pytest          # 607 tests as of Phase 5
 ```
 Unit tests use fake services and a stub parser. Integration tests run real MediaPipe and the real face parser on
 `tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing. Each Phase 4 batch has a

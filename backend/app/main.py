@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import face_segmentation, facial_analysis
+from app.api import face_segmentation, facial_analysis, facial_profile
 from app.config import get_settings
 from app.services.facial_analysis.landmarks import FaceLandmarkService
 from app.services.segmentation.face_parser import FaceParserError, OnnxFaceParser
@@ -63,6 +63,7 @@ def create_app(use_lifespan: bool = True) -> FastAPI:
     )
     app.include_router(facial_analysis.router)
     app.include_router(face_segmentation.router)
+    app.include_router(facial_profile.router)
 
     @app.get("/health")
     def health() -> dict[str, str]:

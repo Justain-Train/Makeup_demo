@@ -71,7 +71,7 @@ MediaPipe Face Landmarker (Tasks API, mediapipe 1.2.2) produces 478 landmarks, i
 
 Do not train a custom model without approval.
 
-## Phase 4: Facial Geometry & Makeup Application Zones (CURRENT)
+## Phase 4: Facial Geometry & Makeup Application Zones (COMPLETE)
 
 Calculate proportions, derive anatomical subregions and reusable makeup zones, validate them against the segmentation masks, and handle asymmetry. Zones are reusable across makeup categories. Do **not** build a separate segmentation model per zone.
 
@@ -102,11 +102,18 @@ The eyelid crease cannot be derived reliably from landmarks or the current class
 
 Approved to start by the user on 2026-11-11.
 
-## Phase 5: FacialProfile Construction
+## Phase 5: FacialProfile Construction (COMPLETE)
 
 Combine landmarks, segmentation masks, geometry, zones and confidences into a **versioned** FacialProfile. Individual components must be replaceable without breaking the rest of the application.
 
-## Phase 6: Makeup Taxonomy & Application Mapping
+**Scope decided by the user (2026-11-11):**
+- Assembly only. No persistence.
+- A new `POST /api/facial-analysis/profile` endpoint, with masks embedded unless `?include_masks=false` is passed.
+- Feature classification is not part of Phase 5: face, eye and lip shape, and the user's own skin tone and undertone. It needs a roadmap home before Phase 8.
+
+Full details are in `docs/DECISIONS.md`.
+
+## Phase 6: Makeup Taxonomy & Application Mapping (NEXT)
 
 **Categories:**
 1. Skin preparation: primer, moisturizer, SPF.
