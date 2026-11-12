@@ -22,8 +22,9 @@ This README is updated each time a roadmap milestone closes.
 | 3 | Face segmentation | **Closed for the prototype (2026-11-11).** Pilot results on EasyPortrait (N=600), as IoU: skin 0.866, lips 0.787, eyes 0.717, brows 0.710. Glasses signal and skin-tone testing are done. Some fixes are deferred (see below). |
 | 4 | Facial geometry and makeup application zones | **Done (2026-11-11).** 70 zones in batches 1–6, staged across 11 makeup steps; 512 backend tests. |
 | 5 | FacialProfile construction | **Done (2026-11-12).** Versioned profile (`schema_version` 1.0) from `POST /api/facial-analysis/profile`. Each component (landmarks, frame, parsing, zones) has its own provider and status, so one failure leaves the rest valid. Nothing is persisted. Includes frontend types and an API client (no UI). 607 backend tests. |
-| 6 | Makeup taxonomy and application mapping | Next |
-| 7–13 | Reference parsing, adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
+| 6 | Makeup taxonomy and application mapping | **Done (2026-11-12).** Versioned vocabulary (1.1) of 12 categories with product types, finishes, techniques, placements and directions; a versioned `MakeupComponent` schema with sRGB hex and derived CIELAB; and `map_zones`, which resolves a product and placement to zone ids without leaving the product's `STAGES` layer. The highlighter and bronzer layers were filled. 930 backend tests. |
+| 7 | Makeup reference analysis (MakeupBlueprint) | Next |
+| 8–13 | Adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
 
 **Deferred Phase 3 items (not done).**
 - Roll-aligned crop, y-offset fix and the `present` floor.
@@ -44,6 +45,7 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
       facial_landmarks.py         Landmark, FacialLandmarkResult, FaceMeshTopology (raw data)
       face_measurements.py        BoundingBox, FaceMeasurements, FacialLandmarkResponse (derived)
       facial_profile.py           versioned FacialProfile (components, providers, quality)
+      makeup_component.py         versioned MakeupComponent (vocabulary-checked, hex + derived CIELAB)
     services/
       image_loading.py            bytes → RGB numpy (+ EXIF orientation fix)
       facial_analysis/
@@ -54,6 +56,8 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
       application_zones/          Layer B: FaceFrame (frame.py), zone catalog + stages (catalog.py),
                                   zone derivation (derive.py)
       facial_profile/             provider protocols + adapters, per-component builder, versions/compat
+      makeup_vocabulary/          frozen term registry with aliases, resolver, color (hex→CIELAB), versions/compat
+      makeup_mapping/             placement→zone table and map_zones (product + placement → zone ids)
   evaluation/                     segmentation eval harness (EasyPortrait IoU, robustness, latency bench);
                                   datasets live outside the repo, reports go to docs/evaluation/
   scripts/download_model.py
@@ -198,7 +202,7 @@ On `/landmark-test`, upload a photo and click **Detect landmarks**, then:
 ## Tests
 
 ```bash
-cd backend && pytest          # 607 tests as of Phase 5
+cd backend && pytest          # 930 tests as of Phase 6
 ```
 Unit tests use fake services and a stub parser. Integration tests run real MediaPipe and the real face parser on
 `tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing. Each Phase 4 batch has a
@@ -228,8 +232,33 @@ The 70 zones cover:
   under the lower lip.
 
 The **stage map** assigns zones to 11 makeup steps: primer, color corrector, foundation, concealer, setting
-powder, bronzer and contour, blush, highlighter, eyebrow and eye, lips, setting spray. Bronzer is intentionally
-empty for now.
+powder, bronzer and contour, blush, highlighter, eyebrow and eye, lips, setting spray. Every layer has zones.
+Bronzer was filled in Phase 6.
+
+## Makeup taxonomy and zone mapping (Phase 6)
+
+This is a backend library. There is no endpoint. Phase 7 and 8 code call it directly.
+
+- **Vocabulary:** `services/makeup_vocabulary/`, version 1.1.
+  - It is a frozen registry of 12 categories, with product types, finishes, techniques, placements and directions.
+  - Aliases are matched regardless of case, separators and apostrophes, so "Cupid's Bow" becomes `cupid_bow`.
+  - Each product type names its `STAGES` stage and layer. Special effects have none.
+  - To add a term, edit the data and bump the MINOR version.
+- **`MakeupComponent`** (`schemas/makeup_component.py`):
+  - Only `category` and `product_type` are required.
+  - `color_hex` is stored as `#RRGGBB`, and `color_lab` (CIELAB D65) is always derived from it.
+  - Raw input is hidden in errors. Log `str(exc)` or `exc.errors(include_input=False)`.
+- **Zone mapping:** `map_zones(product_type, placement, target_zones)` and `map_component(c)` return a `ZoneMapping`.
+  - The product's layer comes from `STAGES` and is read live.
+  - A placement narrows the layer to its intersection with the placement.
+  - An unsupported combination returns a typed `none` result instead of raising.
+  - Explicit zones outside the layer raise `ZoneOutsideLayerError`, and a missing stage raises `CatalogDriftError`.
+
+```python
+from app.services.makeup_mapping import map_zones
+map_zones("Cream Blush", "lifted cheek")   # cheek_upper_r, cheek_upper_l
+map_zones("bronzer", "temple")             # temple_r, temple_l
+```
 
 On `/landmark-test`, click **Segment face**. The panel lets you toggle anatomical regions and application zones
 (left and right use different hues), select all zones of a makeup stage, change overlay opacity, and compare with a

@@ -185,14 +185,24 @@ def test_forehead_zone_matches_pre_refactor_golden(pts, degrees, build, status, 
         assert int(z.mask.sum()) == pixels
 
 
-def test_batch2_ids_appear_only_in_primer_foundation_and_setting_spray():
+def test_batch2_ids_appear_only_in_their_expected_stages():
     where = {zid: set() for zid in BATCH2}
     for st in STAGES:
         for ids in st.layers.values():
             for zid in ids:
                 if zid in where:
                     where[zid].add(st.key)
+    bronze = {"primer", "foundation", "bronzer_contour", "setting_spray"}
+    expected = {
+        "forehead_center": {"primer", "foundation", "highlighter", "setting_spray"},
+        "forehead_perimeter": bronze,
+        "temple_r": bronze,
+        "temple_l": bronze,
+        "jawline_outer_r": bronze,
+        "jawline_outer_l": bronze,
+    }
+    assert set(expected) == set(BATCH2)
     for zid, keys in where.items():
-        assert keys == {"primer", "foundation", "setting_spray"}, zid
+        assert keys == expected[zid], zid
     contour = next(st for st in STAGES if st.key == "bronzer_contour")
     assert contour.layers["contour"][0] == "jawline"

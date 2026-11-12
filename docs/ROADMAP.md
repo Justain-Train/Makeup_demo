@@ -113,7 +113,7 @@ Combine landmarks, segmentation masks, geometry, zones and confidences into a **
 
 Full details are in `docs/DECISIONS.md`.
 
-## Phase 6: Makeup Taxonomy & Application Mapping (NEXT)
+## Phase 6: Makeup Taxonomy & Application Mapping (COMPLETE)
 
 **Categories:**
 1. Skin preparation: primer, moisturizer, SPF.
@@ -148,12 +148,28 @@ Examples:
 
 Build a flexible structured representation. Do not hardcode every combination.
 
-## Phase 7: Makeup Reference Analysis
+**Scope decided by the user (2026-11-12):**
+- A schema plus a mapping service. There is no endpoint.
+- A versioned vocabulary registry.
+- Colors are sRGB hex with derived CIELAB and an optional shade name.
+- Special effects are included, may target any zones, and get no new stage.
+
+Full details are in `docs/DECISIONS.md`.
+
+## Phase 7: Makeup Reference Analysis (CURRENT)
 
 Detect visible makeup, its categories, colors and shades, placement and techniques, intensity, finish and overall style. Output a **MakeupBlueprint**.
 
 - Combine computer vision (OpenCV color and region analysis) with a vision-language model such as Gemini or Qwen-VL.
 - Do not rely solely on an LLM for exact colors or spatial coordinates.
+
+**Scope decided by the user (2026-11-12):**
+- CV reuses our face pipeline on the reference image, with per-zone color measured against that face's bare skin.
+- The VLM is Claude via the Anthropic API. It handles semantics only, and it is off unless enabled in config.
+- Reference photos follow the same privacy rules as selfies.
+- Deliverables: a versioned MakeupBlueprint and `POST /api/makeup/reference-analysis`.
+
+Full details are in `docs/DECISIONS.md`.
 
 ## Phase 8: Makeup Adaptation Engine
 

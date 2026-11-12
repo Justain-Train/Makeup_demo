@@ -430,7 +430,9 @@ def test_stage_map_covers_eleven_stages_with_the_specified_layers(seg_fixture):
     assert [s["number"] for s in seg_fixture["stages"]] == list(range(1, 12))
     assert len(st) == 11
     assert list(st["bronzer_contour"]["layers"]) == ["contour", "bronzer"]
-    assert st["bronzer_contour"]["layers"]["bronzer"] == []  # Phase 2, listed but empty
+    assert st["bronzer_contour"]["layers"]["bronzer"] == [
+        "temple_r", "temple_l", "forehead_perimeter", "cheek_outer_r", "cheek_outer_l",
+        "jawline_outer_r", "jawline_outer_l"]
     assert st["bronzer_contour"]["layers"]["contour"] == [
         "jawline", "contour_hollow_r", "contour_hollow_l", "nose_side_r", "nose_side_l"]
     assert list(st["lips"]["layers"]) == ["lipstick", "lip_liner", "gloss"]
@@ -447,7 +449,9 @@ def test_stage_map_covers_eleven_stages_with_the_specified_layers(seg_fixture):
     assert st["blush"]["layers"] == {"blush": ["cheek_apple_r", "cheek_apple_l", "cheek_upper_r", "cheek_upper_l",
                                                "cheek_outer_r", "cheek_outer_l"]}
     assert st["highlighter"]["layers"] == {
-        "highlighter": ["brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip"]}
+        "highlighter": ["brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip",
+                        "forehead_center", "chin_center", "eye_corner_inner_r", "eye_corner_inner_l",
+                        "cupid_bow"]}
 
 
 @needs_models

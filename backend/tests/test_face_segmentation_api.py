@@ -61,7 +61,10 @@ def test_segmentation_ok_response_contract():
     lips = stages[9]
     assert (lips["key"], lips["name"]) == ("lips", "Lips")
     assert list(lips["layers"]) == ["lipstick", "lip_liner", "gloss"]
-    assert list(stages[5]["layers"]) == ["contour", "bronzer"] and stages[5]["layers"]["bronzer"] == []
+    assert list(stages[5]["layers"]) == ["contour", "bronzer"] and (
+        stages[5]["layers"]["bronzer"] == [
+            "temple_r", "temple_l", "forehead_perimeter", "cheek_outer_r", "cheek_outer_l",
+            "jawline_outer_r", "jawline_outer_l"])
 
     a = body["anatomical"]
     labels = mk.decode_png(base64.b64decode(a["label_map_png_base64"]))

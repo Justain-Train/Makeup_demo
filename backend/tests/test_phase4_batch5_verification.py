@@ -200,7 +200,8 @@ def test_stage_layers_are_exact_nostrils_unstaged_and_ids_exist():
     assert layers[("bronzer_contour", "contour")] == [
         "jawline", "contour_hollow_r", "contour_hollow_l", "nose_side_r", "nose_side_l"]
     assert layers[("highlighter", "highlighter")] == [
-        "brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip"]
+        "brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip",
+        "forehead_center", "chin_center", "eye_corner_inner_r", "eye_corner_inner_l", "cupid_bow"]
     for ids in layers.values():
         assert "nostril_r" not in ids and "nostril_l" not in ids
         assert all(i in ZONE_SPEC_BY_ID for i in ids)

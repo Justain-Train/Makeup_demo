@@ -206,9 +206,9 @@ Zone geometry offsets (ipd multiples) are the plan's approximations, tuned only 
 (declared once in `application_zones/catalog.py`, `STAGES`). The 11 stages: 1 Primer, 2 Color Corrector,
 3 Foundation / Skin Tint, 4 Concealer, 5 Setting Powder, 6 Bronzer & Contour (separate `contour` and `bronzer`
 layers), 7 Blush, 8 Highlighter, 9 Eyebrow & Eye Makeup (`eyebrow`, `eye`), 10 Lips (separate `lipstick`, `lip_liner`,
-`gloss` layers), 11 Setting Spray. A layer whose zones are remaining Phase 4 work (`bronzer`, `blush`) is present
-with an empty list so the UI can show "no zones yet"; no stub zones exist. Currently `contour` holds `jawline`, and
-`highlighter` holds `brow_bone_r/l` (Batch 4 extends it).
+`gloss` layers), 11 Setting Spray. Every layer has zones. Since Phase 6 Batch 4, `highlighter` also covers
+`forehead_center`, `chin_center`, `eye_corner_inner_r/l` and `cupid_bow`, and `bronzer` holds `temple_r/l`,
+`forehead_perimeter`, `cheek_outer_r/l` and `jawline_outer_r/l`. See `catalog.py` for the full lists.
 A test checks that every referenced zone exists and every implemented zone is used by at least one stage.
 
 ## Validation rules

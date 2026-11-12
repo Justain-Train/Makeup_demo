@@ -181,11 +181,14 @@ def test_stage_layers_are_exact_and_ids_exist():
     layers = {(st.key, layer): ids for st in STAGES for layer, ids in st.layers.items()}
     assert layers[("bronzer_contour", "contour")] == [
         "jawline", "contour_hollow_r", "contour_hollow_l", "nose_side_r", "nose_side_l"]
-    assert layers[("bronzer_contour", "bronzer")] == []
+    assert layers[("bronzer_contour", "bronzer")] == [
+        "temple_r", "temple_l", "forehead_perimeter", "cheek_outer_r", "cheek_outer_l",
+        "jawline_outer_r", "jawline_outer_l"]
     assert layers[("blush", "blush")] == ["cheek_apple_r", "cheek_apple_l", "cheek_upper_r", "cheek_upper_l",
                                           "cheek_outer_r", "cheek_outer_l"]
     assert layers[("highlighter", "highlighter")] == [
-        "brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip"]
+        "brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip",
+        "forehead_center", "chin_center", "eye_corner_inner_r", "eye_corner_inner_l", "cupid_bow"]
     for ids in layers.values():
         assert all(i in ZONE_SPEC_BY_ID for i in ids)
 

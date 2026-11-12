@@ -11,6 +11,8 @@ onnxruntime==1.31.1
 # parser calls cv2 directly. Do NOT also install opencv-python(-headless): two cv2
 # distributions overwrite each other's files.
 opencv-contrib-python==5.0.0.93
+# Claude VLM provider (Phase 7). Only called when the cloud VLM is enabled in config.
+anthropic==2.8.0
 
 # dev / testing
 pytest==9.2.0

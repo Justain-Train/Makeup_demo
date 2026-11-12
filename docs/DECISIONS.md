@@ -333,3 +333,239 @@ Every batch kept the earlier zones bit-identical to a `tests/golden_batch*.json`
 All three batches were accepted. Still open:
 - The Batch 2 low follow-ups listed above.
 - Feature classification (face, eye and lip shape, and the user's own skin tone and undertone) still needs a roadmap phase before Phase 8.
+
+---
+
+## Phase 6 — Makeup taxonomy and application mapping
+
+### Scope and design decisions (user, 2026-11-12)
+
+- **Deliverable:** a versioned `MakeupComponent` schema, a controlled vocabulary, validation, and a mapping service that turns a component's placement into zone ids.
+  - The mapping reads `STAGES` and the zone catalog as its only source of truth. It never copies them.
+  - There is no new endpoint and no frontend work. Phases 7 and 8 use it from code.
+- **Vocabulary:** one versioned registry that lists the allowed terms, with aliases, for each category: product types, finishes, techniques, placements and directions.
+  - Adding a term is a data change plus a bump of the vocabulary version.
+  - Combinations are built from terms and are never listed in advance, as the roadmap requires.
+- **Color:**
+  - sRGB hex is the canonical value. CIELAB is computed from it during validation, for perceptual comparison in Phase 8.
+  - A shade name such as "peach" is optional.
+  - Undertone (warm, cool, neutral or olive) is a separate field and describes the product.
+- **Category 12 (special effects and decorative makeup):** it is part of the taxonomy.
+  - Its components can target any existing zones, or none, with a free-form placement note.
+  - It gets no new stage, and the Phase 4 catalog and golden snapshots stay unchanged.
+
+**Batches:**
+1. Vocabulary registry and versioning.
+2. The `MakeupComponent` schema and color.
+3. The placement-to-zones mapping service.
+
+### Batch 1: vocabulary registry (2026-11-12): ACCEPTED by the user, with no fix loops, 695 tests
+
+**Files.** All new, in `services/makeup_vocabulary/`: `__init__`, `versions`, `registry` and `resolve`, plus `tests/test_makeup_vocabulary.py` with 88 tests. No existing file was touched.
+
+**Design.**
+- 12 categories, plus product types, finishes, techniques, placements and directions, each with aliases.
+- The data is frozen: `MappingProxyType`, tuples and frozen dataclasses. `VOCABULARY_VERSION` is `"1.0"`.
+- Each product type stores the key of a `STAGES` stage and one of its layers, never zone ids. Only `special_effects` has none.
+- `normalize` applies NFKC and casefold, removes apostrophes, collapses `-`, `_` and whitespace, and caps input at 64 characters.
+
+**Choices made by the orchestrator, accepted by the user:**
+- Moisturizer and SPF map to the `primer` stage and layer, because stage 1 already covers the whole skin-prep area.
+- A placement key may equal a zone id (`nose_bridge`, `cupid_bow`). That gives natural names, and Batch 3 maps them. Terms of every other kind may never equal a zone id.
+- There is no `crease` placement. The eyelid crease cannot be derived.
+- Criterion 10 now reads "no tracked **code** file changed". The edits to these docs fall outside it.
+
+**Security.** PASS. LOW notes, folded into Batch 2:
+- `validate_registry()` is not run at import.
+- The value of `kind` is echoed into an error message without a length bound.
+- The length is not checked again after NFKC.
+- The exact 64-character limit is not tested.
+
+### Batch 2: MakeupComponent schema and color (2026-11-12): ACCEPTED by the user, after 2 fix loops, 809 tests
+
+**Files.**
+- New: `schemas/makeup_component.py`, `services/makeup_vocabulary/{color,compat}.py` and `tests/test_makeup_component.py`.
+- Changed in Batch 1's code: `versions.py`, `resolve.py`, `__init__.py` and `test_makeup_vocabulary.py`. These hold the Batch 1 security LOW fixes and `COMPONENT_SCHEMA_VERSION = "1.0"`.
+
+**Design.**
+- Only `category` and `product_type` are required. Every other field is optional, because a reference image shows only part of a component. Vocabulary fields are mapped to their canonical terms through the Batch 1 resolver.
+- Category consistency is enforced: the product type, and any technique or placement that names `categories`, must belong to the component's category.
+- `color_hex` is normalized to `#RRGGBB`. `color_lab` (CIELAB, D65) is always recomputed from it and ignores any value the caller supplies. The color module uses only the standard library.
+- `target_zones` lists existing zone ids. They are looked up in `ZONE_SPEC_BY_ID` at validation time, must be unique, and are capped at 128. `special_effects` may leave it empty.
+- `extra="ignore"`, as in FacialProfile.
+
+**Changes made by the orchestrator, accepted by the user:**
+- `color_hex` is optional, because primer, SPF, clear gel and translucent powder have no color. The plan had made it required.
+- The `target_zones` cap is 128. The plan had 16, but the primer stage alone uses 18 zones.
+
+**Fix loops (security MEDIUM: Pydantic errors echoed raw input):**
+1. Set `hide_input_in_errors=True`.
+2. The test was corrected. Pydantic's `exc.errors()` always contains the input and config cannot suppress it. Callers must therefore use `str(exc)` or `exc.errors(include_input=False)`, which the docstring now states.
+
+**Not verified.** That exactly 128 zones are accepted. The catalog has only 70 zones, and 129 is rejected.
+
+**LOW notes for Phase 7:**
+- Send all errors through one helper that drops the input.
+- Sanitize free text (`shade_name`, `placement_note`) at the sink.
+- `model_construct` and `model_copy` skip the `color_lab` derivation, so never use them on untrusted data.
+
+### Batch 3: placement-to-zones mapping (2026-11-12): ACCEPTED by the user, after 1 fix loop, 901 tests
+
+**Files.** All new, in `services/makeup_mapping/`: `__init__`, `placement_zones` and `mapper`, plus `tests/test_makeup_mapping.py` with 92 tests.
+
+**Design.**
+- `map_zones(product_type, placement, target_zones)` and `map_component(c)` return a frozen `ZoneMapping`. It holds `zone_ids` (in layer order), the stage and layer, `source` (layer, placement, explicit or none) and a `reason`.
+- The product's layer from `STAGES` gives the candidate zones. `STAGES` is read on every call, never copied.
+- A placement narrows those candidates through `PLACEMENT_ZONES`, and the result is the intersection with the layer. A non-special-effects product therefore never leaves its layer.
+- An empty intersection gives a typed `none` result and does not raise.
+- Explicit `target_zones` take priority, but they must lie inside the layer. Otherwise `ZoneOutsideLayerError` is raised.
+- `special_effects` can use any existing zone, or none.
+- There is no `side` option; callers filter on `ZONE_SPEC_BY_ID[id].side`.
+
+**Fix loop 1:**
+- A stage or layer missing from `STAGES` now raises `CatalogDriftError`. Before, it silently returned no zones.
+- `target_zones` must be a list or tuple.
+- The sweep is now parametrized over the 69 compatible placement and product pairs.
+- A snapshot test pins the 22 pairs that map to `none`. The planner's test-count gate of ≥880 was dropped as a criterion.
+
+**Security LOW notes for Phase 7:**
+- Treat `CatalogDriftError` as a server fault, not bad input.
+- The `Sequence[str]` annotation is looser than the runtime check.
+
+### Batch 4: catalog gap fixes, scope (user, 2026-11-12)
+
+Batch 3 exposed gaps in the Phase 4 catalog. The user approved editing `catalog.py` `STAGES` and updating the 4 tests that pin the highlighter layer exactly.
+
+**Highlighter layer.** Add these zones:
+- `forehead_center`, which the user pointed out
+- `chin_center`
+- `eye_corner_inner_r/l`
+- `cupid_bow`
+
+**Bronzer layer.** It was empty since Phase 4. Fill it with:
+- `temple_r/l`
+- `forehead_perimeter`
+- `cheek_outer_r/l`
+- `jawline_outer_r/l`
+
+These follow the classic "3" shape. Contour stays a separate layer.
+
+**Vocabulary.** Add the placements the new zones need, and bump the vocabulary MINOR version.
+
+**Not changed.** The vocabulary mismatches stay as they are and keep mapping to `none`:
+- `brow_bone` for brow products
+- `under_eye` for eye products
+- `outer_lip_edge` for lipstick
+
+### Batch 4: catalog gap fixes (2026-11-12): ACCEPTED by the user, with no fix loops, 930 tests
+
+**Files.**
+- Source: `catalog.py` (only `STAGES`), plus the vocabulary `versions.py` and `registry.py` and `placement_zones.py`.
+- Tests: 6 earlier test files that pinned the old layers had their pins updated. These are `test_application_zones`, `test_phase1_independent`, `test_phase4_batch2/4/5_verification` and `test_face_segmentation_api`. The two makeup test files were also updated. The orchestrator read every pin diff: only the values changed, and no assertion was dropped.
+
+**Result.**
+- The highlighter layer is now the original 6 zones plus `forehead_center`, `chin_center`, `eye_corner_inner_r/l` and `cupid_bow`.
+- The bronzer layer is `temple_r/l`, `forehead_perimeter`, `cheek_outer_r/l` and `jawline_outer_r/l`.
+- The vocabulary moves to 1.1, with the new placements `forehead`, `chin`, `temples`, `hairline`, `outer_cheek` and `jawline`.
+  - The alias "forehead center" was left out, because it normalizes to a zone id.
+  - `jawline` also maps to the plain `jawline` zone, so contour still matches.
+
+**What did not change.**
+- The golden snapshots. They do not encode `STAGES`. The `/segmentation` and `/profile` `stages` outputs change in layer contents only, and no schema cap is affected.
+- The `none` snapshot still holds 22 pairs:
+  - 9 were fixed: the bronzer placements, plus inner-corner and cupid's-bow highlight.
+  - 9 were added: contour on the bronzer placements, which is expected because contour stays its own layer.
+  - No pair returns `layer_has_no_zones` any more.
+
+**Close-out.** The stale `catalog.py` docstring about the lower eyelid was fixed. `docs/face_segmentation.md` no longer describes empty layers.
+
+## Phase 6: CLOSED (2026-11-12)
+
+All 4 batches were accepted, and the suite went from 607 to 930 tests.
+
+**Carried into Phase 7:**
+- Build components only through `MakeupComponent` validation.
+- Send errors through one helper that uses `include_input=False`.
+- Sanitize `shade_name` and `placement_note` at the sink.
+- Map `CatalogDriftError` to a server fault.
+- Decide how to handle reference zones that fall outside a product's layer, such as blush draped on the temples. Today they raise `ZoneOutsideLayerError`.
+
+**Vocabulary mismatches left as they are.** These map to `none`:
+- `brow_bone` for brow products
+- `under_eye` for eye products
+- `outer_lip_edge` for lipstick
+
+Feature classification (face, eye and lip shape, the user's own skin tone and undertone) still needs a roadmap phase before Phase 8.
+
+---
+
+## Phase 7 — Makeup reference analysis (MakeupBlueprint)
+
+### Scope and design decisions (user, 2026-11-12)
+
+**CV approach.** Reference images go through our own face pipeline: landmarks, parsing and zones, via the FacialProfile builder.
+- For each zone, we sample the color and compare it with the bare-skin regions of the same face, to separate makeup from skin.
+- Colors, positions and zones come from this CV step only. No new CV model is added.
+
+**VLM.** We use Claude through the Anthropic API.
+- It contributes only the semantic attributes: technique, finish, direction and overall style.
+- It never decides exact colors or coordinates, as the roadmap requires.
+- It sits behind a provider protocol and has a deterministic stub.
+
+**Privacy.** Reference photos get the same treatment as selfies.
+- They are not persisted or logged, and uploads go through the same validation.
+- Images are sent to Anthropic only when the cloud VLM is enabled in config. That setting is **off by default**. With it off, the blueprint is built from CV alone.
+
+**Interface.**
+- A versioned `MakeupBlueprint` schema: a list of `MakeupComponent`s, plus style and confidences.
+- An analysis service.
+- `POST /api/makeup/reference-analysis`.
+- Frontend types come later.
+
+**SDK defaults from the claude-api reference, used unless the user overrides them:**
+- Model `claude-opus-5-5`, through the official `anthropic` Python SDK.
+- Images are sent as base64 `image` content blocks.
+- Output is structured via `client.messages.parse(output_format=<Pydantic model>)`.
+- `output_config.effort` is set explicitly, because it defaults to `medium` on Opus 5.5.
+- Thinking is adaptive (it cannot be disabled on Opus 5.5).
+- `stop_reason == "refusal"` is handled, and server-side `fallbacks` are opted in.
+- Typed SDK errors are caught most-specific first.
+- Tests never call the real API.
+
+### Step 1 — CV reference analyzer (accepted by the evaluator, 2026-11-12)
+
+- `services/makeup_blueprint/cv_analysis.py`: `ReferenceAnalyzer` protocol and `CvReferenceAnalyzer` (provider id `cv_zone_color`, algorithm 1.0). It is pure, with no logging and no module state.
+- Products analyzed: lipstick, powder blush, eyeshadow, highlighter and contour. Each zone's trimmed-median color is compared with that face's bare `face_skin`, excluding the target, under-eye and forehead-perimeter zones.
+- **Not analyzed by CV:** brows, eyeliner and mascara. Natural hair and lashes cannot be told apart from product.
+- Eyeshadow is skipped when glasses are detected.
+- CV populates category, product type, color, undertone, intensity, zones and confidence, all with source `cv`. Finish, placement, technique and direction are left for the VLM.
+- Tests: 36 new, full suite 1041.
+- **Open:**
+  - The undertone rule maps Lab hue 120–360° to "cool". This needs the user's confirmation.
+  - The mask PNG is decoded before its size is checked. This is MEDIUM, and must be fixed before any client-supplied FacialProfile is accepted.
+  - The fallback color is not asserted in tests.
+  - Non-ok statuses are tested only with `no_face_detected`.
+
+### Step 2 — VLM provider (accepted by the evaluator, 2026-11-12)
+
+- SDK: `anthropic==2.8.0`, pinned in `backend/requirements.txt`.
+- `client.beta.messages.parse` in 2.8.0 accepts `fallbacks`, `output_format`, `thinking` and `betas`. So structured output and server-side refusal fallbacks (`server-side-fallback-2026-07-01`, `fallbacks="default"`) are used together on the beta endpoint.
+- Files: `services/makeup_blueprint/vlm.py`, `vlm_prompt.py`, `claude_vlm.py`; five `makeup_vlm_*` settings in `app/config.py`.
+  - `VlmProvider` protocol, `StubVlmProvider` and `ClaudeVlmProvider`.
+  - `build_vlm_provider` returns the stub unless `makeup_vlm_enabled` is true. With the stub, `anthropic` is never imported.
+  - There is no API key setting; the SDK resolves the key from the environment.
+- Request: model `claude-opus-5-5`, adaptive thinking, effort `medium`, `max_tokens` 16000, `output_format=VlmResponse`, `fallbacks="default"`, and a static system prompt.
+  - The image is re-encoded from the array as JPEG, with the long side at most 1568 px.
+- Output: `VlmResponse` is enums only (`extra="forbid"`, bounded lists, no free text) and is re-validated into our schemas.
+  - Claude fills only finish, technique, placement and direction on CV components (by index), and only where they are unset.
+  - Claude can add style labels.
+  - Claude may propose up to 4 brow, eyeliner or mascara components, with no color or zones, all with source `vlm`.
+  - A refusal gives `vlm_refused`. Every SDK error, `max_tokens` stop or invalid output gives `vlm_failed` with a fixed message. The provider never raises.
+- `httpx2` is the HTTP library that `anthropic` 2.8.0 depends on; it is not a typosquat.
+- Tests: 24 new, all with a fake client and no network; full suite 1065.
+- **Follow-ups (step 3):**
+  - Set `max_retries` explicitly, because retries resend the image.
+  - Fall back to the stub if client construction fails.
+  - A response over the list bounds is rejected whole rather than truncated.
+  - The cap of 4 has no dedicated test.
+  - `fallbacks="default"` may serve a request from another Anthropic model.

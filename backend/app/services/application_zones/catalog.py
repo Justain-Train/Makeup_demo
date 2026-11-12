@@ -1,8 +1,8 @@
 """Zone catalog (what each zone is) and the stage-to-zone map.
 
-Zones are defined once here. `derive.py` builds the masks. Implemented: the 18 initial zones plus Phase 4
-batches 1 to 5. The remaining zone (lower eyelid) is not
-stubbed; their stage entries are added together with the zones themselves.
+Zones are defined once here. `derive.py` builds the masks. Implemented: all 70 zones (the 18 initial zones
+plus Phase 4 batches 1 to 6). The eyelid crease cannot be derived and is never added. The highlighter and
+bronzer layers were extended in Phase 6 Batch 4.
 
 Stages and their product layers are declared in `STAGES` below (single source of truth).
 
@@ -123,12 +123,15 @@ STAGES: list[StageSpec] = [
     # Contour and bronzer are separate layers by requirement.
     StageSpec(6, "bronzer_contour", "Bronzer & Contour", {
         "contour": ["jawline", "contour_hollow_r", "contour_hollow_l", "nose_side_r", "nose_side_l"],
-        "bronzer": []}),
+        "bronzer": ["temple_r", "temple_l", "forehead_perimeter", "cheek_outer_r", "cheek_outer_l",
+                    "jawline_outer_r", "jawline_outer_l"]}),
     # Apple, upper and outer cheek are alternative placements and may overlap.
     StageSpec(7, "blush", "Blush", {"blush": ["cheek_apple_r", "cheek_apple_l", "cheek_upper_r", "cheek_upper_l",
                                               "cheek_outer_r", "cheek_outer_l"]}),
     StageSpec(8, "highlighter", "Highlighter", {
-        "highlighter": ["brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip"]}),
+        "highlighter": ["brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l", "nose_bridge", "nose_tip",
+                        "forehead_center", "chin_center", "eye_corner_inner_r", "eye_corner_inner_l",
+                        "cupid_bow"]}),
     StageSpec(9, "eyebrow_eye", "Eyebrow & Eye Makeup", {
         "eyebrow": ["brow_r", "brow_l", *_BROW_DETAIL],
         "eye": ["eye_r", "eye_l", *_EYE_DETAIL, *_EYELIDS]}),

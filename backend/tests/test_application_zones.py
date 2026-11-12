@@ -190,12 +190,16 @@ def test_stages_reference_catalog_zones_and_every_zone_is_staged():
     assert len({st.key for st in STAGES}) == 11
     by_key = {st.key: st for st in STAGES}
     assert list(by_key["bronzer_contour"].layers) == ["contour", "bronzer"]  # separate layers
-    assert by_key["bronzer_contour"].layers["bronzer"] == []
+    assert by_key["bronzer_contour"].layers["bronzer"] == [
+        "temple_r", "temple_l", "forehead_perimeter", "cheek_outer_r", "cheek_outer_l",
+        "jawline_outer_r", "jawline_outer_l"]
     assert list(by_key["lips"].layers) == ["lipstick", "lip_liner", "gloss"]
     assert by_key["blush"].layers["blush"] == ["cheek_apple_r", "cheek_apple_l", "cheek_upper_r", "cheek_upper_l",
                                                "cheek_outer_r", "cheek_outer_l"]
     assert by_key["highlighter"].layers["highlighter"] == ["brow_bone_r", "brow_bone_l", "cheekbone_r", "cheekbone_l",
-                                                           "nose_bridge", "nose_tip"]
+                                                           "nose_bridge", "nose_tip", "forehead_center",
+                                                           "chin_center", "eye_corner_inner_r",
+                                                           "eye_corner_inner_l", "cupid_bow"]
     assert "eyelid_crease" not in ids
 
 

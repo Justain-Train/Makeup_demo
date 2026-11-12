@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -29,6 +30,13 @@ class Settings(BaseSettings):
     face_parser_max_concurrency: int = Field(default=2, ge=1, le=16)
     face_parser_queue_timeout_s: float = Field(default=5.0, gt=0)
     face_parser_threads: int = Field(default=0, ge=0, le=64)  # 0 = onnxruntime default
+
+    # Makeup VLM (semantic annotations only). Off by default. API key comes from the SDK's env.
+    makeup_vlm_enabled: bool = False
+    makeup_vlm_model: str = Field(default="claude-opus-5-5", pattern=r"^[A-Za-z0-9_.-]{1,64}$")
+    makeup_vlm_effort: Literal["low", "medium", "high"] = "medium"
+    makeup_vlm_timeout_s: float = Field(default=30, gt=0, le=300)
+    makeup_vlm_max_tokens: int = Field(default=16000, ge=1024, le=64000)
 
     @property
     def resolved_model_path(self) -> Path:
