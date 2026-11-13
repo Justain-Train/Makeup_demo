@@ -16,6 +16,10 @@ logger = logging.getLogger("evaluation")
 REPO_ROOT = ds.REPO_ROOT
 DEFAULT_SAMPLE = REPO_ROOT / "docs" / "evaluation" / f"easyportrait_test_sample_seed{ds.DEFAULT_SEED}_n{ds.DEFAULT_N}.txt"
 DEFAULT_RUNS_DIR = Path("~/.cache/makeup_demo/easyportrait_runs")
+DEFAULT_MAKEUP_RUNS_DIR = Path("~/.cache/makeup_demo/makeup_runs")
+DEFAULT_MAKEUP_EVAL_RUNS_DIR = Path("~/.cache/makeup_demo/makeup_runs/eval")
+DEFAULT_MAKEUP_SEED = 20261113
+DEFAULT_MAKEUP_SAMPLE = REPO_ROOT / "docs" / "evaluation" / f"makeup_sample_seed{DEFAULT_MAKEUP_SEED}_n200.txt"
 
 
 def _cache(args: argparse.Namespace) -> Path:
@@ -81,6 +85,64 @@ def cmd_clean(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_makeup_fetch(args: argparse.Namespace) -> int:
+    from evaluation import makeup_dataset as md
+    from evaluation.hf_resolve import ResolvingFetcher
+    from evaluation.remote_zip import BudgetedFetcher
+
+    cache = md.ensure_cache(md.resolve_cache_dir(args.cache_dir))
+    bf = BudgetedFetcher(ResolvingFetcher(md.URL), int(args.budget_mb * 1024 * 1024), md.PINNED_LENGTHS)
+    ids, table = md.load_or_build_index(cache, bf)
+    samples = md.draw_samples(ids, args.seed, args.n, args.n_cross)
+    out = Path(args.sample_out or REPO_ROOT / "docs" / "evaluation" / f"makeup_sample_seed{args.seed}_n{args.n}.txt")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(md.format_samples(samples, args.seed, args.n))
+    s = md.fetch_makeup(cache, md.required_files(samples), args.budget_mb, args.workers, bf=bf, table=table)
+    print(
+        f"{len(ids)} complete identities; sample written to {out}; downloaded {s.downloaded}, skipped {s.skipped}, "
+        f"failed {s.failed}, {s.bytes_received:,} bytes{' (budget reached)' if s.budget_reached else ''}"
+    )
+    return 1 if s.failed or s.budget_reached else 0
+
+
+def cmd_makeup_sheet(args: argparse.Namespace) -> int:
+    from evaluation import makeup_dataset as md
+    from evaluation.makeup_pipeline import PairRunner
+    from evaluation.makeup_sheet import build_sheet
+
+    cache = md.ensure_cache(md.resolve_cache_dir(args.cache_dir))
+    samples = md.parse_samples(Path(args.sample).read_text())
+    runs = ds.refuse_inside_repo(Path(args.runs_dir) if args.runs_dir else DEFAULT_MAKEUP_RUNS_DIR / date.today().isoformat(), "output directory")
+    runner = PairRunner()
+    try:
+        path = build_sheet(cache, samples, runner, runs / "contact_sheet.png")
+    finally:
+        runner.close()
+    print(path)
+    return 0
+
+
+def cmd_makeup_eval(args: argparse.Namespace) -> int:
+    from evaluation import makeup_dataset as md
+    from evaluation import makeup_eval as me
+
+    cache = md.ensure_cache(md.resolve_cache_dir(args.cache_dir))
+    text = Path(args.sample).read_text()
+    samples = md.parse_samples(text)
+    runs = ds.refuse_inside_repo(Path(args.runs_dir) if args.runs_dir else DEFAULT_MAKEUP_EVAL_RUNS_DIR, "output directory")
+    ep_cache = ds.resolve_cache_dir(args.ep_cache_dir)
+    ep_ids: list[str] = []
+    if ep_cache.is_dir() and Path(args.ep_sample).is_file():
+        ep_ids = [e.image_id for e in ds.parse_sample(Path(args.ep_sample).read_text())]
+    rep = me.run(
+        cache, samples, runs, Path(args.out_dir),
+        ep_cache=ep_cache if ep_ids else None, ep_ids=ep_ids, seed=me.parse_seed(text),
+        limit=args.limit, label_margin=args.label_margin, audit_sheet=args.audit_sheet,
+    )
+    print(json.dumps(rep["_run"]))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     p = argparse.ArgumentParser(prog="evaluation", description=__doc__)
@@ -123,6 +185,34 @@ def main(argv: list[str] | None = None) -> int:
     common(sp)
     sp.add_argument("--yes", action="store_true")
     sp.set_defaults(fn=cmd_clean)
+
+    sp = sub.add_parser("makeup-fetch", help="index FFHQ-Makeup, draw the sample and fetch it (HTTP Range)")
+    sp.add_argument("--cache-dir", default=None, help="default: ~/.cache/makeup_demo/ffhq_makeup (never inside the repo)")
+    sp.add_argument("--seed", type=int, default=DEFAULT_MAKEUP_SEED)
+    sp.add_argument("--n", type=int, default=200)
+    sp.add_argument("--n-cross", type=int, default=60)
+    sp.add_argument("--budget-mb", type=float, default=300)
+    sp.add_argument("--workers", type=int, default=4)
+    sp.add_argument("--sample-out", default=None)
+    sp.set_defaults(fn=cmd_makeup_fetch)
+
+    sp = sub.add_parser("makeup-sheet", help="offline: contact sheet of bare | reference | preview | truth")
+    sp.add_argument("--cache-dir", default=None)
+    sp.add_argument("--sample", default=str(DEFAULT_MAKEUP_SAMPLE))
+    sp.add_argument("--runs-dir", default=None, help="outside the repo; default ~/.cache/makeup_demo/makeup_runs/<date>")
+    sp.set_defaults(fn=cmd_makeup_sheet)
+
+    sp = sub.add_parser("makeup-eval", help="offline: Phase 7 detection diagnosis and gap-closed metrics on FFHQ-Makeup")
+    sp.add_argument("--cache-dir", default=None)
+    sp.add_argument("--sample", default=str(DEFAULT_MAKEUP_SAMPLE))
+    sp.add_argument("--limit", type=int, default=None)
+    sp.add_argument("--out-dir", default=str(REPO_ROOT / "docs" / "evaluation"), help="default: ../docs/evaluation")
+    sp.add_argument("--runs-dir", default=None, help=f"outside the repo; default {DEFAULT_MAKEUP_EVAL_RUNS_DIR}")
+    sp.add_argument("--label-margin", type=float, default=0.5)
+    sp.add_argument("--audit-sheet", action="store_true")
+    sp.add_argument("--ep-cache-dir", default=None, help="EasyPortrait cache for the false-positive rate (skipped if absent)")
+    sp.add_argument("--ep-sample", default=str(DEFAULT_SAMPLE))
+    sp.set_defaults(fn=cmd_makeup_eval)
 
     args = p.parse_args(argv)
     try:

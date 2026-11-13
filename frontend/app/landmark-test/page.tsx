@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import FaceLandmarkViewer, { type ViewerLayers } from "@/components/FaceLandmarkViewer";
 import SegmentationControls, { type SegmentationSelection } from "@/components/SegmentationControls";
@@ -127,6 +128,9 @@ export default function LandmarkTestPage() {
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: 16 }}>
       <h1 style={{ fontSize: 22 }}>Facial landmark test</h1>
+      <p>
+        <Link href="/preview">Makeup preview →</Link>
+      </p>
 
       <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 12 }}>
         <input type="file" accept="image/jpeg,image/png,image/webp" onChange={onFileChange} />

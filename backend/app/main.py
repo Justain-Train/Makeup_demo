@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import face_segmentation, facial_analysis, facial_profile, makeup_adapt, makeup_reference
+from app.api import face_segmentation, facial_analysis, facial_profile, makeup_adapt, makeup_preview, makeup_reference
 from app.config import get_settings
 from app.services.facial_analysis.landmarks import FaceLandmarkService
 from app.services.rate_limit import InMemoryRateLimiter
@@ -66,12 +66,14 @@ def create_app(use_lifespan: bool = True) -> FastAPI:
         allow_origins=settings.cors_origin_list,
         allow_methods=["GET", "POST"],
         allow_headers=["*"],
+        expose_headers=["Retry-After"],
     )
     app.include_router(facial_analysis.router)
     app.include_router(face_segmentation.router)
     app.include_router(facial_profile.router)
     app.include_router(makeup_reference.router)
     app.include_router(makeup_adapt.router)
+    app.include_router(makeup_preview.router)
 
     @app.get("/health")
     def health() -> dict[str, str]:

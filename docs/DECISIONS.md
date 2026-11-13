@@ -933,3 +933,136 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
   - Behind a reverse proxy, every client shares one key; trusted-proxy handling is not built.
   - Authentication is still missing on all photo routes.
   - Env parsing of the `rate_limit_*` settings is not directly tested.
+
+## Phase 9 — Generative makeup preview
+
+**Status: in progress.** Step 9a (mask-based layer renderer) first, then 9b (generative refinement).
+
+### Scope and design decisions (user, 2026-11-13)
+
+- **Two steps, deterministic first:**
+  - **9a: mask-based layer renderer, no ML.** It renders each `AdaptedComponent` in Lab space inside its zone mask, with:
+    - feathered edges;
+    - intensity as opacity;
+    - a per-finish model;
+    - layer order by `stage_number`.
+  - It is deterministic and fast. Phase 10 reuses it as the lightweight renderer.
+  - **9b: generative refinement**, starting only after 9a is accepted.
+- **9b model and runtime:** **SDXL inpainting** through `diffusers`, running **locally on MPS**. No hosted API, so selfies never leave the machine.
+  - It sits behind an injected provider (like the Phase 7 VLM): off by default, stubbed in tests, never downloaded or run in the test suite.
+  - `torch` and `diffusers` go in an optional extra, not the core install.
+- **Conditioning:** the 9a render is the init image, the union of the component masks (lightly dilated) is the inpaint mask, and the denoise strength is low. The plan is not passed as a text prompt alone.
+- **Hard guarantee:** pixels outside the inpaint mask are copied back from the original, so hair, background and other features are unchanged, and tests check this exactly.
+- **Licensing:**
+  - No FLUX.1 [dev]-family weights (non-commercial).
+  - No InsightFace-based components (IP-Adapter FaceID, InstantID, ArcFace metrics), which are research-only.
+  - SDXL is under CreativeML OpenRAIL++-M.
+- **Metrics:** zero change outside the mask, ΔE00 inside the mask against the intensity-scaled plan colour, and MediaPipe landmark drift. No new face-recognition models.
+- **Frontend (user, 2026-11-13):** a **before/after preview UI**. The page uploads a selfie and a reference, calls `POST /api/makeup/preview`, and shows the original and rendered images side by side or with a slider, plus the per-component report. It handles loading, success and error states (including 429). It is built as step 9a-3, after the endpoint.
+- **Privacy:** previews are returned, never persisted or logged.
+
+### Step 9a plan decisions (user, 2026-11-13)
+
+- **Directional sweep deferred.** 9a renders blush, bronzer and contour as evenly feathered patches on the user's adapted zones. The per-side `direction_angles` are not applied, and each component report records `directional_stretch: "deferred"`. The user wants to see the real preview before deciding on the sweep (it needs left/right mask splitting).
+- **Response format: JSON with a base64 PNG.** It is lossless, so decoding gives back the exact rendered pixels (a test must check this round trip). The trade-off accepted is about 33% size overhead and the image held twice in memory, in exchange for the image and the per-component report arriving together for the UI. A raw `image/png` option can be added later without breaking the API.
+- **Split:** 9a-1 renderer and metrics (no HTTP), 9a-2 endpoint `POST /api/makeup/preview`, 9a-3 before/after UI at `/preview`.
+
+### Step 9a-1 — Layer renderer and metrics (accepted by the evaluator, 2026-11-13)
+
+- **Code:**
+  - `schemas/makeup_preview.py` holds `ComponentRenderReport` and `PreviewResponse` (1.0).
+  - `services/makeup_preview/` contains:
+    - `masks.py`: `decode_mask_full`, with guards copied from Phase 8 `_decode_guarded`;
+    - `color.py`: sRGB/Lab and CIEDE2000 in numpy;
+    - `finishes.py`: 9 finishes, an immutable mapping;
+    - `renderer.py`: `render_layers(image, plan, seed)`;
+    - `metrics.py`.
+- **Behaviour:**
+  - Lab blend: a/b move toward the target by alpha×opacity; L shifts by 0.3×(Lt−L)×alpha×opacity.
+  - Opacity = intensity (default 0.5) × the intensity multipliers.
+  - Gaussian feather: sigma = 4% of the bbox clipped to the image, between 0.8 and 64. Alpha below 1/255 is set to 0, and pixels where alpha == 0 are byte-identical to the input.
+  - Composited in stage order (None last). Shimmer noise is seeded per component.
+  - Skip reasons: `no_mask`, `mask_invalid`, `no_colour`, `zero_opacity`, `empty_mask`. `directional_stretch` is never "applied" (deferred).
+  - The finish strengths are first-guess constants in `finishes.py`, to tune after real previews.
+- **Verification:**
+  - The tester wrote 80 tests (`test_makeup_preview_renderer.py`, `test_makeup_preview_metrics.py`) but hit its turn limit twice, so the orchestrator ran them.
+  - Fix loop 1 added the `empty_mask` skip (an empty or off-image mask had been reported as rendered with 0 pixels) and the sigma cap (security MEDIUM: an unbounded `ZoneBBox` meant an unbounded blur).
+  - Full suite **1442** passed. Security re-review PASS. A probe with 1,000,000×1 and 4000×4000 bboxes took ≤0.09 s.
+- **Open (LOW):** `PreviewResponse.image_png_base64` needs a `max_length` in 9a-2; `skip(reason: str)` is loosely typed.
+
+### Step 9a-2 — `POST /api/makeup/preview` (accepted by the evaluator, 2026-11-13)
+
+- **Code:**
+  - `services/makeup_preview/service.py` holds `build_preview(selfie_rgb, plan) -> PreviewResponse`: render, then a lossless PNG as base64.
+  - `api/makeup_preview.py` mirrors `makeup_adapt.py` (upload validation, providers, 503/500 mapping, `no-store`) and adds `rate_limit("preview")`, its own bucket.
+  - The selfie is decoded once, and the plan comes from `adapt_from_images` with masks included.
+  - A not-ok or empty plan returns 200 with the unmodified selfie and a warning.
+  - `main.py` registers the router.
+  - Typing: `skip(reason: SkipReason)`.
+- **Verification:**
+  - Tester PASS on all criteria: 21 tests in `test_makeup_preview_route.py`, including the exact PNG round trip and independent buckets. Full suite **1463** (re-run by the orchestrator).
+  - Security PASS.
+  - Real-data smoke run on the fixture portrait (used as both images): 200, `no-store`, 0.6 s, 3 components rendered, 6,237 changed pixels, all inside the masks. The effect is subtle because the reference has no makeup.
+- **User decision:** **keep full-resolution output** for the local prototype.
+  - Security MEDIUM: `image_png_base64` max_length ≈ 80 MB is not a real memory bound at 25 MP. Peak memory is about 5–6× the PNG size.
+  - Cap the long edge (e.g. 2048 px) before any public exposure.
+- **Open:**
+  - The FaceParserBusyError path on /preview is untested.
+  - Route tests stub the pipeline; there is no `needs_models` integration test.
+  - Auth is still missing on all photo routes.
+
+### Step 9a-3 — Before/after preview UI (built 2026-11-13; browser checklist run by the user)
+
+- **Code:**
+  - Frontend: `types/makeupPreview.ts`, `lib/makeupPreview.ts`, `components/BeforeAfterSlider.tsx`, `app/preview/page.tsx`, and a link from `/landmark-test`.
+  - Backend `main.py`: CORS `expose_headers=["Retry-After"]`.
+- **Verification:**
+  - Typecheck and build are clean, and the checks for forbidden code (`any`, console, storage, unsafe HTML) found nothing. Tester PASS. Security PASS.
+  - `test_makeup_preview_cors.py` covers the exposed `Retry-After` on a 429 and that a foreign origin gets no `allow-origin`. Starlette adds expose-headers unconditionally, which is harmless.
+- **User test:** the user found the preview "didn't apply makeup, just made the image greyer". That led to the follow-up below.
+
+### Step 9a follow-up — Colour management and renderer visibility (user-approved 2026-11-13; accepted by the evaluator)
+
+- **Diagnosis on the user's photos** (local only, never copied into the repo):
+  - The selfie had an Apple "Display" ICC profile, which `load_rgb_image` ignored. The preview was about 15% less saturated than the browser's colour-managed "before".
+  - The plan had only lips (0.238) and lids (0.318), and opacity was equal to intensity, so the makeup was barely visible.
+- **A (Phase 1 change, approved as a demonstrated bug):** `image_loading.py` converts embedded ICC profiles to sRGB with `ImageCms` (perceptual).
+  - `MAX_ICC_BYTES` is 4 MiB.
+  - RGBA/P become RGB and LA becomes L before the transform.
+  - Any failure falls back silently to `convert("RGB")`.
+  - Images without a profile are byte-identical to before.
+- **B (renderer):**
+  - Opacity = 0.4 + 0.6×intensity (0 stays 0, then the multipliers apply).
+  - Per-stage L shift: lips 0.7, eyebrow_eye 0.5, others 0.3.
+- **Verification:**
+  - 19 tests in `test_colour_management_and_visibility.py`. Phase 1 tests are unchanged and pass. Full suite **1484**.
+  - Security PASS. Fix loop 1 broadened the CMS fallback to `except Exception`.
+  - On the user's photo, the loader output equals the colour-managed conversion exactly. Opacities rose to 0.54 and 0.59.
+- **Open:**
+  - The reference analysis missed the blush, bronzer and highlight that are clearly visible in the user's reference (Phase 7 detection gap). To be measured by the makeup/no-makeup evaluation.
+  - The ICC transform uses about 200–300 MB transiently at 25 MP (LOW).
+
+## Makeup / no-makeup evaluation (user-requested 2026-11-13)
+
+- **Dataset decision:**
+  - MT (BeautyGAN) has no verifiable official source (the project page is 404), and YMU's site is unreachable and access is on request. The user approved downloading research datasets for evaluation only.
+  - Chosen: **FFHQ-Makeup** (`cyberagent/FFHQ-Makeup` on Hugging Face, from the paper authors' lab), CC BY-NC-SA 4.0 (inherits FFHQ). 18,370 identities, each bare plus 5 makeup styles, 512×512.
+  - The bare faces are real FFHQ/Flickr photos, and the makeup is synthetic. The made-up images also contain retouching (skin smoothing, face reshaping, white balance), so metrics must be measured inside the zones and relative to skin.
+  - Evaluation only: never used for training or pseudo-labelling. Images stay in `~/.cache/makeup_demo/ffhq_makeup` and are never written to the repo. Only aggregates and the seeded sample file are committed.
+
+### Step E-1 — Data fetch and contact sheet (accepted by the evaluator, 2026-11-13)
+
+- **Code:**
+  - `evaluation/hf_resolve.py` (`ResolvingFetcher`): single-hop https redirects to `*.hf.co` only; the signed URL is never logged; it re-resolves on a 403 from get_range.
+  - `evaluation/makeup_dataset.py`: a strict member regex, seeded samples, and a budgeted, resumable fetch with magic-byte, 512×512 and SHA-256 checks.
+  - `evaluation/makeup_pipeline.py` (`PairRunner`, in process, VLM stubbed).
+  - `evaluation/makeup_sheet.py`.
+  - CLI subcommands `makeup-fetch` and `makeup-sheet`.
+  - `remote_zip.py` is unchanged.
+- **Verification:**
+  - 49 offline tests. Full suite **1533**. Security PASS (LOW only).
+  - Real run: 1,319 images (60.6 MB), 0 failures. Sample in `docs/evaluation/makeup_sample_seed20261113_n200.txt`.
+- **Contact sheet:** 24 paired + 4 cross rows (local only), reviewed by the orchestrator.
+  - Strong lip colours transfer well, and so do some blushes and lids. Pixels outside the masks are untouched.
+  - Many clear looks are missed entirely (pink eyeshadow, blush, orange or red lips on some faces). Detection or adaptation is the bottleneck, not rendering. E-2 will locate the loss stage.
+- **Open (LOW):** a HEAD 403 doesn't re-resolve (fails closed); `--sample-out` is unchecked; the chmod on an existing runs-dir; JSON reads without a size cap.
