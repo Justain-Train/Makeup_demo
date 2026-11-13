@@ -763,3 +763,173 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
   - Orchestrator verification: each criterion maps to a test; the real-pipeline test ran rather than skipping; there are zero changes in the Phase 1–4 paths and in Phase 7 `service.py`.
   - The degraded paths were verified manually, then a test was added (`test_degraded_paths`).
 - **Security:** PASS. LOW: the logging test checks two logger namespaces; skin tone's broad `except` masks bugs as `degenerate_input`; skin measurements must stay out of any future persistence or analytics.
+
+## Phase 8 — Makeup adaptation engine (AdaptedMakeupPlan)
+
+**Status: complete, accepted by the user on 2026-11-12.** Steps 1–3 were each accepted by the evaluator. The full suite is 1340 tests.
+
+### Scope and design decisions (user, 2026-11-12)
+
+- **Input:** two images in one call. The user's selfie and a reference photo are posted together.
+  - The server builds the user's FacialProfile, with features, and the reference MakeupBlueprint itself, then adapts.
+  - Nothing is stored, and no client-supplied profile or blueprint is trusted.
+  - The adaptation is a pure service, `adapt(profile, blueprint) -> AdaptedMakeupPlan`, so later phases can reuse it.
+- **Geometry:** zone selection plus hints. There is **no mask warping**.
+  - Each component's placement is chosen from the user's own 70 zones through `map_zones` (live `STAGES`).
+  - Per-component direction and angle hints are given in the user's face frame.
+  - Masks are unions of the user's real zone masks. Coordinates are in user-image pixels.
+  - Every adjustment is a **named, deterministic rule with a fixed reason**, recorded in the plan. No LLM or agent is used for geometry.
+- **Colour:** **keep the reference colours.** Only placement, direction and intensity adapt. Colour changes belong to Phase 10, and skin tone (our least reliable feature) is not used to change shades.
+- **Low confidence:** when a feature is `unknown` or below the rule's confidence threshold, the rule is skipped. The component keeps the reference placement, or a lid- or shape-agnostic default, and the plan records "not adapted: feature uncertain" so a future UI can ask the user. Eyelid type is always `unknown` until self-report exists, so eye rules must be lid-agnostic.
+- **Privacy:** both photos are treated like selfies (Phase 1 validation, nothing logged or persisted).
+
+### Step 1 — AdaptedMakeupPlan schema and pure `adapt()` core (accepted by the evaluator, 2026-11-12)
+
+- **Files:**
+  - `schemas/adapted_makeup_plan.py` holds `AdaptedMakeupPlan` 1.0.
+  - Each `AdaptedComponent` embeds the validated reference `MakeupComponent` as `component`, so colour, finish and intensity are the same instance and never re-derived.
+  - Beside it: stage and layer, zones, `zone_selection`, the union mask, bbox, centroid and pixel count, sources, empty `adjustments`, and fixed-code `notes`.
+  - `services/makeup_adaptation/`: `versions.py`, `masks.py` (`union_zone_masks`, memory-bounded, with a local pre-decode PNG/IHDR guard that clamps rather than rejects bboxes), and `adapter.py` (`adapt(profile, blueprint, clock)`).
+- **Zone mapping:**
+  - Zones come from `map_zones`. The sources are reference zones, then the placement, then the layer default.
+  - An out-of-layer zone falls back to the layer default with a note.
+  - Zones unavailable on the user's face are dropped with a note.
+  - `CatalogDriftError` propagates.
+- **Ordering:** components are sorted by the live `STAGES` number; components with no stage go last.
+- **Status:** a non-ok profile takes precedence. Otherwise a non-ok blueprint gives `reference_unavailable`, and an ok blueprint with no components gives `no_makeup_detected`. A profile without zones gives components with `mask=None` plus a `zones_unavailable` warning.
+- **Verification:**
+  - Tester PASS: 17 of 17. The initial failures came from one test-helper bug, fixed in test code. Full suite 1278.
+  - Orchestrator real-data check, using the portrait as both selfie and reference: the plan is ok with 3 components in stage order 6, 7 and 9, all with reference zones and real masks.
+- **Open for step 2 (security LOW):**
+  - Decode masks as grayscale, or check the IHDR colour type and bit depth.
+  - Cap zone bboxes at the image size.
+  - Make `Adjustment.reason` and `ZoneSelection.reason` fixed codes.
+  - Add a corrupted-PNG test.
+
+### Step 2 scope — feature rules (user, 2026-11-12)
+
+- **Rule set:** 12 starter rules, kept for now and **designed for extension** (one rule = one registry entry).
+  - Eyes: `eye_tilt_down_lift`, `eye_tilt_up_balance`, `eye_close_set_outer`, `eye_wide_set_inner`, `eye_round_elongate`.
+  - Face: `face_round_contour`, `face_oblong_horizontal`, `face_square_soften`, `face_heart_balance`.
+  - Lips: `lip_thin_full`, `lip_bottom_heavy_balance`.
+  - Brows: `brow_straight_keep`.
+  - Not covered: skin tone (colours are kept), eyelid type and brow thickness (always unknown), and oval or diamond faces (diamond is a candidate extension).
+- **Effect-based confidence thresholds** (user's choice over a flat 0.4/0.5):
+
+  | Effect | Rules | Threshold |
+  |---|---|---|
+  | Direction hint only | 1, 2, 5, 12 | 0.3 |
+  | Zone or intensity change | 3, 4, 6–9, including face shape | 0.4 |
+  | Changes the resulting lip shape | 10 (overline) | 0.5 |
+
+  - Each threshold is a named constant on its rule.
+  - The plan records the evidence for every rule considered, fired or skipped: feature, label, confidence and threshold.
+- **Narrower rule 11:** it fires only for **clearly** bottom-heavy lips, with `upper_to_lower` ≤ 0.55 (about p10 of 598 real faces). Its effect is a subtle emphasis on the Cupid's bow and upper lip, with no zone change. The broad version would have fired for about 60% of faces.
+- **Measured firing rates at a flat 0.4** (598 faces), for reference:
+  - eye rules 7–9%;
+  - face round, oblong and square 1–2.5%; heart 7%;
+  - thin lips 5%;
+  - straight brows 11%;
+  - at least one rule fired for 79% of faces.
+  - At 0.5, face round, oblong and square drop to 0.3–1.5%, which is effectively off.
+- Rule firing rates on real faces must be re-measured after implementation (the "check against real faces" rule).
+
+### Step 2 — Feature rule engine (accepted by the evaluator, 2026-11-12)
+
+- **Code:** `services/makeup_adaptation/rules.py` holds the `RULES` registry: 12 frozen `Rule` entries, each with per-product `Change` specs. Extending means adding one entry.
+- **Thresholds:** `T_DIRECTION` 0.3, `T_ZONE` 0.4, `T_LIP_SHAPE` 0.5, `RULE11_MAX_RATIO` 0.55.
+- **`evaluate()`** records all 12 `RuleEvaluation`s per component. Each has the feature, label (a fixed Literal), confidence, threshold and outcome: `applied`, `skipped_uncertain`, `skipped_not_triggered`, `skipped_zone_unavailable`, `skipped_not_applicable` or `skipped_conflict`.
+- **Zone changes** go through `map_zones` (layer-bounded) and are intersected with the zones available on the user's face.
+- **Conflicts:** the first zone-changing rule wins. Direction, intensity and emphasis are limited to one per kind per component.
+- **Layer constraints found during planning:**
+  - Contour has no temple zones, so rule 9's temple part targets bronzer.
+  - Only lip liner has `lip_outer_boundary`, so rule 10 applies to lip liner only.
+  - Rule 8 uses the contour-layer `jawline` zone.
+- **Never changed by rules:** colour, finish and the embedded `component.intensity`. An intensity multiplier is an `Adjustment`, not a mutation. Eyelid type is never read.
+- **Schema additions** (the plan schema is unreleased, so it stays 1.0):
+  - `Adjustment` has `effect` (zones, direction, intensity or emphasis), a fixed `RuleReason`, `direction`, `intensity_multiplier` and `emphasis_zones`.
+  - `ZoneSelection.reason` is a Literal.
+  - `AdaptedComponent.rule_evaluations` is new.
+  - A `features_unavailable` warning was added.
+  - `Direction` is a small Literal set, to be refined to face-frame angles in step 3.
+- **Masks (step 1 security follow-ups):** an IHDR 8-bit grayscale check, grayscale-only decode, the bbox capped at the image size, and corrupt input is never raised.
+- **Verification:**
+  - Tester: FAIL first, on the eyelid grep matching a docstring and a determinism test using the wall clock.
+  - Fix loop 1: docstring reworded; fixed clock in the test; label constrained to a Literal.
+  - Tester then PASS: 44 adaptation tests, full suite 1305.
+  - The orchestrator read the threshold and rule-11 test bodies.
+- **Real-face firing** (598 faces, `docs/evaluation/rule_firing_2026-11-12.json`):
+  - At least one rule fired for 55% of faces with a full look and 41% with a CV-only look.
+  - The rates match the pre-implementation estimates. Narrowed rule 11 fires for 11.9% (about 60% before).
+  - Face-shape rules are uncertain about 80% of the time.
+  - Rule 5 conflicts with the tilt rules on eyeliner, by design.
+- **Known limits:** rule 10 cannot fire on CV-only looks, because lip liner is not detected. Rules 2, 5 and 12 need VLM-proposed products.
+
+### Step 3 — Face-frame direction angles and `POST /api/makeup/adapt` (accepted by the evaluator, 2026-11-12)
+
+- **Direction angles:**
+  - `services/makeup_adaptation/directions.py` holds a fixed table from label to face-frame elevation, measured from the outward horizontal: `horizontal` 0°, `outward` 10°, `upward_outward` 25°, `diagonal_up` 45°.
+  - Each applied direction adjustment gets `direction_angles`: a left and a right `DirectionAngle` (`side`, `face_deg`, `image_deg`), finite and in (-180, 180].
+  - Face frame: 0° is outward on the subject's own side, and positive is toward the forehead. Image frame: 0° is image right and 90° is image up.
+  - The angles are built from the profile's real `u` (right eye to left eye) and `v` (down the face) vectors, so roll is reflected exactly. At roll 0, the left side's image angle equals its face angle, and the right side's is 180° minus the face angle.
+  - With no usable frame (missing, non-finite, or `u` not unit length), the label is kept, there are no angles, and the component gets the `direction_angles_unavailable` note and warning.
+- **Schema:** `DirectionAngle` and `Adjustment.direction_angles` were added. The schema stays **1.0**, because it is unreleased until this step.
+  - The `AdaptedComponent` mask validator was relaxed: bbox and centroid are set together, a mask requires a bbox, and there is no bbox when `pixel_count` is 0. This lets `include_masks=false` keep the bbox, centroid and pixel count.
+- **Endpoint:**
+  - `app/api/makeup_adapt.py` holds the route; `main.py` gets only the `include_router`.
+  - `services/makeup_adaptation/pipeline.py` holds `adapt_from_images`, which runs `build_profile` (masks always built, with features), then `analyze_reference`, then `adapt()`, sequentially.
+  - The request is multipart `selfie` + `reference`. Both go through Phase 1 `read_validated_image` before any inference. No client profile or blueprint is accepted.
+  - `include_masks` is a query parameter, default true, the same as `/profile`. False drops only each component's mask.
+  - `Cache-Control: no-store`.
+  - Error mapping:
+    - parser busy gives 503 with `Retry-After: 2`;
+    - parser unavailable gives 503;
+    - `ReferenceAnalysisError`, `CatalogDriftError` and any other exception give 500 with a fixed detail.
+  - Logs carry only the exception type and the stage.
+- **Verification:**
+  - Tester PASS: 35 new tests, full suite **1340**, and the real-pipeline test ran. The two initial failures were test-expectation bugs (a blank synthetic reference gives `no_makeup_detected`) and were fixed in test code.
+  - Security PASS (LOW only).
+  - Orchestrator checks:
+    - The full suite was re-run: 1340 passed.
+    - `rules.py` mtime predates the step. The git diff check was vacuous because the directory is untracked.
+    - The face-frame axes were checked against the `FaceFrameData` definitions.
+    - Real-data run with the portrait as both images: 200, `no-store`, status ok, 1.0, components in stage order 6, 7 and 9 with real masks; `include_masks=false` keeps the bboxes. No rule fires on this CV-only look, so the angle path is covered by unit tests only.
+- **Open items:**
+  - Auth and a rate limit before the VLM is enabled outside local dev, now covering this route too. It decodes two images per request. The rate limit is next: the user chose an injected limiter.
+  - Security LOW: the mask validator does not check that the bbox and centroid lie inside the image, or that the centroid is finite. The values are server-produced only.
+  - Starlette spools the full multipart body before the byte cap (pre-existing).
+  - Test gaps: no test rejects client-supplied profile or blueprint fields, and the angle path has no real-face test.
+
+## Rate limiting on the photo routes (user, 2026-11-12; accepted by the evaluator)
+
+- **User decisions:**
+  - An **injected limiter**, not slowapi and not proxy-only, so there is no global mutable state.
+  - **10 requests a minute with a burst of 3**, per client IP.
+  - **All three photo routes**, each with its own bucket: `profile`, `reference` and `adapt`.
+- **Code:**
+  - `services/rate_limit/` holds `Decision`, the `RateLimiter` protocol and `InMemoryRateLimiter`.
+    - The limiter is a token bucket per (bucket, key), held in an instance-level `OrderedDict` under a lock.
+    - Memory is bounded by LRU eviction at `rate_limit_max_keys` (10,000).
+    - The clock is injectable.
+  - `create_app` builds the limiter on `app.state`. It is not built in the lifespan, because tests use `use_lifespan=False`.
+  - `api/rate_limit.py` holds `rate_limit(bucket)`, a decorator dependency. The three route files change only by the import and `dependencies=[...]`.
+  - Settings: `rate_limit_enabled` (default true), `rate_limit_per_min` (10), `rate_limit_burst` (3) and `rate_limit_max_keys`.
+- **Behaviour:**
+  - Over the limit gives 429 with a fixed detail and an integer `Retry-After` (6 s at the defaults).
+  - The key is `request.client.host`, or `"unknown"` when there is none. `X-Forwarded-For` is never read.
+  - The only log line is the bucket name; no IP is logged.
+- **Tests:** an autouse fixture in `tests/conftest.py` disables the limiter for every test. A dependency override is impossible, because `rate_limit()` builds one callable per route. The limiter tests re-enable it with their own settings and a fake clock.
+- **Verification:**
+  - Tester PASS: 16 new tests, plus 6 gap tests the tester added in `test_rate_limit_gaps.py`. Full suite **1362**.
+  - Security PASS (one MEDIUM and some LOW findings, below).
+  - Orchestrator checks:
+    - The suite was re-run.
+    - The two existing route diffs were inspected: import plus decorator only.
+    - On the real app with the limiter enabled, each route gave 415, 415 and 415 for the bad upload, then 429 with `Retry-After: 6`.
+- **Open items:**
+  - **MEDIUM (residual):** FastAPI 0.162.4 parses the multipart form before resolving dependencies (`fastapi/routing.py`: `request.form()` at line 455 runs before `solve_dependencies` at line 511). A rejected request is still received and spooled to a temp file, though it is never validated, decoded or analysed. Before public exposure, cap request bodies at the proxy, or add an ASGI middleware (needs user approval).
+  - **LOW:** a client can evade the limit by rotating IPv6 addresses (key by /64 instead). A flood of more than `max_keys` distinct keys evicts other clients' buckets, which resets them to a full burst.
+  - Limits are per process and multiply with workers; a shared store (such as Redis) goes behind the `RateLimiter` protocol.
+  - Behind a reverse proxy, every client shares one key; trusted-proxy handling is not built.
+  - Authentication is still missing on all photo routes.
+  - Env parsing of the `rate_limit_*` settings is not directly tested.

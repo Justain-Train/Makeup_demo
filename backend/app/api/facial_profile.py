@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, Upl
 
 from app.api.face_segmentation import get_face_parser
 from app.api.facial_analysis import get_landmark_service
+from app.api.rate_limit import rate_limit
 from app.api.uploads import read_validated_image
 from app.config import Settings, get_settings
 from app.schemas.facial_profile import FacialProfile
@@ -53,7 +54,7 @@ def get_feature_provider() -> FeatureProvider:
     return DefaultFeatureProvider()
 
 
-@router.post("/profile", response_model=FacialProfile)
+@router.post("/profile", response_model=FacialProfile, dependencies=[Depends(rate_limit("profile"))])
 def facial_profile_route(
     file: UploadFile = File(..., description="Selfie image (JPEG, PNG or WebP)"),
     include_masks: bool = Query(True, description="Include the label map and zone masks"),

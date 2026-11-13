@@ -187,7 +187,7 @@ Classify the user's own facial features so that Phase 8 can adapt a look to them
 
 Full details are in `docs/DECISIONS.md`.
 
-## Phase 8: Makeup Adaptation Engine (NEXT)
+## Phase 8: Makeup Adaptation Engine (DONE 2026-11-12)
 
 FacialProfile + MakeupBlueprint produces an **AdaptedMakeupPlan**.
 
@@ -198,7 +198,15 @@ FacialProfile + MakeupBlueprint produces an **AdaptedMakeupPlan**.
 
 Start with deterministic, explainable rules. Do not use agents or LLM calls for straightforward geometry.
 
-## Phase 9: Generative Makeup Preview
+**Scope decided by the user (2026-11-12):**
+- Two images in one call (selfie and reference). The server builds both analyses, and the core is a pure `adapt(profile, blueprint)`.
+- Zone selection from the user's 70 zones plus direction hints. No mask warping. Every adjustment is a named rule with a reason.
+- Reference colours are kept. Colour changes come in Phase 10.
+- Unknown or low-confidence features skip their rule, fall back to a safe default, and record "not adapted".
+
+Full details are in `docs/DECISIONS.md`.
+
+## Phase 9: Generative Makeup Preview (NEXT)
 
 Produce a realistic preview using Diffusers, SD/FLUX editing, inpainting, ControlNet or IP-Adapter, with spatial and mask conditioning.
 

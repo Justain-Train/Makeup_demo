@@ -5,6 +5,7 @@ import logging
 from fastapi import APIRouter, Depends, File, HTTPException, Request, Response, UploadFile, status
 
 from app.api.facial_profile import get_landmark_provider, get_parsing_provider, get_zone_provider
+from app.api.rate_limit import rate_limit
 from app.api.uploads import read_validated_image
 from app.config import Settings, get_settings
 from app.schemas.makeup_blueprint import MakeupBlueprint
@@ -55,7 +56,9 @@ def get_reference_deps(
     )
 
 
-@router.post("/reference-analysis", response_model=MakeupBlueprint)
+@router.post(
+    "/reference-analysis", response_model=MakeupBlueprint, dependencies=[Depends(rate_limit("reference"))]
+)
 def reference_analysis_route(
     response: Response,
     file: UploadFile = File(..., description="Reference makeup image (JPEG, PNG or WebP)"),

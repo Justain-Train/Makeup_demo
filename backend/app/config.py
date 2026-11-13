@@ -39,6 +39,12 @@ class Settings(BaseSettings):
     makeup_vlm_max_tokens: int = Field(default=16000, ge=1024, le=64000)
     makeup_vlm_max_retries: int = Field(default=1, ge=0, le=3)
 
+    # Per-client token bucket on the upload routes (in-process; per worker).
+    rate_limit_enabled: bool = True
+    rate_limit_per_min: float = Field(default=10, gt=0)
+    rate_limit_burst: int = Field(default=3, ge=1)
+    rate_limit_max_keys: int = Field(default=10_000, ge=1)
+
     @property
     def resolved_model_path(self) -> Path:
         """Relative model paths are resolved against backend/, not the CWD."""

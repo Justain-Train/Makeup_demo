@@ -1,0 +1,457 @@
+{
+  "purpose": "Phase 8 rule-firing rates (component-evaluations per rule per scenario). Aggregates only.",
+  "dataset": "EasyPortrait v2 test split, committed stratified sample (seed 20261110, n=600)",
+  "counts": {
+    "sampled": 600,
+    "missing": 0,
+    "undecodable": 0,
+    "no_profile": 2,
+    "evaluated": 598
+  },
+  "scenarios": {
+    "full": {
+      "faces_with_applied_rule": 331,
+      "faces_with_applied_rule_pct": 55.35,
+      "rules": {
+        "eye_tilt_down_lift": {
+          "counts": {
+            "applied": 134,
+            "skipped_uncertain": 448,
+            "skipped_not_triggered": 614,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 3588,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 2.8,
+            "skipped_uncertain": 9.36,
+            "skipped_not_triggered": 12.83,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 75.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_tilt_up_balance": {
+          "counts": {
+            "applied": 69,
+            "skipped_uncertain": 224,
+            "skipped_not_triggered": 305,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.44,
+            "skipped_uncertain": 4.68,
+            "skipped_not_triggered": 6.38,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_close_set_outer": {
+          "counts": {
+            "applied": 42,
+            "skipped_uncertain": 359,
+            "skipped_not_triggered": 197,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.88,
+            "skipped_uncertain": 7.5,
+            "skipped_not_triggered": 4.12,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_wide_set_inner": {
+          "counts": {
+            "applied": 48,
+            "skipped_uncertain": 359,
+            "skipped_not_triggered": 191,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.0,
+            "skipped_uncertain": 7.5,
+            "skipped_not_triggered": 3.99,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_round_elongate": {
+          "counts": {
+            "applied": 46,
+            "skipped_uncertain": 277,
+            "skipped_not_triggered": 253,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 22
+          },
+          "pct": {
+            "applied": 0.96,
+            "skipped_uncertain": 5.79,
+            "skipped_not_triggered": 5.29,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.46
+          }
+        },
+        "face_round_contour": {
+          "counts": {
+            "applied": 14,
+            "skipped_uncertain": 952,
+            "skipped_not_triggered": 230,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 3588,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.29,
+            "skipped_uncertain": 19.9,
+            "skipped_not_triggered": 4.81,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 75.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_oblong_horizontal": {
+          "counts": {
+            "applied": 16,
+            "skipped_uncertain": 952,
+            "skipped_not_triggered": 228,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 3588,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.33,
+            "skipped_uncertain": 19.9,
+            "skipped_not_triggered": 4.77,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 75.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_square_soften": {
+          "counts": {
+            "applied": 15,
+            "skipped_uncertain": 476,
+            "skipped_not_triggered": 107,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.31,
+            "skipped_uncertain": 9.95,
+            "skipped_not_triggered": 2.24,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_heart_balance": {
+          "counts": {
+            "applied": 84,
+            "skipped_uncertain": 952,
+            "skipped_not_triggered": 158,
+            "skipped_zone_unavailable": 2,
+            "skipped_not_applicable": 3588,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.76,
+            "skipped_uncertain": 19.9,
+            "skipped_not_triggered": 3.3,
+            "skipped_zone_unavailable": 0.04,
+            "skipped_not_applicable": 75.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "lip_thin_full": {
+          "counts": {
+            "applied": 19,
+            "skipped_uncertain": 398,
+            "skipped_not_triggered": 181,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.4,
+            "skipped_uncertain": 8.32,
+            "skipped_not_triggered": 3.78,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        },
+        "lip_bottom_heavy_balance": {
+          "counts": {
+            "applied": 142,
+            "skipped_uncertain": 292,
+            "skipped_not_triggered": 762,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 3588,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 2.97,
+            "skipped_uncertain": 6.1,
+            "skipped_not_triggered": 15.93,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 75.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "brow_straight_keep": {
+          "counts": {
+            "applied": 78,
+            "skipped_uncertain": 232,
+            "skipped_not_triggered": 288,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 4186,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.63,
+            "skipped_uncertain": 4.85,
+            "skipped_not_triggered": 6.02,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 87.5,
+            "skipped_conflict": 0.0
+          }
+        }
+      }
+    },
+    "cv_only": {
+      "faces_with_applied_rule": 246,
+      "faces_with_applied_rule_pct": 41.14,
+      "rules": {
+        "eye_tilt_down_lift": {
+          "counts": {
+            "applied": 67,
+            "skipped_uncertain": 224,
+            "skipped_not_triggered": 307,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 2.24,
+            "skipped_uncertain": 7.49,
+            "skipped_not_triggered": 10.27,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_tilt_up_balance": {
+          "counts": {
+            "applied": 0,
+            "skipped_uncertain": 0,
+            "skipped_not_triggered": 0,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2990,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.0,
+            "skipped_uncertain": 0.0,
+            "skipped_not_triggered": 0.0,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 100.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_close_set_outer": {
+          "counts": {
+            "applied": 42,
+            "skipped_uncertain": 359,
+            "skipped_not_triggered": 197,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.4,
+            "skipped_uncertain": 12.01,
+            "skipped_not_triggered": 6.59,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_wide_set_inner": {
+          "counts": {
+            "applied": 48,
+            "skipped_uncertain": 359,
+            "skipped_not_triggered": 191,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.61,
+            "skipped_uncertain": 12.01,
+            "skipped_not_triggered": 6.39,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "eye_round_elongate": {
+          "counts": {
+            "applied": 0,
+            "skipped_uncertain": 0,
+            "skipped_not_triggered": 0,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2990,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.0,
+            "skipped_uncertain": 0.0,
+            "skipped_not_triggered": 0.0,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 100.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_round_contour": {
+          "counts": {
+            "applied": 14,
+            "skipped_uncertain": 952,
+            "skipped_not_triggered": 230,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 1794,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.47,
+            "skipped_uncertain": 31.84,
+            "skipped_not_triggered": 7.69,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 60.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_oblong_horizontal": {
+          "counts": {
+            "applied": 16,
+            "skipped_uncertain": 952,
+            "skipped_not_triggered": 228,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 1794,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.54,
+            "skipped_uncertain": 31.84,
+            "skipped_not_triggered": 7.63,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 60.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_square_soften": {
+          "counts": {
+            "applied": 15,
+            "skipped_uncertain": 476,
+            "skipped_not_triggered": 107,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.5,
+            "skipped_uncertain": 15.92,
+            "skipped_not_triggered": 3.58,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "face_heart_balance": {
+          "counts": {
+            "applied": 42,
+            "skipped_uncertain": 476,
+            "skipped_not_triggered": 79,
+            "skipped_zone_unavailable": 1,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 1.4,
+            "skipped_uncertain": 15.92,
+            "skipped_not_triggered": 2.64,
+            "skipped_zone_unavailable": 0.03,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "lip_thin_full": {
+          "counts": {
+            "applied": 0,
+            "skipped_uncertain": 0,
+            "skipped_not_triggered": 0,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2990,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.0,
+            "skipped_uncertain": 0.0,
+            "skipped_not_triggered": 0.0,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 100.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "lip_bottom_heavy_balance": {
+          "counts": {
+            "applied": 71,
+            "skipped_uncertain": 146,
+            "skipped_not_triggered": 381,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2392,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 2.37,
+            "skipped_uncertain": 4.88,
+            "skipped_not_triggered": 12.74,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 80.0,
+            "skipped_conflict": 0.0
+          }
+        },
+        "brow_straight_keep": {
+          "counts": {
+            "applied": 0,
+            "skipped_uncertain": 0,
+            "skipped_not_triggered": 0,
+            "skipped_zone_unavailable": 0,
+            "skipped_not_applicable": 2990,
+            "skipped_conflict": 0
+          },
+          "pct": {
+            "applied": 0.0,
+            "skipped_uncertain": 0.0,
+            "skipped_not_triggered": 0.0,
+            "skipped_zone_unavailable": 0.0,
+            "skipped_not_applicable": 100.0,
+            "skipped_conflict": 0.0
+          }
+        }
+      }
+    }
+  }
+}

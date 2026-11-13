@@ -4,7 +4,8 @@ An anatomy-aware makeup assistant. It adapts reference makeup techniques to the 
 instead of transferring pixels. The current pipeline is **selfie → MediaPipe Face Landmarker (478 landmarks) →
 face parsing (anatomical regions) → 70 makeup-application zones → structured JSON → canvas visualization**.
 A reference makeup photo goes through the same pipeline and becomes a versioned **MakeupBlueprint** (Phase 7).
-There is no makeup rendering and no feature classification yet. The full plan is in
+The user's features are classified (Phase 7.5), and the reference look is adapted to the user's face as an
+**AdaptedMakeupPlan** (Phase 8). There is no makeup rendering yet. The full plan is in
 [docs/ROADMAP.md](docs/ROADMAP.md).
 
 > **LICENSE WARNING.** The face-parsing weights (BiSeNet, ONNX) were trained on **CelebAMask-HQ,
@@ -26,8 +27,9 @@ This README is updated each time a roadmap milestone closes.
 | 6 | Makeup taxonomy and application mapping | **Done (2026-11-12).** Versioned vocabulary (1.1) of 12 categories with product types, finishes, techniques, placements and directions; a versioned `MakeupComponent` schema with sRGB hex and derived CIELAB; and `map_zones`, which resolves a product and placement to zone ids without leaving the product's `STAGES` layer. The highlighter and bronzer layers were filled. 930 backend tests. |
 | 7 | Makeup reference analysis (MakeupBlueprint) | **Done (2026-11-12).** `POST /api/makeup/reference-analysis` returns a versioned `MakeupBlueprint` (1.0). CV measures each zone's color against that face's bare skin and owns color, undertone, intensity and zones. An optional Claude VLM (`claude-opus-5-5`, **off by default**) adds only technique, finish, placement, direction and style. Every field records its source (`cv`/`vlm`). Nothing is persisted. 1129 backend tests. |
 | 7.5 | Facial feature classification | **Done (2026-11-12).** FacialProfile 1.1 adds an optional `features` component to `/profile`. It covers eye spacing, tilt and shape; lip fullness, balance and width; brow arch; face shape; and skin depth and undertone. Every label carries its measurements and a confidence, and ambiguous faces return `unknown`. Classification is deterministic, with no training, and calibrated on 598 real faces. Eyelid type is self-reported only (always `unknown` for now). Nothing is persisted. 1261 backend tests. |
-| 8 | Makeup adaptation engine (AdaptedMakeupPlan) | Next |
-| 9–13 | Rendering, customization, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
+| 8 | Makeup adaptation engine (AdaptedMakeupPlan) | **Done (2026-11-12).** `POST /api/makeup/adapt` takes a selfie and a reference photo in one call, builds the FacialProfile (with features) and the MakeupBlueprint on the server, and runs a pure `adapt(profile, blueprint)`. Placement is chosen from the user's 70 zones plus face-frame direction angles, with no mask warping. 12 named, deterministic feature rules each record their evidence, threshold and reason; uncertain features are skipped and recorded as not adapted. Reference colours are kept. Nothing is persisted. 1340 backend tests. |
+| 9 | Generative makeup preview | Next |
+| 10–13 | Customization, tutorials, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
 
 **Deferred Phase 3 items (not done).**
 - Roll-aligned crop, y-offset fix and the `present` floor.
@@ -44,6 +46,7 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
     api/face_segmentation.py      HTTP route for /segmentation
     api/facial_profile.py         HTTP route for /profile
     api/makeup_reference.py       HTTP route for /api/makeup/reference-analysis
+    api/makeup_adapt.py           HTTP route for /api/makeup/adapt (selfie + reference)
     api/uploads.py                shared upload validation (type, bytes, real format, pixels)
     schemas/
       facial_landmarks.py         Landmark, FacialLandmarkResult, FaceMeshTopology (raw data)
@@ -51,6 +54,7 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
       facial_profile.py           versioned FacialProfile (components, providers, quality)
       makeup_component.py         versioned MakeupComponent (vocabulary-checked, hex + derived CIELAB)
       makeup_blueprint.py         versioned MakeupBlueprint (components + per-field cv/vlm sources, style, quality)
+      adapted_makeup_plan.py      versioned AdaptedMakeupPlan (components on user zones, rules, angles, masks)
     services/
       image_loading.py            bytes → RGB numpy (+ EXIF orientation fix)
       facial_analysis/
@@ -152,6 +156,19 @@ curl -X POST http://localhost:8000/api/facial-analysis/segmentation \
 
 `POST /api/facial-analysis/profile`: same upload rules. Returns a versioned **FacialProfile**: `schema_version`, `status`, `image`, `components` (`landmarks`, `frame`, `parsing`, `zones`), `quality` (alignment, warnings, `retake_suggested`) and `timings_ms`. Masks are embedded by default. With `?include_masks=false`, the label map and zone masks are dropped, but bbox, polygon and regions are kept. The profile is built per request and is never stored or logged.
 
+**Rate limit (all three photo routes: `/profile`, `/api/makeup/reference-analysis`, `/api/makeup/adapt`).** Each
+route has its own token bucket per client IP, 10 requests a minute with a burst of 3 by default. Over the limit, the
+route returns **429** with an integer `Retry-After`, before the upload is validated, decoded or analysed. The key is the
+socket peer address; `X-Forwarded-For` is never trusted. The limiter is in-memory and per process, behind a
+`RateLimiter` protocol (`app/services/rate_limit/`) so a shared store can replace it. Client IPs are never logged.
+
+| Variable | Default | |
+|---|---|---|
+| `RATE_LIMIT_ENABLED` | `true` | `false` disables the limiter (the test suite does this by default) |
+| `RATE_LIMIT_PER_MIN` | `10` | Sustained requests per minute, per IP, per route |
+| `RATE_LIMIT_BURST` | `3` | Requests allowed back to back |
+| `RATE_LIMIT_MAX_KEYS` | `10000` | Tracked (route, IP) pairs; least recently used are evicted |
+
 - **Components:** each has `meta` (`component_version`, `status` ok/degraded/unavailable, `confidence`, `provider` with id, weights sha256, `algorithm_version` and licence warning, `reason`) and `data`. `data` is `null` exactly when the component is `unavailable`. A failing stage marks only that component, and the components that depend on it, unavailable.
 - **Versioning:** a MINOR bump adds optional fields only. A MAJOR bump is a breaking change. The frontend client (`fetchFacialProfile` in `frontend/lib/facialProfile.ts`) rejects unsupported MAJOR versions.
 - **Errors:** the same as `/segmentation`. A busy or missing parser gives 503 (with `Retry-After` when busy). The client turns this into `ProfileBusyError`, with the retry delay clamped to 0–60 s. In TypeScript, narrow a component with `isComponentAvailable(c)` or `c.data !== null`, not by checking `meta.status`.
@@ -211,7 +228,7 @@ On `/landmark-test`, upload a photo and click **Detect landmarks**, then:
 ## Tests
 
 ```bash
-cd backend && pytest          # 1261 tests as of Phase 7.5
+cd backend && pytest          # 1362 tests as of Phase 8 + rate limiting
 ```
 Unit tests use fake services and a stub parser. Integration tests run real MediaPipe and the real face parser on
 `tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing. Each Phase 4 batch has a
@@ -285,6 +302,7 @@ performance, limitations and the evaluation protocol: [docs/face_segmentation.md
 | No face / multiple faces | 200 | `status: "no_face_detected"` / `"multiple_faces_detected"`, `message`, no components |
 | Bad upload | 400 / 413 / 415 | Same as `/profile` |
 | Parser missing or busy | 503 | Fixed message; busy adds `Retry-After: 2` |
+| Rate limited | 429 | `{"detail": "Too many requests. Please retry later."}` with an integer `Retry-After` (seconds) |
 | Analysis fault | 500 | `{"detail": "Reference analysis failed."}`, never exception text |
 
 How the blueprint is built:
@@ -315,8 +333,8 @@ Settings (see `backend/.env.example`):
 **Credentials** are never read from `.env`. The SDK uses the profile from `ant auth login`, or an
 `ANTHROPIC_API_KEY` exported in the shell.
 
-> **Before enabling the VLM outside local development:** the route has no authentication or rate limit, so any
-> caller could trigger paid Claude calls with uploaded photos. Every request with the VLM on is one billed API call.
+> **Before enabling the VLM outside local development:** the route is rate limited but has no authentication, so any
+> caller could still trigger paid Claude calls with uploaded photos, up to the limit per IP. Every request with the VLM on is one billed API call.
 > Refusals may be served by another Anthropic model (server-side fallbacks).
 
 ## Facial features (Phase 7.5)
@@ -357,3 +375,34 @@ How classification works:
 > Skin tone and eyelid type are planned to become user-confirmable once the frontend is connected. Feature values are
 > sensitive: they are never logged or persisted.
 
+## Makeup adaptation (Phase 8)
+
+`POST /api/makeup/adapt` takes two multipart fields, `selfie` and `reference`. Both follow the same upload rules as
+`/profile` and are validated before any inference. `include_masks` (query, default `true`) works as on `/profile`;
+`false` drops each component's mask but keeps its bbox, centroid and pixel count. The response is an
+`AdaptedMakeupPlan` (1.0) with `Cache-Control: no-store`. No client-supplied profile or blueprint is accepted.
+
+| Case | HTTP | Body |
+|---|---|---|
+| Adapted | 200 | `status: "ok"`, components in `STAGES` order |
+| No face in either photo / no makeup in the reference | 200 | A non-ok `status` (the profile's status takes precedence; then `reference_unavailable` or `no_makeup_detected`) |
+| Bad upload in either field | 400 / 413 / 415 | Same as `/profile` |
+| Parser missing or busy | 503 | Fixed message; busy adds `Retry-After: 2` |
+| Rate limited | 429 | `{"detail": "Too many requests. Please retry later."}` with an integer `Retry-After` (seconds) |
+| Adaptation fault | 500 | Fixed detail, never exception text |
+
+How a plan is built (`services/makeup_adaptation/`):
+- Each `AdaptedComponent` embeds the reference `MakeupComponent` unchanged, so **colour, finish and intensity are the
+  reference's**. Zones come from `map_zones` on the user's own face; the mask is the union of the user's real zone masks.
+- **12 rules** (`rules.py`) for eye tilt, spacing and shape; face shape; lip fullness and balance; and brows. Each has
+  a named confidence threshold (0.3 for direction hints, 0.4 for zone or intensity changes, 0.5 for overlining). Every
+  rule considered is recorded with its feature, label, confidence, threshold and outcome. Eyelid type is never read.
+- **Direction angles** (`directions.py`): each direction adjustment gets left and right angles, in the face frame
+  (0° outward, positive toward the forehead) and in the image frame (0° image right, 90° image up), from the
+  profile's roll-aware frame. Without a usable frame the plan says `direction_angles_unavailable`.
+- Rule firing on 598 real faces: [rule_firing_2026-11-12.json](docs/evaluation/rule_firing_2026-11-12.json).
+
+> **Before deploying:** this route is rate limited but has no authentication yet. Each request decodes two images and
+> runs both pipelines (and a billed Claude call if the VLM is enabled). The limiter is per process, and behind a reverse
+> proxy every client shares the proxy's address. A rejected request is still received and its multipart body spooled
+> before the 429, so cap request bodies at the proxy.

@@ -6,9 +6,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import face_segmentation, facial_analysis, facial_profile, makeup_reference
+from app.api import face_segmentation, facial_analysis, facial_profile, makeup_adapt, makeup_reference
 from app.config import get_settings
 from app.services.facial_analysis.landmarks import FaceLandmarkService
+from app.services.rate_limit import InMemoryRateLimiter
 from app.services.segmentation.face_parser import FaceParserError, OnnxFaceParser
 
 logger = logging.getLogger(__name__)
@@ -55,6 +56,11 @@ async def lifespan(app: FastAPI):
 def create_app(use_lifespan: bool = True) -> FastAPI:
     settings = get_settings()
     app = FastAPI(title="AI Makeup Assistant API", lifespan=lifespan if use_lifespan else None)
+    app.state.rate_limiter = InMemoryRateLimiter(
+        rate_per_min=settings.rate_limit_per_min,
+        burst=settings.rate_limit_burst,
+        max_keys=settings.rate_limit_max_keys,
+    )
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origin_list,
@@ -65,6 +71,7 @@ def create_app(use_lifespan: bool = True) -> FastAPI:
     app.include_router(face_segmentation.router)
     app.include_router(facial_profile.router)
     app.include_router(makeup_reference.router)
+    app.include_router(makeup_adapt.router)
 
     @app.get("/health")
     def health() -> dict[str, str]:
