@@ -22,7 +22,11 @@ from app.schemas.face_segmentation import (
 )
 from app.schemas.facial_landmarks import DetectionThresholds, ImageSize, Landmark
 from app.services.facial_profile import compat
-from app.services.facial_profile.versions import COMPONENT_VERSIONS, ZONES_ALGORITHM_VERSION
+from app.services.facial_profile.versions import (
+    COMPONENT_VERSIONS,
+    PROFILE_SCHEMA_VERSION,
+    ZONES_ALGORITHM_VERSION,
+)
 
 
 def _provider(kind):
@@ -89,7 +93,7 @@ def test_round_trip():
     profile = _profile()
     again = fp.FacialProfile.model_validate_json(profile.model_dump_json())
     assert again == profile
-    assert again.schema_version == "1.0"
+    assert again.schema_version == PROFILE_SCHEMA_VERSION
 
 
 def test_data_status_invariant():
@@ -115,7 +119,7 @@ def test_confidence_range():
 
 def test_versions():
     assert ZONES_ALGORITHM_VERSION == "phase4-70zones-1"
-    assert set(COMPONENT_VERSIONS) == {"landmarks", "frame", "parsing", "zones"}
+    assert set(COMPONENT_VERSIONS) == {"landmarks", "frame", "parsing", "zones", "features"}
 
 
 @pytest.mark.parametrize("v", ["1.0", "1.7"])

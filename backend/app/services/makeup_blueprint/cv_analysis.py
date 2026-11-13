@@ -10,6 +10,7 @@ import base64
 import binascii
 import math
 import struct
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Literal, Protocol
 
@@ -362,3 +363,32 @@ def _full(image: np.ndarray, skin_crop: tuple[np.ndarray, int, int]) -> np.ndarr
     full = np.zeros(image.shape[:2], dtype=bool)
     full[y : y + mask.shape[0], x : x + mask.shape[1]] = mask
     return full
+
+
+decode_zone_mask = _crop
+trimmed_median_hex = _trimmed_hex
+full_zone_mask = _full
+
+
+def bare_skin_reference(
+    image: np.ndarray,
+    crop_of: Callable[[str], tuple[np.ndarray, int, int] | None],
+) -> tuple[np.ndarray, bool] | None:
+    """Bare-skin reference mask (face_skin minus target and excluded zones) and the fallback flag.
+
+    Mirrors the reference logic in CvReferenceAnalyzer.analyze (analyze itself is untouched).
+    """
+    skin_crop = crop_of(SKIN_ZONE)
+    if skin_crop is None or int(skin_crop[0].sum()) < MIN_ZONE_PIXELS:
+        return None
+    ref_mask = _full(image, skin_crop)
+    excluded = {z for row in TARGETS for z in row.zones} | set(REFERENCE_EXCLUDED_ZONES)
+    for zid in sorted(excluded):
+        c = crop_of(zid)
+        if c is None:
+            continue
+        m, x, y = c
+        ref_mask[y : y + m.shape[0], x : x + m.shape[1]] &= ~m
+    if int(ref_mask.sum()) >= MIN_REF_PIXELS:
+        return ref_mask, False
+    return _full(image, skin_crop), True

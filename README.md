@@ -3,6 +3,7 @@
 An anatomy-aware makeup assistant. It adapts reference makeup techniques to the user's own facial geometry
 instead of transferring pixels. The current pipeline is **selfie → MediaPipe Face Landmarker (478 landmarks) →
 face parsing (anatomical regions) → 70 makeup-application zones → structured JSON → canvas visualization**.
+A reference makeup photo goes through the same pipeline and becomes a versioned **MakeupBlueprint** (Phase 7).
 There is no makeup rendering and no feature classification yet. The full plan is in
 [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -23,8 +24,10 @@ This README is updated each time a roadmap milestone closes.
 | 4 | Facial geometry and makeup application zones | **Done (2026-11-11).** 70 zones in batches 1–6, staged across 11 makeup steps; 512 backend tests. |
 | 5 | FacialProfile construction | **Done (2026-11-12).** Versioned profile (`schema_version` 1.0) from `POST /api/facial-analysis/profile`. Each component (landmarks, frame, parsing, zones) has its own provider and status, so one failure leaves the rest valid. Nothing is persisted. Includes frontend types and an API client (no UI). 607 backend tests. |
 | 6 | Makeup taxonomy and application mapping | **Done (2026-11-12).** Versioned vocabulary (1.1) of 12 categories with product types, finishes, techniques, placements and directions; a versioned `MakeupComponent` schema with sRGB hex and derived CIELAB; and `map_zones`, which resolves a product and placement to zone ids without leaving the product's `STAGES` layer. The highlighter and bronzer layers were filled. 930 backend tests. |
-| 7 | Makeup reference analysis (MakeupBlueprint) | Next |
-| 8–13 | Adaptation, rendering, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
+| 7 | Makeup reference analysis (MakeupBlueprint) | **Done (2026-11-12).** `POST /api/makeup/reference-analysis` returns a versioned `MakeupBlueprint` (1.0). CV measures each zone's color against that face's bare skin and owns color, undertone, intensity and zones. An optional Claude VLM (`claude-opus-5-5`, **off by default**) adds only technique, finish, placement, direction and style. Every field records its source (`cv`/`vlm`). Nothing is persisted. 1129 backend tests. |
+| 7.5 | Facial feature classification | **Done (2026-11-12).** FacialProfile 1.1 adds an optional `features` component to `/profile`. It covers eye spacing, tilt and shape; lip fullness, balance and width; brow arch; face shape; and skin depth and undertone. Every label carries its measurements and a confidence, and ambiguous faces return `unknown`. Classification is deterministic, with no training, and calibrated on 598 real faces. Eyelid type is self-reported only (always `unknown` for now). Nothing is persisted. 1261 backend tests. |
+| 8 | Makeup adaptation engine (AdaptedMakeupPlan) | Next |
+| 9–13 | Rendering, customization, … | Planned (see [docs/ROADMAP.md](docs/ROADMAP.md)) |
 
 **Deferred Phase 3 items (not done).**
 - Roll-aligned crop, y-offset fix and the `present` floor.
@@ -40,12 +43,14 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
     api/facial_analysis.py        HTTP routes only (/landmarks, /topology)
     api/face_segmentation.py      HTTP route for /segmentation
     api/facial_profile.py         HTTP route for /profile
+    api/makeup_reference.py       HTTP route for /api/makeup/reference-analysis
     api/uploads.py                shared upload validation (type, bytes, real format, pixels)
     schemas/
       facial_landmarks.py         Landmark, FacialLandmarkResult, FaceMeshTopology (raw data)
       face_measurements.py        BoundingBox, FaceMeasurements, FacialLandmarkResponse (derived)
       facial_profile.py           versioned FacialProfile (components, providers, quality)
       makeup_component.py         versioned MakeupComponent (vocabulary-checked, hex + derived CIELAB)
+      makeup_blueprint.py         versioned MakeupBlueprint (components + per-field cv/vlm sources, style, quality)
     services/
       image_loading.py            bytes → RGB numpy (+ EXIF orientation fix)
       facial_analysis/
@@ -56,8 +61,12 @@ backend/                          FastAPI (Python 3.11+; tested on 3.13)
       application_zones/          Layer B: FaceFrame (frame.py), zone catalog + stages (catalog.py),
                                   zone derivation (derive.py)
       facial_profile/             provider protocols + adapters, per-component builder, versions/compat
+      facial_features/            deterministic feature classifiers (eye, lip, brow, face shape, skin tone)
+                                  and their thresholds
       makeup_vocabulary/          frozen term registry with aliases, resolver, color (hex→CIELAB), versions/compat
       makeup_mapping/             placement→zone table and map_zones (product + placement → zone ids)
+      makeup_blueprint/           reference analysis: CV analyzer, VLM protocol + stub + Claude provider,
+                                  analysis service (CV + VLM → MakeupBlueprint), versions/compat
   evaluation/                     segmentation eval harness (EasyPortrait IoU, robustness, latency bench);
                                   datasets live outside the repo, reports go to docs/evaluation/
   scripts/download_model.py
@@ -68,7 +77,7 @@ frontend/                         Next.js 16 + React 19 + TypeScript
   app/landmark-test/page.tsx      debug page
   components/FaceLandmarkViewer.tsx  canvas overlay
   lib/api.ts                      fetch helpers
-  lib/facialProfile.ts            /profile client: version check, typed errors, isComponentAvailable
+  lib/facialProfile.ts            /profile client: version check, typed errors, isComponentAvailable, getFeatures
   types/facialLandmarks.ts        TS mirror of the Pydantic schemas
   types/facialProfile.ts          TS mirror of the FacialProfile schema
 ```
@@ -202,7 +211,7 @@ On `/landmark-test`, upload a photo and click **Detect landmarks**, then:
 ## Tests
 
 ```bash
-cd backend && pytest          # 930 tests as of Phase 6
+cd backend && pytest          # 1261 tests as of Phase 7.5
 ```
 Unit tests use fake services and a stub parser. Integration tests run real MediaPipe and the real face parser on
 `tests/fixtures/portrait.jpg` and are skipped if the respective weights are missing. Each Phase 4 batch has a
@@ -264,3 +273,87 @@ On `/landmark-test`, click **Segment face**. The panel lets you toggle anatomica
 (left and right use different hues), select all zones of a makeup stage, change overlay opacity, and compare with a
 wipe slider. Hover shows the region and zones under the cursor. Details, the verified class mapping, measured
 performance, limitations and the evaluation protocol: [docs/face_segmentation.md](docs/face_segmentation.md).
+
+## Makeup reference analysis (Phase 7)
+
+`POST /api/makeup/reference-analysis` takes a multipart field `file` and applies the same upload rules as
+`/profile`. It returns a `MakeupBlueprint` with `Cache-Control: no-store`.
+
+| Case | HTTP | Body |
+|---|---|---|
+| Analyzed | 200 | `status: "ok"`, `components`, `style`, `quality` (warnings, `overall_confidence`), `providers`, `timings_ms` |
+| No face / multiple faces | 200 | `status: "no_face_detected"` / `"multiple_faces_detected"`, `message`, no components |
+| Bad upload | 400 / 413 / 415 | Same as `/profile` |
+| Parser missing or busy | 503 | Fixed message; busy adds `Retry-After: 2` |
+| Analysis fault | 500 | `{"detail": "Reference analysis failed."}`, never exception text |
+
+How the blueprint is built:
+- **CV** (`cv_zone_color`) runs the reference photo through the FacialProfile pipeline. It compares a trimmed-median
+  color for each zone against the same face's bare skin.
+  - It detects lipstick, blush, eyeshadow, highlighter and contour, and sets their color, undertone, intensity, zones
+    and confidence.
+  - It does not detect brows, eyeliner or mascara, because natural hair and lashes can't be told apart from product.
+  - It skips eyeshadow when glasses are detected.
+- **VLM** is a provider protocol.
+  - The default is a stub, which adds a `vlm_disabled` warning.
+  - The Claude provider receives a re-encoded JPEG (long side at most 1568 px), never the original upload. It must
+    answer with enum values only. It fills technique, finish, placement and direction on CV components, adds style
+    labels, and may propose up to 4 brow, eyeliner or mascara components with no color or zones.
+  - It cannot set or override CV fields.
+  - A refusal, SDK error or invalid output degrades to CV-only results, with a `vlm_refused` or `vlm_failed` warning.
+
+Settings (see `backend/.env.example`):
+
+| Variable | Default | |
+|---|---|---|
+| `MAKEUP_VLM_ENABLED` | `false` | When true, reference photos are sent to the Anthropic API |
+| `MAKEUP_VLM_MODEL` | `claude-opus-5-5` | |
+| `MAKEUP_VLM_EFFORT` | `medium` | `low` / `medium` / `high` |
+| `MAKEUP_VLM_TIMEOUT_S` / `MAKEUP_VLM_MAX_TOKENS` | `30` / `16000` | |
+| `MAKEUP_VLM_MAX_RETRIES` | `1` | Each retry resends the face image |
+
+**Credentials** are never read from `.env`. The SDK uses the profile from `ant auth login`, or an
+`ANTHROPIC_API_KEY` exported in the shell.
+
+> **Before enabling the VLM outside local development:** the route has no authentication or rate limit, so any
+> caller could trigger paid Claude calls with uploaded photos. Every request with the VLM on is one billed API call.
+> Refusals may be served by another Anthropic model (server-side fallbacks).
+
+## Facial features (Phase 7.5)
+
+`POST /api/facial-analysis/profile` now returns FacialProfile **1.1**, with an optional `components.features`
+component. It has its own provider (`facial-features`) and status. A profile without features omits the key
+instead of sending `null`, so 1.0 readers keep working. Skin tone is computed even with `include_masks=false`.
+Reference analysis (Phase 7) does not compute features.
+
+| Feature | Labels | Measured from |
+|---|---|---|
+| Eye spacing / tilt / shape | close · average · wide / downturned · neutral · upturned / almond · round | Landmarks, in the roll-removed face frame |
+| Lip fullness / balance / width | thin · medium · full / bottom_heavy · balanced · top_heavy / narrow · average · wide | Landmarks |
+| Brow arch | straight · soft_arched · high_arched | Landmarks |
+| Brow thickness | always `unknown` | Not measurable from MediaPipe's template brow band |
+| Face shape | oval · round · square · heart · oblong · diamond | Nearest calibrated prototype over 4 ratios. Confidence is capped at 0.8; a turned head gives `unknown` |
+| Skin depth | very_light · light · intermediate · tan · brown · dark | Photo-measured ITA° on the bare-skin sample. Confidence is capped at 0.7 |
+| Skin undertone | cool · neutral · warm · olive | Skin-hue scale. Confidence is capped at 0.6; a strong colour cast gives `unknown` |
+| Eyelid type | always `unknown` | **Self-report only, never detected.** The input arrives with the frontend–backend connection |
+
+How classification works:
+- Every label is a `Classified` value with `label`, `confidence`, `measurements` and `reason`. A value inside an
+  ambiguity margin gives `unknown` rather than a forced label.
+- **Confidence is not a probability of being correct.** It measures how clear-cut the measurement is.
+- Thresholds are calibrated on 598 cached EasyPortrait faces (offline, aggregates only):
+  [face shape](docs/evaluation/face_shape_calibration_2026-11-12.json),
+  [eye, lip and brow](docs/evaluation/geometry_calibration_2026-11-12.json) and
+  [skin tone](docs/evaluation/skin_tone_distribution_2026-11-12.json). The scripts that produce them are in `backend/evaluation/`.
+- Relative descriptors (wide-set, upturned, high-arched) use population bands: the middle 60% is "average".
+
+> **Limits.** No ground-truth labels exist, so **accuracy is unmeasured** for every feature. Treat features as soft,
+> confidence-weighted hints, and never gate users on them. Skin tone needs the most care:
+> - photo ITA depends on exposure and white balance;
+> - the undertone edges are fitted on one dataset;
+> - the share of "cool" undertones varies by depth band, which is likely a camera artifact;
+> - foundation changes the measured skin.
+>
+> Skin tone and eyelid type are planned to become user-confirmable once the frontend is connected. Feature values are
+> sensitive: they are never logged or persisted.
+

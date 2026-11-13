@@ -1,10 +1,16 @@
 // FacialProfile API client. Never logs response bodies or facial geometry.
 
 import { API_BASE } from "@/lib/api";
-import type { AvailableComponent, Component, FacialProfile } from "@/types/facialProfile";
+import type { AvailableComponent, Component, FacialProfile, FeaturesData } from "@/types/facialProfile";
 
 export function isComponentAvailable<T>(c: Component<T>): c is AvailableComponent<T> {
   return c.meta.status !== "unavailable";
+}
+
+export function getFeatures(profile: FacialProfile): FeaturesData | null {
+  const component = profile.components?.features;
+  if (!component || !isComponentAvailable(component)) return null;
+  return component.data;
 }
 
 /** Mirrors backend/app/services/facial_profile/compat.py. MAJOR -> minimum supported MINOR. */

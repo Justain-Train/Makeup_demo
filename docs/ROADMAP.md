@@ -156,7 +156,7 @@ Build a flexible structured representation. Do not hardcode every combination.
 
 Full details are in `docs/DECISIONS.md`.
 
-## Phase 7: Makeup Reference Analysis (CURRENT)
+## Phase 7: Makeup Reference Analysis (DONE 2026-11-12)
 
 Detect visible makeup, its categories, colors and shades, placement and techniques, intensity, finish and overall style. Output a **MakeupBlueprint**.
 
@@ -171,7 +171,23 @@ Detect visible makeup, its categories, colors and shades, placement and techniqu
 
 Full details are in `docs/DECISIONS.md`.
 
-## Phase 8: Makeup Adaptation Engine
+## Phase 7.5: Facial Feature Classification (DONE 2026-11-12)
+
+Classify the user's own facial features so that Phase 8 can adapt a look to them. The output is a `features` component on the FacialProfile.
+
+**Scope decided by the user (2026-11-12):**
+- Automatic, deterministic and explainable classification from existing landmarks, zones and parsing. Every label carries the measurements behind it and a confidence. No model training.
+  - Eye geometry: spacing, tilt, almond vs. round.
+  - Face shape.
+  - Lip shape.
+  - Brow shape.
+  - Skin tone and undertone, on a skin-specific scale. Phase 7's product thresholds do not carry over.
+- **Eyelid type is self-reported** (monolid, inner fold, double, hooded, not sure). The input is added later, together with the frontend–backend connection. Until then the field is always `unknown`. It is not detected from the image: the crease is not derivable, and detection would be unreliable and biased.
+- Not in scope: crease detection, and eyelid type from the VLM for reference photos (possible later).
+
+Full details are in `docs/DECISIONS.md`.
+
+## Phase 8: Makeup Adaptation Engine (NEXT)
 
 FacialProfile + MakeupBlueprint produces an **AdaptedMakeupPlan**.
 

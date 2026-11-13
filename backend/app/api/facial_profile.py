@@ -12,8 +12,10 @@ from app.schemas.facial_profile import FacialProfile
 from app.services.facial_analysis.landmarks import FaceLandmarkService
 from app.services.facial_profile.builder import build_profile
 from app.services.facial_profile.providers import (
+    DefaultFeatureProvider,
     DefaultParsingProvider,
     DefaultZoneProvider,
+    FeatureProvider,
     LandmarkProvider,
     MediaPipeLandmarkProvider,
     ParsingProvider,
@@ -47,6 +49,10 @@ def get_zone_provider() -> ZoneProvider:
     return DefaultZoneProvider()
 
 
+def get_feature_provider() -> FeatureProvider:
+    return DefaultFeatureProvider()
+
+
 @router.post("/profile", response_model=FacialProfile)
 def facial_profile_route(
     file: UploadFile = File(..., description="Selfie image (JPEG, PNG or WebP)"),
@@ -54,6 +60,7 @@ def facial_profile_route(
     landmark_provider: LandmarkProvider = Depends(get_landmark_provider),
     parsing_provider: ParsingProvider | None = Depends(get_parsing_provider),
     zone_provider: ZoneProvider = Depends(get_zone_provider),
+    feature_provider: FeatureProvider = Depends(get_feature_provider),
     settings: Settings = Depends(get_settings),
 ) -> FacialProfile:
     image = read_validated_image(file, settings)
@@ -64,7 +71,14 @@ def facial_profile_route(
             "from backend/ and restart the server. Landmark detection still works.",
         )
     try:
-        return build_profile(image, landmark_provider, parsing_provider, zone_provider, include_masks)
+        return build_profile(
+            image,
+            landmark_provider,
+            parsing_provider,
+            zone_provider,
+            include_masks,
+            feature_provider=feature_provider,
+        )
     except FaceParserBusyError as exc:
         raise HTTPException(
             status.HTTP_503_SERVICE_UNAVAILABLE,

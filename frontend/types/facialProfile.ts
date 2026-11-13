@@ -16,7 +16,7 @@ export type ComponentStatus = "ok" | "degraded" | "unavailable";
 
 export interface ProviderInfo {
   id: string;
-  kind: "landmarks" | "parsing" | "zones";
+  kind: "landmarks" | "parsing" | "zones" | "features";
   /** 64 lowercase hex chars, or null. */
   weights_sha256: string | null;
   algorithm_version: string;
@@ -84,11 +84,50 @@ export interface ZonesData {
   stages: Stage[];
 }
 
+/** Heuristic and uncalibrated. "unknown" means the geometry was ambiguous or degenerate. */
+export interface Classified<L extends string> {
+  label: L | "unknown";
+  /** 0..1, finite. */
+  confidence: number;
+  /** At most 16 entries; keys match ^[a-z0-9_]{1,64}$. */
+  measurements: Record<string, number>;
+  /** Server-authored only. */
+  reason: string | null;
+}
+
+export interface EyelidType {
+  value: "monolid" | "inner_fold" | "double" | "hooded" | "unknown";
+  source: "user" | "unknown";
+}
+
+export interface SkinToneData {
+  depth: Classified<"very_light" | "light" | "intermediate" | "tan" | "brown" | "dark">;
+  undertone: Classified<"warm" | "neutral" | "cool" | "olive">;
+  lighting_quality: "good" | "caution" | "poor";
+  lighting_reasons: Array<"too_dark" | "overexposed" | "color_cast" | "glasses" | "insufficient_skin">;
+}
+
+export interface FeaturesData {
+  eye_spacing: Classified<"close" | "average" | "wide">;
+  eye_tilt: Classified<"upturned" | "neutral" | "downturned">;
+  eye_shape: Classified<"almond" | "round">;
+  eyelid_type: EyelidType;
+  lip_fullness: Classified<"thin" | "medium" | "full">;
+  lip_balance: Classified<"top_heavy" | "balanced" | "bottom_heavy">;
+  lip_width: Classified<"narrow" | "average" | "wide">;
+  brow_arch: Classified<"straight" | "soft_arched" | "high_arched">;
+  brow_thickness: Classified<"thin" | "medium" | "thick">;
+  face_shape?: Classified<"oval" | "round" | "square" | "heart" | "oblong" | "diamond">;
+  skin_tone?: SkinToneData;
+}
+
 export interface ComponentSet {
   landmarks: Component<LandmarksData>;
   frame: Component<FaceFrameData>;
   parsing: Component<ParsingData>;
   zones: Component<ZonesData>;
+  /** Present from schema 1.1. */
+  features?: Component<FeaturesData> | null;
 }
 
 export interface ProfileQuality {

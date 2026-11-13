@@ -18,6 +18,7 @@ from app.schemas.facial_profile import (
     ComponentSet,
     FaceFrameData,
     FacialProfile,
+    FeaturesData,
     LandmarksData,
     ParsingData,
     ProfileQuality,
@@ -38,6 +39,7 @@ from app.services.face_regions import (
 )
 from app.services.facial_analysis.geometry import compute_basic_measurements, landmark_pixels
 from app.services.facial_profile.providers import (
+    FeatureProvider,
     LandmarkProvider,
     ParsingProvider,
     ZoneProvider,
@@ -74,6 +76,7 @@ def build_profile(
     parsing_provider: ParsingProvider,
     zone_provider: ZoneProvider,
     include_masks: bool,
+    feature_provider: FeatureProvider | None = None,
 ) -> FacialProfile:
     """Raises FaceParserBusyError and landmark-provider errors; every other later-stage failure
     becomes an 'unavailable' component carrying only the exception type name."""
@@ -235,10 +238,12 @@ def build_profile(
         )
 
     # Zones component
+    full_zone_models: list[Zone] = []
     if derived is None:
         zones_component = _unavailable("zones", zone_info, zones_error or "Unknown")
     else:
         zone_models: list[Zone] = [_encode_zone(z, parse.origin) for z in derived]  # type: ignore[union-attr]
+        full_zone_models = zone_models
         if not include_masks:
             zone_models = [z.model_copy(update={"mask": None}) for z in zone_models]
         confs = [z.confidence for z in zone_models if z.confidence is not None]
@@ -276,6 +281,53 @@ def build_profile(
             retake = ["glasses"] if any(w.code == "glasses_detected" for w in warnings) else []
         quality = ProfileQuality(alignment=alignment, warnings=warnings, retake_suggested=retake)
 
+    # Features (optional)
+    features_component: Component[FeaturesData] | None = None
+    if feature_provider is not None:
+        t0 = time.perf_counter()
+        feature_info = feature_provider.info()
+        if frame is None:
+            features_component = _unavailable("features", feature_info, "depends on frame")
+        else:
+            glasses = any(w.code == "glasses_detected" for w in quality.warnings)
+            try:
+                fdata = feature_provider.classify(
+                    image, pts, frame, full_zone_models if derived is not None else None, glasses
+                )
+            except Exception as exc:  # noqa: BLE001 - never leak details
+                features_component = _unavailable("features", feature_info, type(exc).__name__)
+            else:
+                skin = fdata.skin_tone
+                freason: str | None = None
+                if skin is None:
+                    freason = "Skin tone unavailable."
+                elif skin.lighting_quality == "poor":
+                    freason = "Lighting is poor."
+                elif landmarks_component.meta.status == "degraded" or frame_component.meta.status == "degraded":
+                    freason = "The face is small."
+                confs: list[float] = []
+                for c in (
+                    fdata.eye_spacing,
+                    fdata.eye_tilt,
+                    fdata.eye_shape,
+                    fdata.lip_fullness,
+                    fdata.lip_balance,
+                    fdata.lip_width,
+                    fdata.brow_arch,
+                    fdata.brow_thickness,
+                    fdata.face_shape,
+                    skin.depth if skin is not None else None,
+                    skin.undertone if skin is not None else None,
+                ):
+                    if c is not None and c.label != "unknown":
+                        confs.append(c.confidence)
+                fconf = min(1.0, max(0.0, sum(confs) / len(confs))) if confs else None
+                features_component = Component[FeaturesData](
+                    meta=_meta("features", feature_info, "degraded" if freason else "ok", fconf, freason),
+                    data=fdata,
+                )
+        timings["features"] = (time.perf_counter() - t0) * 1000
+
     timings["total"] = (time.perf_counter() - t_start) * 1000
     return FacialProfile(
         status="ok",
@@ -286,6 +338,7 @@ def build_profile(
             frame=frame_component,
             parsing=parsing_component,
             zones=zones_component,
+            features=features_component,
         ),
         quality=quality,
         timings_ms={k: round(v, 2) for k, v in timings.items()},

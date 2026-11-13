@@ -501,6 +501,8 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
 
 ## Phase 7 — Makeup reference analysis (MakeupBlueprint)
 
+**Status: complete, accepted by the user on 2026-11-12.** Steps 1–4 were each accepted by the evaluator. The full suite is 1129 tests.
+
 ### Scope and design decisions (user, 2026-11-12)
 
 **CV approach.** Reference images go through our own face pipeline: landmarks, parsing and zones, via the FacialProfile builder.
@@ -611,3 +613,153 @@ Feature classification (face, eye and lip shape, the user's own skin tone and un
   - `no-store` is not on error responses; their bodies hold no user data.
   - Two concurrent first requests may each build a provider (harmless).
   - **No auth or rate limit on the route. Both must be added before `MAKEUP_VLM_ENABLED=true` is used outside local dev**, because each request can trigger a paid Claude call with a user's photo.
+
+## Phase 7.5 — Facial feature classification
+
+**Status: complete, accepted by the user on 2026-11-12.** Steps 1–4 were each accepted by the evaluator; step 1 was reopened and recalibrated. The full suite is 1261 tests.
+
+### Scope and design decisions (user, 2026-11-12)
+
+- **Placement:** a new phase between 7 and 8, so Phases 8–13 keep their numbers. The output is a `features` component on the FacialProfile, with its own provider and status, under a MINOR schema bump (1.0 to 1.1). Phase 5 is not reopened.
+- **Automatic classification:**
+  - Eye spacing, tilt and shape, face shape, lip shape, and brow shape, all from existing landmarks and zones.
+  - Skin tone and undertone, from the Phase 7 bare-skin sampling.
+  - Classification is deterministic and explainable: every label comes with its measurements and a confidence. Ambiguous cases return `unknown` or low confidence; there is no forced label.
+  - No model training.
+- **Skin tone:**
+  - Skin tone uses its own scale, separate from the Phase 7 product-undertone thresholds.
+  - The measured values (Lab lightness and hue) are reported next to any label.
+  - It is tested across the skin-tone range.
+  - It is sensitive data: never logged, never persisted.
+- **Eyelid type:**
+  - It is **self-reported by the user**, with the values `monolid`, `inner_fold`, `double`, `hooded` and `unknown`.
+  - It is **never detected from the image**. The crease is not derivable (Phase 4), image heuristics fail under makeup, lighting and glasses, and errors would fall disproportionately on East Asian users.
+  - The self-report input is deferred until the frontend–backend connection is built. Until then the field is `unknown` with source `unknown`. Phase 8 must handle `unknown` with safe, lid-agnostic defaults.
+- **Deferred:**
+  - The self-report input (request field and UI).
+  - Optional eyelid type from the VLM for reference photos.
+  - Any experimental crease-visibility signal, which would first need a consented, diverse labeled set.
+
+### Step 1 — Features schema, 1.1 bump, eye, lip and brow classifiers (accepted by the user, 2026-11-12)
+
+- **Files:**
+  - `services/facial_features/` (`_common`, `thresholds`, `eye`, `lip`, `brow`).
+  - `schemas/facial_profile.py`, additive: `Classified`, `EyelidType`, `FeaturesData`, an optional `features` slot and the `"features"` provider kind.
+  - `PROFILE_SCHEMA_VERSION` is 1.1. Compat is unchanged, because it already accepts 1.x.
+  - Frontend types are mirrored.
+- **Classifiers:** eye spacing, tilt and shape (in the roll-removed face frame); lip fullness, balance and width; brow arch and thickness. Thresholds are named and marked "heuristic, uncalibrated". Inside an ambiguity margin the label is `unknown`, and degenerate input gives `unknown` with confidence 0.
+- **1.0 compatibility fix:** an absent `features` is **omitted from output, never `null`** (`exclude_if`). An existing real-pipeline test that iterates components exposed the `null` break.
+- **Signed off by the user:**
+  - (a) The existing `test_versions` key set now includes `features`.
+  - (b) Lip balance follows the makeup-guide convention. `balanced` means upper ≈ lower (ratio 0.8–1.25), so most faces read `bottom_heavy`.
+  - (c) The orchestrator's test run is accepted in place of a tester-agent report.
+- **Evaluator:** rejected pending (a)–(c); resolved by the user's sign-off.
+- **Results:** full suite 1183; `tsc --noEmit` is clean.
+- **Open (LOW):**
+  - The features kind check runs only at construction.
+  - `reason` could become a Literal.
+  - `EyelidType` value and source must be cross-validated once self-report lands.
+
+### Step 2 — Face shape (accepted by the evaluator, 2026-11-12)
+
+- **Classifier:** `facial_features/face_shape.py` is a nearest-prototype classifier over four ratios in the roll-removed frame:
+  - length (152 to 10) / cheek width (234/454);
+  - forehead (54/284) / cheek;
+  - jaw (172/397) / cheek;
+  - chin taper (176/400 over 172/397).
+- **Labels:** oval, round, square, heart, oblong or diamond.
+  - Confidence is capped at 0.8.
+  - If the best and runner-up prototypes are less than 0.25 SD apart, the result is `unknown` (`within_ambiguity_margin`).
+  - Yaw is estimated from left/right asymmetry around the nose tip; above 0.30 the result is `unknown` (`head_turned`).
+  - `jaw_angle_deg` is reported as a measurement only.
+- **Calibration (approved by the user, option 1):**
+  - The first version used anatomy-guess prototypes and 58/288 as the jaw corner. That point is near the ear, at 0.89 of cheek width.
+  - It passed all synthetic tests, but on the real portrait it returned `unknown` with confidence 0, because the synthetic tests were circular.
+  - Recalibrated offline on the cached Phase 3 EasyPortrait sample, with no download: 598 of 600 measured, 334 frontal.
+  - Aggregates only are in `docs/evaluation/face_shape_calibration_2026-11-12.json`, produced by `backend/evaluation/face_shape_calibration.py`.
+  - Prototypes are SD offsets from the measured population mean. Oval is the mean, and a guard test ties it to the report.
+- **Results on the 598 real faces:**
+
+  | Label | Faces |
+  |---|---|
+  | oval | 111 |
+  | heart | 80 |
+  | oblong | 43 |
+  | round | 37 |
+  | square | 36 |
+  | diamond | 13 |
+  | unknown (ambiguous) | 158 |
+  | unknown (head turned) | 120 |
+
+  - Labelled confidence: median 0.32, p90 0.68.
+  - The fixture portrait is oblong at 0.36.
+- **Known limit:** there is **no face-shape ground truth**. Labels are heuristic, though now centred on real landmark-space data. Phase 8 should treat face shape as a soft hint and weight it by confidence.
+- **Tests:** full suite 1231; `tsc` is clean. The tester agent was skipped (turn limits), and the orchestrator ran the tests.
+
+### Step 3 — Skin tone and undertone (accepted by the evaluator, 2026-11-12)
+
+- **Code:** `facial_features/skin_tone.py` has `classify_skin_tone(image, zones, glasses)`, which returns `SkinToneData` (depth, undertone, `lighting_quality`, `lighting_reasons`).
+  - The skin sample is the Phase 7 bare-skin reference, through new public aliases and `bare_skin_reference` in `cv_analysis.py`. These are additive only; `analyze()` is unchanged.
+  - The sclera is not used as a white reference, because the parser has no sclera class.
+- **Depth:** photo-measured ITA° on the standard Chardon/Del Bino bands, with a 2° ambiguity margin. Confidence is capped at 0.7.
+- **Undertone:** a skin-hue scale (cool <41°, neutral, warm >52°, olive >60° or low chroma in the warm range). Confidence is capped at 0.6.
+- **Lighting:**
+  - Exposure is clipping-based: the share of crushed or blown skin pixels. It is **not** based on skin L*, so deep skin in good light is not penalised.
+  - The colour cast is the background chroma (caution at 15, poor at 21).
+  - Glasses lower confidence slightly.
+- **Calibration** (offline, the 598 cached EasyPortrait faces, aggregates only in `docs/evaluation/skin_tone_distribution_2026-11-12.json`):
+  - The placeholder undertone edges skewed cool 259 to warm 13, and the cast flag fired on 68% of faces.
+  - The undertone edges were refitted to the measured hue quantiles, and the cast thresholds to the background-chroma p75/p90.
+- **Fix loop 1** (3 MEDIUM fairness findings from security):
+  - Exposure is now clipping-based.
+  - The olive rule uses its own constant.
+  - The eval suppresses bands with n<5 and reports undertone per depth band.
+  - Added a no-logging test and a deep-skin test.
+- **Final results on the 598 faces:**
+  - Depth: unknown 17%; all bands occur; dark has 88 faces.
+  - Undertone: cool 165, neutral 129, warm 48, olive 24, unknown 39%. Per-band unknown is 29–49%.
+  - Cast flag 24%.
+- **Known limits (fairness):**
+  - Photo ITA depends on exposure and white balance, unlike colorimeter ITA.
+  - The undertone edges are quantile-fitted on one dataset.
+  - **The cool share of classified undertones varies by depth band:** very_light about 80%, dark about 75%, intermediate about 23%. This is likely a camera artifact and cannot be verified without labels.
+  - The cast flag is a background proxy.
+  - Foundation changes the measured skin.
+  - **Downstream code must treat depth and undertone as soft hints the user can confirm, and never gate users on them.**
+  - Recommended: when the frontend is connected, show skin tone as a correctable suggestion, as eyelid type will be.
+
+### Step 1 reopened — eye, lip and brow recalibration (accepted by the evaluator, 2026-11-12)
+
+- **Why:** a real-data check showed near-constant labels. Eye spacing was wide for 567 of 598 faces, brow arch was high for 523 of 598, and brow thickness was medium for 405 of 421 labelled.
+- **Calibration:** `backend/evaluation/geometry_calibration.py` writes `docs/evaluation/geometry_calibration_2026-11-12.json`, aggregates only.
+- **Policy:** relative descriptors use population bands. The middle ~60% (p20–p80) is average, neutral or soft, and the outer 20% tails get the other labels.
+  - Spacing (1.19, 1.37), tilt (−0.38°, 6.0°), arch (0.226, 0.287).
+  - Eye shape and lip thresholds were already plausible and are unchanged.
+  - A guard test ties the edges to the calibration file.
+- **Brow thickness:** now always `unknown` (`not_measurable_from_landmarks`), because the MediaPipe brow band is a template (p10–p90 spans only 0.179–0.232). A parsing-mask measure is possible later.
+- **Results:**
+  - Spacing: average 278, wide 95, close 89, unknown 136.
+  - Tilt: neutral 273, up 78, down 82, unknown 165.
+  - Arch: soft 268, straight 88, high 85, unknown 157.
+- **Lesson:** synthetic tests built from the thresholds cannot catch miscalibration. Every classifier must be checked against the real-face distribution before acceptance.
+- **Tests:** full suite 1251; `tsc` is clean. The tests were run by the orchestrator.
+
+### Step 4 — Features wired into FacialProfile and `/profile` (accepted by the evaluator, 2026-11-12)
+
+- **Code:** `FeatureProvider` and `DefaultFeatureProvider` live in `facial_profile/providers.py`. `build_profile(..., feature_provider=None)` takes a new optional keyword; this change is additive.
+  - `/profile` passes the default provider.
+  - **Phase 7 reference analysis gets no features** (opt-in). Its code and tests are unchanged.
+- **Skin tone with masks off:** skin tone is classified from the unstripped zone list before masks are stripped, so `include_masks=false` still gets a real skin tone. Features never contain masks.
+- **Status rules:**
+  - `ok` normally.
+  - `degraded` when skin tone is unavailable (parsing or zones missing), lighting is poor, or landmarks or frame are degraded. The reasons are fixed strings.
+  - `unavailable` when the frame is unavailable, or when the classifier raises; the reason is the exception class name only.
+  - Omitted entirely when no provider is passed.
+- **Glasses:** `glasses_detected` from the quality warnings is passed to skin tone.
+- **Frontend:** `getFeatures(profile)` in `frontend/lib/facialProfile.ts`.
+- **Real portrait** (`/profile?include_masks=false`): 200, schema 1.1, features `ok`, confidence 0.58, no mask data in the response, skin depth `intermediate`.
+- **Verification:**
+  - Tester PASS: 66 targeted tests and 1259 in the full suite; `tsc` is clean.
+  - Orchestrator verification: each criterion maps to a test; the real-pipeline test ran rather than skipping; there are zero changes in the Phase 1–4 paths and in Phase 7 `service.py`.
+  - The degraded paths were verified manually, then a test was added (`test_degraded_paths`).
+- **Security:** PASS. LOW: the logging test checks two logger namespaces; skin tone's broad `except` masks bugs as `degenerate_input`; skin measurements must stay out of any future persistence or analytics.
